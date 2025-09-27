@@ -1,0 +1,7 @@
+"0","#| include: false"
+"0","library(duqling)"
+"0","eval_duq <- duq"
+"0","get_sim_functions_dms <- function(){"
+"0","  c(""dms_simple"", ""dms_additive"", ""dms_complicated"", ""dms_radial"", ""dms_harmonic"")"
+"0","}"
+"0",""

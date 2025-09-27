@@ -1,0 +1,3 @@
+"0","# For installation: "
+"0","#    devtools::install_github(""knrumsey/duqling"")"
+"0","library(duqling)"

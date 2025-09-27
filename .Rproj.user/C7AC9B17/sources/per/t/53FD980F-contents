@@ -1,0 +1,402 @@
+---
+title: "`duqling`: A Comprehensive Guide"
+format:
+  html:
+    toc: true
+    theme: cosmo
+---
+
+```{r}
+#| include: false
+library(duqling)
+eval_duq <- duq
+get_sim_functions_dms <- function(){
+  c("dms_simple", "dms_additive", "dms_complicated", "dms_radial", "dms_harmonic")
+}
+
+```
+
+# 0. Package Installation
+
+To install `duqling`, you will need either `devtools` or `remotes`.
+
+```{r, eval=FALSE}
+devtools::install_github("knrumsey/duqling")
+library(duqling)
+```
+
+# 1. Benchmark test functions
+
+`duqling` includes a huge library of canonical test functions used in uncertainty quantification and emulation. Details and references for each function can be found in the documentation and for many functions the [Simon Fraser Virtual Library of Simulation Experiments](https://www.sfu.ca/~ssurjano/), which shares many test functions with `duqling`.
+
+## Exploring with `quack()`
+
+For a list of all available functions:
+
+```{r eval=TRUE}
+quack()
+```
+
+Or filter functions by specific criteria:
+
+```{r}
+quack(input_dim = 7:10, stochastic=FALSE)
+```
+
+Or get metadata for a single function:
+
+```{r}
+q <- quack("circuit", verbose=FALSE)
+print(q)
+```
+
+## Function types
+
+`duqling` has a vast library of test functions that is still growing. Each test function is characterized by the following properties:
+
+-   **Stochastic**: Is the function deterministic or inherently random? See `quack()$stochastic`.
+-   **Response type**: Is the output univariate (scalar-valued), multivariate (vector-valued), or functional outputs. See `quack()$response`.
+-   **Categorical inputs**: Does the function contain categorical inputs? See `quack()$has_categorical`.
+
+Most of the test functions in `duqling` at the time of this writing are deterministic, scalar-valued, and without categorical inputs.
+
+## Evaluating test functions
+
+Every test function in `duqling` is required to have a signature of the form `function(x, scale01=TRUE, ...)`. The first argument is the vector of inputs with length *at least* `quack(fname)$input_dim`. If it is longer, then additional inputs are ignored. When the second argument (`scale01`) is `TRUE`, the function performs *internal scaling* so that the inputs can be passed on a zero to one scale.\
+\
+For example, we can generate a set of synthetic model runs with the code:
+
+```{r}
+# Number of model evaluations and inputs
+n <- 1000 
+p <- quack("ishigami")$input_dim 
+
+# Design matrix (using Latin hypercubes)
+X <- lhs::randomLHS(n, p)
+
+# Evaluate test function
+y <- eval_duq(X, "ishigami")
+
+# Or equivalently:
+y <- apply(X, 1, duqling::ishigami)
+```
+
+Many functions have additional arguments that can be used for more flexible behavior. For example, see `?borehole`, and
+
+```{r}
+y <- eval_duq(X, "borehole", adjust_fidelity=0.7)
+```
+
+------------------------------------------------------------------------
+
+# 2. Real datasets
+
+`duqling` also includes real-world datasets for uncertainty quantification. The datasets can be viewed with:
+
+```{r}
+data_quack(raw=TRUE)
+```
+
+Most of the `duqling` datasets are hosted at the [UQDataverse (Harvard)](https://dataverse.harvard.edu/dataverse/uqdataverse), but can be read directly via:
+
+```{r, eval=FALSE}
+# Must be in data_quack(raw=TRUE)$dname
+dname <- "stochastic_sir" 
+data <- get_UQ_data(dname)
+```
+
+The primary objective of `duqling` is to support *emulation* research, so most (but not all) of our datasets are focused on emulation. To get emulation ready data, see:
+
+```{r}
+data_quack()
+```
+
+Data can be ready from the UQDataverse using the function
+
+```{r}
+# Must be in data_quack()$dname
+dname <- "stochastic_sir"
+data <- get_emulation_data(dname)
+
+# Design matrix
+X <- data$X
+
+# Response vector
+y <- data$y
+```
+
+# 3. Simulation studies
+
+`duqling` supports reproducible and transparent simulation studies that are comparable even across papers.
+
+## Using `run_sim_study()`
+
+Runs emulation methods on benchmark functions. Required: `fit_func` and `pred_func`. Control `fnames` `n_train`, `NSR`, `design_type`, `replications`.
+
+```{r eval=FALSE}
+res <- run_sim_study(
+  fit_func = my_fit,
+  pred_func = my_pred,
+  fnames = c("borehole", "ishigami"),
+  n_train = 100,
+  NSR = 0.1,
+  replications = 5
+)
+```
+
+The `replications` argument can be specified a few different ways. When equal to a positive integer, replications `1:replications` are run. When equal to a vector of positive integers, e.g., `c(1,3,7,10)`, only those replications are run. To run a single positive integer (say replication $7$), specify `replications = -7`.
+
+## Using `run_sim_study_data()`
+
+Runs emulation methods on benchmark datasets. Required: `fit_func` and `pred_func`. Control `dnames` and `folds`. Can also accept custom datasets (see Section 5 for details).
+
+```{r, eval=FALSE}
+res <- run_sim_study(
+  fit_func = my_fit,
+  pred_func = my_pred,
+  fnames = c("pbx9501_gold", "pbx9501_ss304"),
+  folds = 5
+)
+```
+
+This runs a simulation study using $k$-fold cross validation, where $k=$`folds`. When `folds` is set to a negative value, a boostrapping procedure is used instead, where the test set is taken to be all data pairs not included in the bootstrap resample.
+
+## Seed Generation
+
+One of the core design principles of `duqling` is **reproducibility**. A simulation scenario is defined as a combination of
+
+-   test function; `fname`,
+-   training size; `n_train`,
+-   design type; `design_type`,
+-   noise-to-signal ratio; `NSR`
+-   replication index; `replications`
+
+for `run_sim_study()` and a combination of
+
+-   dataset; `dname,`
+-   fold number
+-   fold size
+-   evaluation type (cross-validation or bootstrap)
+
+for `run_sim_study_data()`. For each simulation scenario, a polynomial hashing / Rabin fingerprinting scheme is used to generate a unique random seed. This ensures that the generated training data (inputs and outputs) are *identical* — regardless of the order or grouping of scenarios in your function call.
+
+For example:
+
+```{r, eval=FALSE}
+results1 <- run_sim_study(fit_func, pred_func, 
+                          fnames = c("borehole", "ishigami", "banana"), 
+                          NSR = c(0, 0.1), 
+                          design_type = "LHS", 
+                          replications = 10)
+
+results2 <- run_sim_study(fit_func, pred_func, 
+                          fnames = c("ishigami", "borehole"), 
+                          NSR = 0, 
+                          design_type = "LHS", 
+                          replications = c(1, 7, 15))
+```
+
+The rows of `results1` and `results2` corresponding to the same scenario will match exactly (apart from timing differences, which are machine dependent), even though they were run in a different order internally.
+
+The `seed` argument (default = $42$) sets the *base seed*. Any runs using the same seed will generate identical results for the same scenarios, regardless of the order or grouping of arguments. While you *can* change this option, we recommend leaving it at the default so that your results remain directly comparable with previously published results.
+
+## Supported Emulators
+
+To compare to an existing emulator, you need only write the corresponding `fit` and `pred` function. For instance,
+
+```{r, eval=FALSE}
+library(BASS)
+fit_bass <- function(X, y) bass(X, y)
+pred_bass <- function(obj, Xt) predict(obj, Xt)
+```
+
+and now these functions are ready for the `run_sim_study` functions. These functions for the $29$ emulation methods compared in Rumsey et al (2025) are included by default in the `duqling` package. For a list of supported emulators see `?get_emulator_functions`.
+
+```{r, eval=FALSE}
+# Must have the required packages
+emulators <- c("bass", "bart", "lagp")
+run_sim_study(emulators$fit_func,
+              emulators$pred_func, 
+              ... # More options
+              )
+```
+
+## A Working Example
+
+As an example, we will run a comparison of `bass` versus a Bayesian linear model on 3 replications of a small suite of test functions.
+
+```{r}
+#| echo: true
+#| eval: true
+#| results: "hide"
+#| message: false
+#| warning: false
+#| cache: true
+emus <- get_emulator_functions(c("bass", "blm"))
+funs <- get_sim_functions_dms()
+
+library(tictoc)
+tic()
+duq_res <- run_sim_study(emus$fit_func, 
+              emus$pred_func,
+              fnames = funs,
+              n_train=500,
+              NSR=0,
+              replications=1:3, 
+              mc_cores=3)
+tf <- toc()
+```
+The above chunk took `r round(tf$toc-tf$tic, 2)` seconds to complete. 
+
+
+# 4. Analysis and visualization
+
+`duqling` includes several tools for analyzing the results of a simulation study and for creating publication-ready figures. 
+
+## Preprocessing and wrangling
+
+-   `process_sim_study()`\
+-   `filter_sim_study()`\
+-   `join_sim_study()`\
+-   `collapse_sim_study()`
+
+The `process_` function is used to standardize the results of a simulation study, so that future analyses are as easy as possible. It can then be joined with an existing study (like the one from Rumsey et al (2025)) using the `join_` function.
+
+```{r}
+duq_res <- process_sim_study(duq_res)
+
+# Load paper data -> `results`
+load("../data/results_paper.Rda") 
+duq_paper <- process_sim_study(results)
+
+# Join them
+duq_res <- join_sim_study(duq_res, duq_paper)
+```
+
+Since the paper data contains more cases than in our simple working example, we can `filter_` to restrict to the current case of interest. 
+
+```{r}
+duq_res <- filter_sim_study(duq_res, id=funs, n_train=500, NSR=0)
+```
+
+The `collapse_` function lets you aggregate some of the metrics in the simulation study across some of the scenario variables (`replication` by default). It is sometimes useful for making custom figures. 
+
+
+## Metric transformations
+
+-   `rank_sim_study()`\
+-   `normalize_sim_study()`\
+-   `relativize_sim_study()`
+
+It can be difficult to compare across different functions and simulation scenarios, so `duqling` provides a few different ways to *normalize* the results within a single simulation scenario. These functions can be called on any of the metric-columns of `duq_res$df`, and a new column will be created. 
+
+```{r}
+# Get method rankings within a sim scenario
+duq_res <- rank_sim_study(duq_res, "CRPS")
+tmp <- duq_res$df$CRPS_rank # Now this column exists
+
+# Get (trimmed) z-scores for each method within sim scenario
+duq_res <- normalize_sim_study(duq_res, "CRPS", trim=0.01)
+tmp <- duq_res$df$CRPS_norm # Now this column exists
+
+# Get relative CRPS for each method within sim scenario
+duq_res <- relativize_sim_study(duq_res, "CRPS", epsilon = 1e-3, upper_bound=1e3)
+tmp <- duq_res$df$CRPS_rel # Now this column exists
+
+# Get log(relative CRPS) for each method within sim scenario
+duq_res <- relativize_sim_study(duq_res, "CRPS", epsilon = 1e-3, upper_bound=1e3, log=TRUE)
+tmp <- duq_res$df$CRPS_rel_log # Now this column exists
+```
+
+## Visualization and Analysis
+
+-   `summarize_sim_study()` - summaries
+-   `rankplot_sim_study()` — cumulative rank plots\
+-   `heatmap_sim_study()` — average performance heatmaps\
+-   `paretoplot_sim_study()` — accuracy vs time tradeoffs\
+-   `boxplots_sim_study()` — side-by-side boxplots or violins
+
+Now we can make publication-ready figures with just one or two lines of code!
+
+```{R}
+#| message: false
+#| warning: false
+rankplot_sim_study(duq_res, metric="CRPS")
+
+heatmap_sim_study(duq_res, "CRPS_rank")
+
+duq_res <- relativize_sim_study(duq_res, "time", log=TRUE)
+paretoplot_sim_study(duq_res, c("CRPS_rel_log", "time_rel_log"))
+
+duq_sub <- filter_sim_study(duq_res, id="dms_additive")
+boxplots_sim_study(duq_sub, y_scale_fun=log10)
+```
+
+---------------------------------------------------------------
+
+# 5. Advanced extensions
+
+For expert users who want to extend duqling:
+
+## Custom test functions
+
+Use "custom\_<name>" in `fnames` and pass a list with `$func` and `$input_dim` in `...`. In the string `"custom_<fname>"`, `<fname>` must match the name of the argument passed through `...`. 
+
+```{r eval=FALSE}
+f <- function(x, scale01=TRUE) sum(x^2) + x[1]*x[2]
+my_custom <- list(func = f, input_dim = 5)
+
+run_sim_study(fit_func, pred_func,
+              fnames = "custom_foobar",
+              foobar = my_custom)
+```
+
+To pass multiple custom functions you can do:
+
+```{R, eval=FALSE}
+f <- function(x, scale01=TRUE, z=1) sum(x^2) + x[1]*x[2]*z
+f1 <- function(x, scale01=TRUE) f(x, scale01, 1)
+f2 <- function(x, scale01=TRUE) f(x, scale01, 2)
+f3 <- function(x, scale01=TRUE) f(x, scale01, 3)
+
+run_sim_study(fit_func, pred_func,
+              fnames = c("custom_foobar",
+                         "custom_zebra",
+                         "custom_teddy"
+              foobar = list(func=f1, input_dim=2),
+              zebra  = list(func=f2, input_dim=2),
+              teddy  = list(func=f3, input_dim=2))
+```
+
+## Custom designs
+
+Set `design_type="custom"` and pass a `design_func` through `...`. 
+
+```{r eval=FALSE}
+correlated_design <- function(n, p) {
+  d <- lhs::randomLHS(n, p)
+  d[,1] <- (d[,2] + d[,3]) / 2
+  d
+}
+
+run_sim_study(fit_func, pred_func,
+              fnames = "ishigami",
+              design_type = "custom",
+              design_func = correlated_design)
+```
+
+## Custom datasets
+
+Register your own dataset for use with `run_sim_study_data()`.
+
+```{r, eval=FALSE}
+my_X <- lhs::randomLHS(247, 3)
+my_y <- apply(my_X, 1, duqling::ishigami) 
+my_y <- log(10 + my_y * runif(247, 0.8, 1.2))
+my_data <- list(X=my_X, y=my_y)
+
+run_sim_study_data(fit_func, pred_func, 
+                   dsets=my_data,
+                   custom_data_names="log_ishigami")
+
+```

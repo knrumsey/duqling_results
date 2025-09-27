@@ -1,0 +1,8 @@
+"0","duq_res <- process_sim_study(duq_res)"
+"0",""
+"0","# Load paper data -> `results`"
+"0","load(""../data/results_paper.Rda"") "
+"0","duq_paper <- process_sim_study(results)"
+"0",""
+"0","# Join them"
+"0","duq_res <- join_sim_study(duq_res, duq_paper)"

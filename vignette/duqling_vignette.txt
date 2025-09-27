@@ -1,0 +1,125 @@
+---
+title: "duqling: A Comprehensive Guide"
+format:
+  html:
+    toc: true
+    theme: cosmo
+---
+
+# 1. Benchmark test functions
+
+duqling includes a library of canonical benchmark functions used in uncertainty quantification and emulation.
+
+## Exploring with `quack()`
+
+List all available functions, filter by input dimension, response type, or stochasticity, and query metadata for a specific function.
+
+```{r eval=FALSE}
+library(duqling)
+quack()
+```
+
+## Function metadata
+
+- **Stochastic**: does the function have inherent randomness?  
+- **Response type**: univariate, multivariate, or functional outputs.  
+- **Categorical inputs**: whether some inputs are discrete.  
+
+For most of this guide we’ll focus on univariate deterministic functions.
+
+---
+
+# 2. Real datasets
+
+duqling also includes datasets for emulation benchmarks.
+
+- Specialized emulation datasets (e.g., physical or climate models).  
+- General datasets for regression / surrogate modeling.  
+
+---
+
+# 3. Simulation studies
+
+Two entry points for running simulation studies.
+
+## Using `run_sim_study()`
+
+Runs emulation methods on benchmark functions. Required: `fit_func` and `pred_func`. Control `n_train`, `NSR`, `design_type`, replications, and seeds.
+
+```{r eval=FALSE}
+res <- run_sim_study(
+  fit_func = my_fit,
+  pred_func = my_pred,
+  fnames = c("borehole", "ishigami"),
+  n_train = 100,
+  NSR = 0.1,
+  replications = 5
+)
+```
+
+## Using `run_sim_study_data()`
+
+Analogous framework for datasets, typically using cross-validation folds.
+
+---
+
+# 4. Analysis and visualization
+
+A family of helpers to preprocess results and produce summaries.
+
+## Preprocessing and wrangling
+- `process_sim_study()`  
+- `filter_sim_study()`  
+- `join_sim_study()`  
+- `collapse_sim_study()`  
+
+## Metric transformations
+- `rank_sim_study()`  
+- `normalize_sim_study()`  
+- `relative_sim_study()`  
+
+## Visualization
+- `rankplot_sim_study()` — cumulative rank plots  
+- `heatmap_sim_study()` — average performance heatmaps  
+- `paretoplot_sim_study()` — accuracy vs time tradeoffs  
+- `boxplots_sim_study()` — side-by-side boxplots or violins  
+
+---
+
+# 5. Advanced extensions
+
+For expert users who want to extend duqling:
+
+## Custom test functions
+
+Use "custom_<name>" in `fnames` and pass a list with `$func` and `$input_dim` in `...`.
+
+```{r eval=FALSE}
+f <- function(x, scale01=TRUE) sum(x^2) + x[1]*x[2]
+my_custom <- list(func = f, input_dim = 5)
+
+run_sim_study(fit_func, pred_func,
+              fnames = "custom_rumsey",
+              rumsey = my_custom)
+```
+
+## Custom designs
+
+Set `design_type="custom"` and pass a `design_func` through `...`.
+
+```{r eval=FALSE}
+correlated_design <- function(n, p) {
+  d <- lhs::randomLHS(n, p)
+  d[,1] <- (d[,2] + d[,3]) / 2
+  d
+}
+
+run_sim_study(fit_func, pred_func,
+              fnames = "ishigami",
+              design_type = "custom",
+              design_func = correlated_design)
+```
+
+## Custom datasets
+
+Register your own dataset for use with `run_sim_study_data()`.  

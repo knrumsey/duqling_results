@@ -1,0 +1,1 @@
+"0","duq_res <- filter_sim_study(duq_res, id=funs, n_train=500, NSR=0)"

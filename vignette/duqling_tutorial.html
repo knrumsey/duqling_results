@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>duqling: A Comprehensive Guide</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="duqling_tutorial_files/libs/clipboard/clipboard.min.js"></script>
+<script src="duqling_tutorial_files/libs/quarto-html/quarto.js"></script>
+<script src="duqling_tutorial_files/libs/quarto-html/popper.min.js"></script>
+<script src="duqling_tutorial_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="duqling_tutorial_files/libs/quarto-html/anchor.min.js"></script>
+<link href="duqling_tutorial_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="duqling_tutorial_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="duqling_tutorial_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="duqling_tutorial_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="duqling_tutorial_files/libs/bootstrap/bootstrap-10daa034703793678e481cc8cee6d76f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#package-installation" id="toc-package-installation" class="nav-link active" data-scroll-target="#package-installation">0. Package Installation</a></li>
+  <li><a href="#benchmark-test-functions" id="toc-benchmark-test-functions" class="nav-link" data-scroll-target="#benchmark-test-functions">1. Benchmark test functions</a>
+  <ul class="collapse">
+  <li><a href="#exploring-with-quack" id="toc-exploring-with-quack" class="nav-link" data-scroll-target="#exploring-with-quack">Exploring with <code>quack()</code></a></li>
+  <li><a href="#function-types" id="toc-function-types" class="nav-link" data-scroll-target="#function-types">Function types</a></li>
+  <li><a href="#evaluating-test-functions" id="toc-evaluating-test-functions" class="nav-link" data-scroll-target="#evaluating-test-functions">Evaluating test functions</a></li>
+  </ul></li>
+  <li><a href="#real-datasets" id="toc-real-datasets" class="nav-link" data-scroll-target="#real-datasets">2. Real datasets</a></li>
+  <li><a href="#simulation-studies" id="toc-simulation-studies" class="nav-link" data-scroll-target="#simulation-studies">3. Simulation studies</a>
+  <ul class="collapse">
+  <li><a href="#using-run_sim_study" id="toc-using-run_sim_study" class="nav-link" data-scroll-target="#using-run_sim_study">Using <code>run_sim_study()</code></a></li>
+  <li><a href="#using-run_sim_study_data" id="toc-using-run_sim_study_data" class="nav-link" data-scroll-target="#using-run_sim_study_data">Using <code>run_sim_study_data()</code></a></li>
+  <li><a href="#seed-generation" id="toc-seed-generation" class="nav-link" data-scroll-target="#seed-generation">Seed Generation</a></li>
+  <li><a href="#supported-emulators" id="toc-supported-emulators" class="nav-link" data-scroll-target="#supported-emulators">Supported Emulators</a></li>
+  <li><a href="#a-working-example" id="toc-a-working-example" class="nav-link" data-scroll-target="#a-working-example">A Working Example</a></li>
+  </ul></li>
+  <li><a href="#analysis-and-visualization" id="toc-analysis-and-visualization" class="nav-link" data-scroll-target="#analysis-and-visualization">4. Analysis and visualization</a>
+  <ul class="collapse">
+  <li><a href="#preprocessing-and-wrangling" id="toc-preprocessing-and-wrangling" class="nav-link" data-scroll-target="#preprocessing-and-wrangling">Preprocessing and wrangling</a></li>
+  <li><a href="#metric-transformations" id="toc-metric-transformations" class="nav-link" data-scroll-target="#metric-transformations">Metric transformations</a></li>
+  <li><a href="#visualization-and-analysis" id="toc-visualization-and-analysis" class="nav-link" data-scroll-target="#visualization-and-analysis">Visualization and Analysis</a></li>
+  </ul></li>
+  <li><a href="#advanced-extensions" id="toc-advanced-extensions" class="nav-link" data-scroll-target="#advanced-extensions">5. Advanced extensions</a>
+  <ul class="collapse">
+  <li><a href="#custom-test-functions" id="toc-custom-test-functions" class="nav-link" data-scroll-target="#custom-test-functions">Custom test functions</a></li>
+  <li><a href="#custom-designs" id="toc-custom-designs" class="nav-link" data-scroll-target="#custom-designs">Custom designs</a></li>
+  <li><a href="#custom-datasets" id="toc-custom-datasets" class="nav-link" data-scroll-target="#custom-datasets">Custom datasets</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><code>duqling</code>: A Comprehensive Guide</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="package-installation" class="level1">
+<h1>0. Package Installation</h1>
+<p>To install <code>duqling</code>, you will need either <code>devtools</code> or <code>remotes</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"knrumsey/duqling"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(duqling)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="benchmark-test-functions" class="level1">
+<h1>1. Benchmark test functions</h1>
+<p><code>duqling</code> includes a huge library of canonical test functions used in uncertainty quantification and emulation. Details and references for each function can be found in the documentation and for many functions the <a href="https://www.sfu.ca/~ssurjano/">Simon Fraser Virtual Library of Simulation Experiments</a>, which shares many test functions with <code>duqling</code>.</p>
+<section id="exploring-with-quack" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-with-quack">Exploring with <code>quack()</code></h2>
+<p>For a list of all available functions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quack</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     fname input_dim     response has_categorical stochastic
+1                 const_fn         1   univariate           FALSE      FALSE
+2               forrester1         1   univariate           FALSE      FALSE
+3  forrester1_low_fidelity         1   univariate           FALSE      FALSE
+4                   grlee1         1   univariate           FALSE      FALSE
+5                   banana         2   univariate           FALSE      FALSE
+6             dms_additive         2   univariate           FALSE      FALSE
+7          dms_complicated         2   univariate           FALSE      FALSE
+8             dms_harmonic         2   univariate           FALSE      FALSE
+9               dms_radial         2   univariate           FALSE      FALSE
+10              dms_simple         2   univariate           FALSE      FALSE
+11              foursquare         2   univariate           FALSE      FALSE
+12                  grlee2         2   univariate           FALSE      FALSE
+13      lim_non_polynomial         2   univariate           FALSE      FALSE
+14          lim_polynomial         2   univariate           FALSE      FALSE
+15             multivalley         2   univariate           FALSE      FALSE
+16                 ripples         2   univariate           FALSE      FALSE
+17             simple_poly         2   univariate           FALSE      FALSE
+18                squiggle         2   univariate           FALSE      FALSE
+19                   star2         2   univariate           FALSE      FALSE
+20           twin_galaxies         2   univariate           FALSE      FALSE
+21               const_fn3         3   univariate           FALSE      FALSE
+22                   cube3         3   univariate           FALSE      FALSE
+23            cube3_rotate         3   univariate           FALSE      FALSE
+24            detpep_curve         3   univariate           FALSE      FALSE
+25               Gfunction         3   univariate           FALSE      FALSE
+26                ishigami         3   univariate           FALSE      FALSE
+27                 rabbits         3   univariate           FALSE      FALSE
+28                sharkfin         3   univariate           FALSE      FALSE
+29          simple_machine         3   functional           FALSE      FALSE
+30                   vinet         3   functional           FALSE      FALSE
+31              ocean_circ         4   univariate           FALSE       TRUE
+32                   park4         4   univariate           FALSE      FALSE
+33      park4_low_fidelity         4   univariate           FALSE      FALSE
+34               pollutant         4   functional           FALSE      FALSE
+35           pollutant_uni         4   univariate           FALSE      FALSE
+36         beam_deflection         5   functional           FALSE      FALSE
+37                   cube5         5   univariate           FALSE      FALSE
+38                friedman         5   univariate           FALSE      FALSE
+39            short_column         5   univariate           FALSE      FALSE
+40       simple_machine_cm         5   functional           FALSE      FALSE
+41       stochastic_piston         5   univariate           FALSE       TRUE
+42                 bs_call         6   functional           FALSE       TRUE
+43                  bs_put         6   functional           FALSE       TRUE
+44            cantilever_D         6   univariate           FALSE      FALSE
+45            cantilever_S         6   univariate           FALSE      FALSE
+46                 circuit         6   univariate           FALSE      FALSE
+47              Gfunction6         6   univariate           FALSE      FALSE
+48                  grlee6         6   univariate           FALSE      FALSE
+49                  crater         7   univariate           FALSE      FALSE
+50               gamma_mix         7   univariate           FALSE      FALSE
+51                  piston         7   univariate           FALSE      FALSE
+52                borehole         8   univariate           FALSE      FALSE
+53   borehole_low_fidelity         8   univariate           FALSE      FALSE
+54                 detpep8         8   univariate           FALSE      FALSE
+55                   ebola         8   univariate           FALSE      FALSE
+56                   robot         8   univariate           FALSE      FALSE
+57                dts_sirs         9   functional           FALSE       TRUE
+58            steel_column         9   univariate           FALSE      FALSE
+59                  sulfur         9   univariate           FALSE      FALSE
+60              friedman10        10   univariate           FALSE      FALSE
+61                ignition        10   univariate           FALSE      FALSE
+62              wingweight        10   univariate           FALSE      FALSE
+63             Gfunction12        12   univariate           FALSE      FALSE
+64              const_fn15        15   univariate           FALSE      FALSE
+65                    oo15        15   univariate           FALSE      FALSE
+66                  permdb        16   univariate           FALSE      FALSE
+67             Gfunction18        18   univariate           FALSE      FALSE
+68              friedman20        20   univariate           FALSE      FALSE
+69                 welch20        20   univariate           FALSE      FALSE
+70            d_onehundred       100 multivariate           FALSE      FALSE
+71              onehundred       100   univariate           FALSE      FALSE</code></pre>
+</div>
+</div>
+<p>Or filter functions by specific criteria:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quack</span>(<span class="at">input_dim =</span> <span class="dv">7</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">stochastic=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   fname input_dim   response has_categorical stochastic
+1                 crater         7 univariate           FALSE      FALSE
+2              gamma_mix         7 univariate           FALSE      FALSE
+3                 piston         7 univariate           FALSE      FALSE
+4               borehole         8 univariate           FALSE      FALSE
+5  borehole_low_fidelity         8 univariate           FALSE      FALSE
+6                detpep8         8 univariate           FALSE      FALSE
+7                  ebola         8 univariate           FALSE      FALSE
+8                  robot         8 univariate           FALSE      FALSE
+9           steel_column         9 univariate           FALSE      FALSE
+10                sulfur         9 univariate           FALSE      FALSE
+11            friedman10        10 univariate           FALSE      FALSE
+12              ignition        10 univariate           FALSE      FALSE
+13            wingweight        10 univariate           FALSE      FALSE</code></pre>
+</div>
+</div>
+<p>Or get metadata for a single function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">quack</span>(<span class="st">"circuit"</span>, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(q)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$fname
+[1] "circuit"
+
+$input_dim
+[1] 6
+
+$has_categorical
+[1] FALSE
+
+$response
+[1] "univariate"
+
+$stochastic
+NULL
+
+$input_range
+      [,1]  [,2]
+Rb1  50.00 150.0
+Rb2  25.00  70.0
+Rf    0.50   3.0
+Rc1   1.20   2.5
+Rc2   0.25   1.2
+beta 50.00 300.0</code></pre>
+</div>
+</div>
+</section>
+<section id="function-types" class="level2">
+<h2 class="anchored" data-anchor-id="function-types">Function types</h2>
+<p><code>duqling</code> has a vast library of test functions that is still growing. Each test function is characterized by the following properties:</p>
+<ul>
+<li><strong>Stochastic</strong>: Is the function deterministic or inherently random? See <code>quack()$stochastic</code>.</li>
+<li><strong>Response type</strong>: Is the output univariate (scalar-valued), multivariate (vector-valued), or functional outputs. See <code>quack()$response</code>.</li>
+<li><strong>Categorical inputs</strong>: Does the function contain categorical inputs? See <code>quack()$has_categorical</code>.</li>
+</ul>
+<p>Most of the test functions in <code>duqling</code> at the time of this writing are deterministic, scalar-valued, and without categorical inputs.</p>
+</section>
+<section id="evaluating-test-functions" class="level2">
+<h2 class="anchored" data-anchor-id="evaluating-test-functions">Evaluating test functions</h2>
+<p>Every test function in <code>duqling</code> is required to have a signature of the form <code>function(x, scale01=TRUE, ...)</code>. The first argument is the vector of inputs with length <em>at least</em> <code>quack(fname)$input_dim</code>. If it is longer, then additional inputs are ignored. When the second argument (<code>scale01</code>) is <code>TRUE</code>, the function performs <em>internal scaling</em> so that the inputs can be passed on a zero to one scale.<br>
+<br>
+For example, we can generate a set of synthetic model runs with the code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of model evaluations and inputs</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">quack</span>(<span class="st">"ishigami"</span>)<span class="sc">$</span>input_dim </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Function: ishigami 
+  Input dimension: 3 
+  Response type: univariate 
+  Stochastic: FALSE 
+  Has categorical inputs: FALSE 
+
+Input ranges:
+        [,1]     [,2]
+x1 -3.141593 3.141593
+x2 -3.141593 3.141593
+x3 -3.141593 3.141593</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Design matrix (using Latin hypercubes)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> lhs<span class="sc">::</span><span class="fu">randomLHS</span>(n, p)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate test function</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">eval_duq</span>(X, <span class="st">"ishigami"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Or equivalently:</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">apply</span>(X, <span class="dv">1</span>, duqling<span class="sc">::</span>ishigami)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Many functions have additional arguments that can be used for more flexible behavior. For example, see <code>?borehole</code>, and</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">eval_duq</span>(X, <span class="st">"borehole"</span>, <span class="at">adjust_fidelity=</span><span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+</section>
+<section id="real-datasets" class="level1">
+<h1>2. Real datasets</h1>
+<p><code>duqling</code> also includes real-world datasets for uncertainty quantification. The datasets can be viewed with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data_quack</span>(<span class="at">raw=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            dname input_dim output_dim       n input_cat_dim
+1   Z_machine_exp         1          1   23224             3
+2            e3sm         2          1   48602             1
+3  stochastic_sir         4          1    2000             0
+4         pbx9501         6         10    7000             1
+5  flyer_plate104        11        200    1000             0
+6 strontium_plume        20         10     300             0
+7   Z_machine_sim        40          9 5000000             0
+8    fair_climate        46          1  168168             1</code></pre>
+</div>
+</div>
+<p>Most of the <code>duqling</code> datasets are hosted at the <a href="https://dataverse.harvard.edu/dataverse/uqdataverse">UQDataverse (Harvard)</a>, but can be read directly via:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Must be in data_quack(raw=TRUE)$dname</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dname <span class="ot">&lt;-</span> <span class="st">"stochastic_sir"</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">get_UQ_data</span>(dname)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The primary objective of <code>duqling</code> is to support <em>emulation</em> research, so most (but not all) of our datasets are focused on emulation. To get emulation ready data, see:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data_quack</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            dname input_dim input_cat_dim     n response_type
+1                            e3sm         2             0 48602           uni
+2                       e3sm_mcar         2             0 10000           uni
+3                       e3sm_mnar         2             0  9122           uni
+4                  stochastic_sir         4             0  2000           uni
+5                       SLOSH_low         5             0  4000           uni
+6                       SLOSH_mid         5             0  4000           uni
+7                      SLOSH_high         5             0  4000           uni
+8                    pbx9501_gold         6             0   500           uni
+9                   pbx9501_ss304         6             0   500           uni
+10                 pbx9501_nickel         6             0   500           uni
+11                pbx9501_uranium         6             0   500           uni
+12             Z_machine_max_vel1         6             0  5000           uni
+13             Z_machine_max_vel2         6             0  5000           uni
+14                 flyer_plate104        11             0  1000           uni
+15            strontium_plume_p4b        20             0   300           uni
+16           strontium_plume_p104        20             0   300           uni
+17          Z_machine_max_vel_all        30             0  5000           uni
+18 fair_climate_ssp1-2.6_year2200        45             0  1001           uni
+19 fair_climate_ssp2-4.5_year2200        45             0  1001           uni
+20 fair_climate_ssp3-7.0_year2200        45             0  1001           uni
+21          fair_climate_ssp1-2.6        46             0 56056           uni
+22          fair_climate_ssp2-4.5        46             0 56056           uni
+23          fair_climate_ssp3-7.0        46             0 56056           uni</code></pre>
+</div>
+</div>
+<p>Data can be ready from the UQDataverse using the function</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Must be in data_quack()$dname</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dname <span class="ot">&lt;-</span> <span class="st">"stochastic_sir"</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">get_emulation_data</span>(dname)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2000 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: "\t"
+dbl (5): infections_day21, transmission_prob, average_daily_interactions, re...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Design matrix</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> data<span class="sc">$</span>X</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Response vector</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> data<span class="sc">$</span>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="simulation-studies" class="level1">
+<h1>3. Simulation studies</h1>
+<p><code>duqling</code> supports reproducible and transparent simulation studies that are comparable even across papers.</p>
+<section id="using-run_sim_study" class="level2">
+<h2 class="anchored" data-anchor-id="using-run_sim_study">Using <code>run_sim_study()</code></h2>
+<p>Runs emulation methods on benchmark functions. Required: <code>fit_func</code> and <code>pred_func</code>. Control <code>fnames</code> <code>n_train</code>, <code>NSR</code>, <code>design_type</code>, <code>replications</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">run_sim_study</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fit_func =</span> my_fit,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">pred_func =</span> my_pred,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fnames =</span> <span class="fu">c</span>(<span class="st">"borehole"</span>, <span class="st">"ishigami"</span>),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_train =</span> <span class="dv">100</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">NSR =</span> <span class="fl">0.1</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">replications =</span> <span class="dv">5</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>replications</code> argument can be specified a few different ways. When equal to a positive integer, replications <code>1:replications</code> are run. When equal to a vector of positive integers, e.g., <code>c(1,3,7,10)</code>, only those replications are run. To run a single positive integer (say replication <span class="math inline">\(7\)</span>), specify <code>replications = -7</code>.</p>
+</section>
+<section id="using-run_sim_study_data" class="level2">
+<h2 class="anchored" data-anchor-id="using-run_sim_study_data">Using <code>run_sim_study_data()</code></h2>
+<p>Runs emulation methods on benchmark datasets. Required: <code>fit_func</code> and <code>pred_func</code>. Control <code>dnames</code> and <code>folds</code>. Can also accept custom datasets (see Section 5 for details).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">run_sim_study</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fit_func =</span> my_fit,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">pred_func =</span> my_pred,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fnames =</span> <span class="fu">c</span>(<span class="st">"pbx9501_gold"</span>, <span class="st">"pbx9501_ss304"</span>),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">folds =</span> <span class="dv">5</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This runs a simulation study using <span class="math inline">\(k\)</span>-fold cross validation, where <span class="math inline">\(k=\)</span><code>folds</code>. When <code>folds</code> is set to a negative value, a boostrapping procedure is used instead, where the test set is taken to be all data pairs not included in the bootstrap resample.</p>
+</section>
+<section id="seed-generation" class="level2">
+<h2 class="anchored" data-anchor-id="seed-generation">Seed Generation</h2>
+<p>One of the core design principles of <code>duqling</code> is <strong>reproducibility</strong>. A simulation scenario is defined as a combination of</p>
+<ul>
+<li>test function; <code>fname</code>,</li>
+<li>training size; <code>n_train</code>,</li>
+<li>design type; <code>design_type</code>,</li>
+<li>noise-to-signal ratio; <code>NSR</code></li>
+<li>replication index; <code>replications</code></li>
+</ul>
+<p>for <code>run_sim_study()</code> and a combination of</p>
+<ul>
+<li>dataset; <code>dname,</code></li>
+<li>fold number</li>
+<li>fold size</li>
+<li>evaluation type (cross-validation or bootstrap)</li>
+</ul>
+<p>for <code>run_sim_study_data()</code>. For each simulation scenario, a polynomial hashing / Rabin fingerprinting scheme is used to generate a unique random seed. This ensures that the generated training data (inputs and outputs) are <em>identical</em> — regardless of the order or grouping of scenarios in your function call.</p>
+<p>For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>results1 <span class="ot">&lt;-</span> <span class="fu">run_sim_study</span>(fit_func, pred_func, </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">fnames =</span> <span class="fu">c</span>(<span class="st">"borehole"</span>, <span class="st">"ishigami"</span>, <span class="st">"banana"</span>), </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">NSR =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">design_type =</span> <span class="st">"LHS"</span>, </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">replications =</span> <span class="dv">10</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>results2 <span class="ot">&lt;-</span> <span class="fu">run_sim_study</span>(fit_func, pred_func, </span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">fnames =</span> <span class="fu">c</span>(<span class="st">"ishigami"</span>, <span class="st">"borehole"</span>), </span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">NSR =</span> <span class="dv">0</span>, </span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">design_type =</span> <span class="st">"LHS"</span>, </span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">replications =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The rows of <code>results1</code> and <code>results2</code> corresponding to the same scenario will match exactly (apart from timing differences, which are machine dependent), even though they were run in a different order internally.</p>
+<p>The <code>seed</code> argument (default = <span class="math inline">\(42\)</span>) sets the <em>base seed</em>. Any runs using the same seed will generate identical results for the same scenarios, regardless of the order or grouping of arguments. While you <em>can</em> change this option, we recommend leaving it at the default so that your results remain directly comparable with previously published results.</p>
+</section>
+<section id="supported-emulators" class="level2">
+<h2 class="anchored" data-anchor-id="supported-emulators">Supported Emulators</h2>
+<p>To compare to an existing emulator, you need only write the corresponding <code>fit</code> and <code>pred</code> function. For instance,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BASS)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>fit_bass <span class="ot">&lt;-</span> <span class="cf">function</span>(X, y) <span class="fu">bass</span>(X, y)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>pred_bass <span class="ot">&lt;-</span> <span class="cf">function</span>(obj, Xt) <span class="fu">predict</span>(obj, Xt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and now these functions are ready for the <code>run_sim_study</code> functions. These functions for the <span class="math inline">\(29\)</span> emulation methods compared in Rumsey et al (2025) are included by default in the <code>duqling</code> package. For a list of supported emulators see <code>?get_emulator_functions</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Must have the required packages</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>emulators <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bass"</span>, <span class="st">"bart"</span>, <span class="st">"lagp"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">run_sim_study</span>(emulators<span class="sc">$</span>fit_func,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>              emulators<span class="sc">$</span>pred_func, </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>              ... <span class="co"># More options</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>              )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="a-working-example" class="level2">
+<h2 class="anchored" data-anchor-id="a-working-example">A Working Example</h2>
+<p>As an example, we will run a comparison of <code>bass</code> versus a Bayesian linear model on 3 replications of a small suite of test functions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>emus <span class="ot">&lt;-</span> <span class="fu">get_emulator_functions</span>(<span class="fu">c</span>(<span class="st">"bass"</span>, <span class="st">"blm"</span>))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>funs <span class="ot">&lt;-</span> <span class="fu">get_sim_functions_dms</span>()</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tictoc)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>duq_res <span class="ot">&lt;-</span> <span class="fu">run_sim_study</span>(emus<span class="sc">$</span>fit_func, </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>              emus<span class="sc">$</span>pred_func,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">fnames =</span> funs,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">n_train=</span><span class="dv">500</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">NSR=</span><span class="dv">0</span>,</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">replications=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, </span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">mc_cores=</span><span class="dv">3</span>)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>tf <span class="ot">&lt;-</span> <span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The above chunk took 17.44 seconds to complete.</p>
+</section>
+</section>
+<section id="analysis-and-visualization" class="level1">
+<h1>4. Analysis and visualization</h1>
+<p><code>duqling</code> includes several tools for analyzing the results of a simulation study and for creating publication-ready figures.</p>
+<section id="preprocessing-and-wrangling" class="level2">
+<h2 class="anchored" data-anchor-id="preprocessing-and-wrangling">Preprocessing and wrangling</h2>
+<ul>
+<li><code>process_sim_study()</code><br>
+</li>
+<li><code>filter_sim_study()</code><br>
+</li>
+<li><code>join_sim_study()</code><br>
+</li>
+<li><code>collapse_sim_study()</code></li>
+</ul>
+<p>The <code>process_</code> function is used to standardize the results of a simulation study, so that future analyses are as easy as possible. It can then be joined with an existing study (like the one from Rumsey et al (2025)) using the <code>join_</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>duq_res <span class="ot">&lt;-</span> <span class="fu">process_sim_study</span>(duq_res)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load paper data -&gt; `results`</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"../data/results_paper.Rda"</span>) </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>duq_paper <span class="ot">&lt;-</span> <span class="fu">process_sim_study</span>(results)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Join them</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>duq_res <span class="ot">&lt;-</span> <span class="fu">join_sim_study</span>(duq_res, duq_paper)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Since the paper data contains more cases than in our simple working example, we can <code>filter_</code> to restrict to the current case of interest.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>duq_res <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_res, <span class="at">id=</span>funs, <span class="at">n_train=</span><span class="dv">500</span>, <span class="at">NSR=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>collapse_</code> function lets you aggregate some of the metrics in the simulation study across some of the scenario variables (<code>replication</code> by default). It is sometimes useful for making custom figures.</p>
+</section>
+<section id="metric-transformations" class="level2">
+<h2 class="anchored" data-anchor-id="metric-transformations">Metric transformations</h2>
+<ul>
+<li><code>rank_sim_study()</code><br>
+</li>
+<li><code>normalize_sim_study()</code><br>
+</li>
+<li><code>relativize_sim_study()</code></li>
+</ul>
+<p>It can be difficult to compare across different functions and simulation scenarios, so <code>duqling</code> provides a few different ways to <em>normalize</em> the results within a single simulation scenario. These functions can be called on any of the metric-columns of <code>duq_res$df</code>, and a new column will be created.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get method rankings within a sim scenario</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>duq_res <span class="ot">&lt;-</span> <span class="fu">rank_sim_study</span>(duq_res, <span class="st">"CRPS"</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> duq_res<span class="sc">$</span>df<span class="sc">$</span>CRPS_rank <span class="co"># Now this column exists</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Get (trimmed) z-scores for each method within sim scenario</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>duq_res <span class="ot">&lt;-</span> <span class="fu">normalize_sim_study</span>(duq_res, <span class="st">"CRPS"</span>, <span class="at">trim=</span><span class="fl">0.01</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> duq_res<span class="sc">$</span>df<span class="sc">$</span>CRPS_norm <span class="co"># Now this column exists</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Get relative CRPS for each method within sim scenario</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>duq_res <span class="ot">&lt;-</span> <span class="fu">relativize_sim_study</span>(duq_res, <span class="st">"CRPS"</span>, <span class="at">epsilon =</span> <span class="fl">1e-3</span>, <span class="at">upper_bound=</span><span class="fl">1e3</span>)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> duq_res<span class="sc">$</span>df<span class="sc">$</span>CRPS_rel <span class="co"># Now this column exists</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Get log(relative CRPS) for each method within sim scenario</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>duq_res <span class="ot">&lt;-</span> <span class="fu">relativize_sim_study</span>(duq_res, <span class="st">"CRPS"</span>, <span class="at">epsilon =</span> <span class="fl">1e-3</span>, <span class="at">upper_bound=</span><span class="fl">1e3</span>, <span class="at">log=</span><span class="cn">TRUE</span>)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> duq_res<span class="sc">$</span>df<span class="sc">$</span>CRPS_rel_log <span class="co"># Now this column exists</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="visualization-and-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="visualization-and-analysis">Visualization and Analysis</h2>
+<ul>
+<li><code>summarize_sim_study()</code> - summaries</li>
+<li><code>rankplot_sim_study()</code> — cumulative rank plots<br>
+</li>
+<li><code>heatmap_sim_study()</code> — average performance heatmaps<br>
+</li>
+<li><code>paretoplot_sim_study()</code> — accuracy vs time tradeoffs<br>
+</li>
+<li><code>boxplots_sim_study()</code> — side-by-side boxplots or violins</li>
+</ul>
+<p>Now we can make publication-ready figures with just one or two lines of code!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rankplot_sim_study</span>(duq_res, <span class="at">metric=</span><span class="st">"CRPS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="duqling_tutorial_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap_sim_study</span>(duq_res, <span class="st">"CRPS_rank"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="duqling_tutorial_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>duq_res <span class="ot">&lt;-</span> <span class="fu">relativize_sim_study</span>(duq_res, <span class="st">"time"</span>, <span class="at">log=</span><span class="cn">TRUE</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">paretoplot_sim_study</span>(duq_res, <span class="fu">c</span>(<span class="st">"CRPS_rel_log"</span>, <span class="st">"time_rel_log"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="duqling_tutorial_files/figure-html/unnamed-chunk-21-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>duq_sub <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_res, <span class="at">id=</span><span class="st">"dms_additive"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplots_sim_study</span>(duq_sub, <span class="at">y_scale_fun=</span>log10)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="duqling_tutorial_files/figure-html/unnamed-chunk-21-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="advanced-extensions" class="level1">
+<h1>5. Advanced extensions</h1>
+<p>For expert users who want to extend duqling:</p>
+<section id="custom-test-functions" class="level2">
+<h2 class="anchored" data-anchor-id="custom-test-functions">Custom test functions</h2>
+<p>Use “custom_<name>” in <code>fnames</code> and pass a list with <code>$func</code> and <code>$input_dim</code> in <code>...</code>. In the string <code>"custom_&lt;fname&gt;"</code>, <code>&lt;fname&gt;</code> must match the name of the argument passed through <code>...</code>.</name></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">scale01=</span><span class="cn">TRUE</span>) <span class="fu">sum</span>(x<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">2</span>]</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>my_custom <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">func =</span> f, <span class="at">input_dim =</span> <span class="dv">5</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">run_sim_study</span>(fit_func, pred_func,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">fnames =</span> <span class="st">"custom_foobar"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">foobar =</span> my_custom)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To pass multiple custom functions you can do:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">scale01=</span><span class="cn">TRUE</span>, <span class="at">z=</span><span class="dv">1</span>) <span class="fu">sum</span>(x<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">2</span>]<span class="sc">*</span>z</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">scale01=</span><span class="cn">TRUE</span>) <span class="fu">f</span>(x, scale01, <span class="dv">1</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">scale01=</span><span class="cn">TRUE</span>) <span class="fu">f</span>(x, scale01, <span class="dv">2</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>f3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">scale01=</span><span class="cn">TRUE</span>) <span class="fu">f</span>(x, scale01, <span class="dv">3</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">run_sim_study</span>(fit_func, pred_func,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">fnames =</span> <span class="fu">c</span>(<span class="st">"custom_foobar"</span>,</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"custom_zebra"</span>,</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"custom_teddy"</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">foobar =</span> <span class="fu">list</span>(<span class="at">func=</span>f1, <span class="at">input_dim=</span><span class="dv">2</span>),</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">zebra  =</span> <span class="fu">list</span>(<span class="at">func=</span>f2, <span class="at">input_dim=</span><span class="dv">2</span>),</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">teddy  =</span> <span class="fu">list</span>(<span class="at">func=</span>f3, <span class="at">input_dim=</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="custom-designs" class="level2">
+<h2 class="anchored" data-anchor-id="custom-designs">Custom designs</h2>
+<p>Set <code>design_type="custom"</code> and pass a <code>design_func</code> through <code>...</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>correlated_design <span class="ot">&lt;-</span> <span class="cf">function</span>(n, p) {</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> lhs<span class="sc">::</span><span class="fu">randomLHS</span>(n, p)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  d[,<span class="dv">1</span>] <span class="ot">&lt;-</span> (d[,<span class="dv">2</span>] <span class="sc">+</span> d[,<span class="dv">3</span>]) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  d</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="fu">run_sim_study</span>(fit_func, pred_func,</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">fnames =</span> <span class="st">"ishigami"</span>,</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">design_type =</span> <span class="st">"custom"</span>,</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">design_func =</span> correlated_design)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="custom-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="custom-datasets">Custom datasets</h2>
+<p>Register your own dataset for use with <code>run_sim_study_data()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>my_X <span class="ot">&lt;-</span> lhs<span class="sc">::</span><span class="fu">randomLHS</span>(<span class="dv">247</span>, <span class="dv">3</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>my_y <span class="ot">&lt;-</span> <span class="fu">apply</span>(my_X, <span class="dv">1</span>, duqling<span class="sc">::</span>ishigami) </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>my_y <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="dv">10</span> <span class="sc">+</span> my_y <span class="sc">*</span> <span class="fu">runif</span>(<span class="dv">247</span>, <span class="fl">0.8</span>, <span class="fl">1.2</span>))</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">X=</span>my_X, <span class="at">y=</span>my_y)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">run_sim_study_data</span>(fit_func, pred_func, </span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">dsets=</span>my_data,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">custom_data_names=</span><span class="st">"log_ishigami"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
