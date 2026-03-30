@@ -84,6 +84,46 @@ filter_sim_study(duq, n_train=1000, NSR=0.1) %>%
                     title="FVU (n=1000, NSR=0.1)")
 ggsave(path, height=7.5, width=8)
 
+## n = 500, NSR=0
+path <- "figs/SM/FigureSM1c0.eps"
+filter_sim_study(duq, n_train=500, NSR=0) %>%
+  rankplot_sim_study("RMSE", title="RMSE Rank (n=500, NSR=0)")
+ggsave(path, height=4, width=8)
+
+path <- "figs/SM/FigureSM2c0.eps"
+filter_sim_study(duq, n_train=500, NSR=0) %>%
+  rankplot_sim_study("time", title="Time Rank (n=500, NSR=0)")
+ggsave(path, height=4, width=8)
+
+path <- "figs/SM/FigureSM3c0.eps"
+custom <- function(xx){
+  log10(pmin(1, pmax(0.001, xx)))
+}
+filter_sim_study(duq, n_train=500, NSR=0) %>%
+  heatmap_sim_study(metric="CRPS_Q3", y_scale_fun = custom,
+                    colorbar_labels = list(breaks=log10(c(0.001, 0.01,  0.1, 0.56, 1)),
+                                           labels=c("<0.001","0.01", "0.1", "0.56", "")),
+                    color_scale="mako",
+                    title="CRPS Q3 (n=500, NSR=0)")
+ggsave(path, height=7.5, width=8)
+
+path <- "figs/SM/FigureSM4c0.eps"
+filter_sim_study(duq, n_train=500, NSR=0) %>%
+  heatmap_sim_study(metric="CRPS", y_scale_fun = custom,
+                    colorbar_labels = list(breaks=log10(c(0.001, 0.01,  0.1, 0.56, 1)),
+                                           labels=c("<0.001","0.01", "0.1", "0.56", "")),
+                    color_scale="mako",
+                    title="Mean CRPS (n=500, NSR=0)")
+ggsave(path, height=7.5, width=8)
+
+path <- "figs/SM/FigureSM5c0.eps"
+filter_sim_study(duq, n_train=500, NSR=0) %>%
+  heatmap_sim_study(metric="FVU", y_scale_fun = custom,
+                    colorbar_labels = list(breaks=log10(c(0.001, 0.01,  0.1, 0.5, 1)),
+                                           labels=c("<0.001","0.01", "0.1", "0.5", "")),
+                    color_scale="mako",
+                    title="FVU (n=500, NSR=0)")
+ggsave(path, height=7.5, width=8)
 
 ## n = 500, NSR=0.1
 path <- "figs/SM/FigureSM1c.eps"

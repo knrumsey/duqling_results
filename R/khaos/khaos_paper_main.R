@@ -23,4 +23,9 @@ if(rerun_sobol){
   source("R/khaos/khaos_sobol.R")
 }
 
+#=================================
+#.    Sobol Ishigami Example
+#=================================
+source("R/khaos/khaos_ishigami.R")
+
 
