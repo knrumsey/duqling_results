@@ -1,5 +1,12 @@
-load("data/results_paper.Rda") # -> results
-duq <- process_sim_study(results, scale_CRPS = TRUE)
+# From duqling
+data("sim_study_testfuncs")
+duq <- process_sim_study(sim_study_testfuncs, scale_CRPS = TRUE)
+
+data("sim_study_realdata")
+duq_data <- process_sim_study(sim_study_realdata, scale_CRPS=TRUE)
+
+duq_data_small <- filter_sim_study(duq_data, expr = n_train <= 1438)
+duq_data_big  <- filter_sim_study(duq_data, expr = n_train > 1438)
 
 #================================================================
 #    FIGURES
@@ -77,23 +84,31 @@ filter_sim_study(duq, n_train=5000, NSR=0) %>%
                        title="(n=5000, NSR=0)", ylim=c(1, 70))
 ggsave(path, height=4.5, width=4.5)
 
+### REALDATA FIGURES
 
 path <- "figs/main/Figure8.eps"
-load("data/results_paper_data.Rda")
-duq_data <- process_sim_study(results_smalldata)
-filter_sim_study(duq_data) %>%
+filter_sim_study(duq_data_small) %>%
   rankplot_sim_study("CRPS", title="CRPS Rank (Small Datasets)")
 ggsave(path, height=4, width=8)
 
 path <- "figs/main/Figure9.eps"
-duq_data_big <- process_sim_study(results_bigdata)
 filter_sim_study(duq_data_big) %>%
-  rankplot_sim_study("CRPS_max", title="CRPS Rank (Big Datasets)")
+  rankplot_sim_study("CRPS", title="CRPS Rank (Big Datasets)")
+ggsave(path, height=4, width=8)
+
+path <- "figs/main/Figure8_new.eps"
+filter_sim_study(duq_data_small) %>%
+  perfprofile_sim_study("CRPS", title="CRPS Profile (Small Datasets)")
+ggsave(path, height=4, width=8)
+
+path <- "figs/main/Figure9_new.eps"
+filter_sim_study(duq_data_big) %>%
+  perfprofile_sim_study("CRPS", title="CRPS Profile (Big Datasets)")
 ggsave(path, height=4, width=8)
 
 
 path <- "figs/main/Figure10a.eps"
-paretoplot_sim_study(duq_data, metric=c("CRPS_rel", "time_rel_log"),
+paretoplot_sim_study(duq_data_small, metric=c("CRPS_rel", "time_rel_log"),
                      epsilon=c(0.001, 0), upper_bound=c(100, Inf), show_legend = FALSE,
                      title="CRPS & Speed (Small Datasets)", ylim=c(1, 35))
 ggsave(path, height=4.5, width=4.5)
@@ -108,7 +123,7 @@ path <- "figs/main/Figure11.eps"
 custom <- function(xx){
   log10(pmin(1, pmax(0.001, xx)))
 }
-filter_sim_study(duq_data) %>%
+filter_sim_study(duq_data_small) %>%
   heatmap_sim_study(metric="CRPS_med", y_scale_fun = custom,
                     colorbar_labels = list(breaks=log10(c(0.001, 0.01,  0.1, 0.56, 1)),
                                            labels=c("<0.001", "0.01", "0.1", "0.56", "")),

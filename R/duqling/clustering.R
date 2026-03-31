@@ -1,14 +1,14 @@
 library(dbscan)
 library(ggrepel)
-load("data/results_paper.Rda")
-load("data/results_paper_data.Rda")
 
-duq1 <- process_sim_study(results)
-duq2 <- process_sim_study(results_all)
+data("sim_study_testfuncs")
+duq1 <- process_sim_study(sim_study_testfuncs, scale_CRPS = TRUE)
+
+data("sim_study_realdata")
+duq2 <- process_sim_study(sim_study_realdata, scale_CRPS = TRUE)
+
 duq <- join_sim_study(duq1, duq2)
 df <- duq$df
-
-
 
 # ---- Step 1. Define scenario ----
 scenario_cols <- c("id", "n_train", "NSR", "design_type", "replication")
@@ -44,7 +44,8 @@ mds_df <- data.frame(
 
 # ---- Step 6. DBSCAN clustering ----
 set.seed(123)
-db <- dbscan(mds_df[,c("Dim1","Dim2")], eps = 0.22, minPts = 1)
+#db <- dbscan(mds_df[,c("Dim1","Dim2")], eps = 0.22, minPts = 1)
+db <- dbscan(mds_df[,c("Dim1","Dim2")], eps = 0.25, minPts = 1)
 mds_df$cluster <- factor(ifelse(db$cluster == 0, "Noise", paste0("C", db$cluster)))
 
 # ---- Step 7. Plot with hidden legend + markers + non-overlapping labels ----

@@ -1,5 +1,12 @@
-load("data/results_paper.Rda") # -> results
-duq <- process_sim_study(results, scale_CRPS = TRUE)
+# From duqling
+data("sim_study_testfuncs")
+duq <- process_sim_study(sim_study_testfuncs, scale_CRPS = TRUE)
+
+data("sim_study_realdata")
+duq_data <- process_sim_study(sim_study_realdata)
+
+duq_data_small <- filter_sim_study(duq_data, expr = n_train <= 1438)
+duq_data_big  <- filter_sim_study(duq_data, expr = n_train > 1438)
 
 ## n = 1000, NSR=0
 path <- "figs/SM/FigureSM1a.eps"

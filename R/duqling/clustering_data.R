@@ -2,7 +2,8 @@ library(dbscan)
 library(ggrepel)
 load("data/results_paper_data.Rda")
 
-duq2 <- process_sim_study(results_all)
+data("sim_study_realdata")
+duq2 <- process_sim_study(sim_study_realdata, scale_CRPS = TRUE)
 df <- duq2$df
 
 # ---- Step 1. Define scenario ID (each dataset/test function + replication) ----
@@ -42,7 +43,7 @@ mds_df <- data.frame(
 
 # ---- Step 6. DBSCAN clustering ----
 set.seed(123)
-db <- dbscan(mds_df[,c("Dim1","Dim2")], eps = 0.1, minPts = 1)  # tune eps + minPts!
+db <- dbscan(mds_df[,c("Dim1","Dim2")], eps = 0.13, minPts = 1)  # tune eps + minPts!
 mds_df$cluster <- factor(ifelse(db$cluster == 0, "Noise", paste0("C", db$cluster)))
 
 # ---- Step 7. Plot ----

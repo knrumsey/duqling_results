@@ -1,13 +1,17 @@
-load("data/results_paper.Rda")
-duq <- process_sim_study(results, scale_CRPS = TRUE)
+data("sim_study_testfuncs")
+duq <- process_sim_study(sim_study_testfuncs, scale_CRPS = TRUE)
 
+data("sim_study_realdata")
+duq_data <- process_sim_study(sim_study_realdata, scale_CRPS=TRUE)
+
+# Make figures
 fname <- "ignition"
 res_sub <- filter_sim_study(duq,
-                            n_train=1000, NSR=0, id=fname)
+                            n_train=1000, NSR=0.1, id=fname)
 boxplots_sim_study(res_sub,
                    ylim = c(min(res_sub$df$CRPS), 1),
                    y_scale_fun = log10,
-                   title=paste(fname, "(n=1000, NSR=0)"))
+                   title=paste(fname, "(n=1000, NSR=0.1)"))
 ggsave(filename="figs/main/boxplots1.eps", height=3, width=5)
 
 fname <- "banana"
@@ -38,8 +42,6 @@ boxplots_sim_study(res_sub,
 ggsave(filename="figs/main/boxplots4.eps", height=3, width=5)
 
 
-load("data/results_paper_data.Rda")
-duq_data <- process_sim_study(results_all)
 fname <- "Z_machine_max_vel1"
 res_sub <- filter_sim_study(duq_data, id=fname)
 boxplots_sim_study(res_sub,
