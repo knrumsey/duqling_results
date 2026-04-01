@@ -1,64 +1,4 @@
-library(duqling)
-library(laGP)
-
-# MASTER FUNCTIONS
-fit_lagp <- function(X, y){
-  if(sd(y) == 0) y <- y + rnorm(y, 0, 1e-6)
-  if(max(table(y)) > 10) y <- y + rnorm(y, 0, 1e-6)
-  list(X=X, y=y)
-}
-pred_lagp <- function(obj, Xt, nn, mm){
-  n <- nrow(Xt)
-
-  preds <- matrix(NA, nrow=1000, ncol=nrow(Xt))
-  for(i in 1:nrow(Xt)){
-    nug <- max(1e-7 * var(obj$y), 1e-9)
-    mod <- laGP(Xt[i,,drop=FALSE], start=10, end=nn, X=obj$X, Z=obj$y, method=mm, g=nug)
-    m <- mod$mean
-    v <- mod$df
-    s2 <- mod$s2 * (v-2) / v
-    preds[,i] <- m + rt(1000, v) * sqrt(s2)
-  }
-  return(preds)
-}
-
-
-method_list <- c("alcray", "alc", "mspe", "nn")
-nn_list <- c(25, 50, 100, 200)
-method_names <- NULL
-for (i in seq_along(method_list)) {
-  for (j in seq_along(nn_list)) {
-    mn_curr <- paste0(method_list[i], "_", nn_list[j])
-    method_names <- c(method_names, mn_curr)
-
-    # Use local to bind i and j
-    assign(paste0("pred_", mn_curr),
-           local({
-             mm <- method_list[i]
-             nn <- nn_list[j]
-             function(obj, Xt) pred_lagp(obj, Xt, nn = nn, mm = mm)
-           })
-    )
-
-    # Fit function is always the same
-    assign(paste0("fit_", mn_curr), fit_lagp)
-  }
-}
-model_names <- method_names
-(base) [knrumsey@darwin-fe1 duqling_sims]$
-  (base) [knrumsey@darwin-fe1 duqling_sims]$ ls
-bnns                         check_failures_multi.R   emulators.R       out           rashomon.R              run_single_case.R            submit_single_cases.sh
-bnns_0.1.2.tar.gz            check_lagp_missing.R     fname_metrics     out_data      rashomon_submit.sh      slurm_logs
-ccs6_submit_single_cases.sh  custom_data_files.Rda    get_missing.R     out_lagp      run_single_case_data.R  submit_single_cases_data.sh
-check_failures_multi_data.R  custom_duqling_data.Rda  lagp_emulators.R  rashomon.csv  run_single_case_lagp.R  submit_single_cases_lagp.sh
-(base) [knrumsey@darwin-fe1 duqling_sims]$ cat emulators.R
-# Save me some time during debugging:
-library(duqling)
-X <- lhs::randomLHS(100, 3)
-y <- apply(X,1,duqling::ishigami)
-
 # Keep track of model names and use get(paste0("fit_", model_name))
-
 model_names <- NULL
 
 # 1. BASS
@@ -438,9 +378,11 @@ pred_rvm <- function(obj, Xt) predict(obj, Xt)
 model_names <- c(model_names, "rvm")
 
 # 20. NGBoost
-library(ngboost)
-use_condaenv("ngbenv", required = TRUE)
-py_config()
+# DUE TO ADDITION OF OTHER PYTHON MODELS (30-32), THIS SCRIPT CANNOT CONTAIN RETICULATE CODE
+# Check run_single_case.R
+#library(ngboost)
+#use_condaenv("ngbenv", required = TRUE)
+#py_config()
 fit_ngboost <- function(X, y){
   if(sd(y) == 0) y <- y + rnorm(y, 0, 1e-7)
   model <- NGBRegression$new(Dist = Dist("Normal"),
@@ -769,3 +711,172 @@ pred_baseline <- function(obj, Xt){
   stop("Shouldn't even get here")
 }
 model_names <- c(model_names, "baseline")
+
+
+###############################################
+# 3/29/26: New emulators post reviewer feedback
+###############################################
+
+# 30. GPyTorch
+#library(reticulate)
+# see also python-surrogates/gpytorch_model.py
+fit_gpytorch <- function(X, y){
+  X <- as.matrix(X)
+  y <- as.numeric(y)
+
+  if(sd(y) == 0) y <- y + rnorm(length(y), 0, 1e-7)
+
+  xm <- colMeans(X)
+  xs <- apply(X, 2, sd)
+  xs[xs == 0] <- 1
+
+  ym <- mean(y)
+  ys <- sd(y)
+  if(ys == 0) ys <- 1
+
+  Xs <- scale(X, center = xm, scale = xs)
+  ys_std <- (y - ym) / ys
+
+  train_x <- torch$tensor(Xs, dtype = torch$float32)
+  train_y <- torch$tensor(as.numeric(ys_std), dtype = torch$float32)
+
+  likelihood <- gpytorch$likelihoods$GaussianLikelihood()
+  model <- py$ExactGPModel(train_x, train_y, likelihood)
+
+  model$train()
+  likelihood$train()
+
+  optimizer <- torch$optim$Adam(
+    model$parameters(),
+    lr = 0.1
+  )
+
+  mll <- gpytorch$mlls$ExactMarginalLogLikelihood(likelihood, model)
+
+  for(i in 1:150){
+    optimizer$zero_grad()
+    output <- model(train_x)
+    loss <- -mll(output, train_y)
+    loss$backward()
+    optimizer$step()
+  }
+
+  list(
+    model = model,
+    likelihood = likelihood,
+    xm = xm,
+    xs = xs,
+    ym = ym,
+    ys = ys
+  )
+}
+
+pred_gpytorch <- function(obj, Xt){
+  Xt <- as.matrix(Xt)
+  Xs <- scale(Xt, center = obj$xm, scale = obj$xs)
+  test_x <- torch$tensor(Xs, dtype = torch$float32)
+
+  model <- obj$model
+  likelihood <- obj$likelihood
+
+  model$eval()
+  likelihood$eval()
+
+  posterior <- likelihood(model(test_x))
+  samp <- posterior$rsample(sample_shape = torch$Size(list(1000L)))
+  out <- py_to_r(samp$detach()$cpu()$numpy())
+
+  out <- out * obj$ys + obj$ym
+  matrix(out, nrow = 1000, ncol = nrow(Xt))
+}
+model_names <- c(model_names, "gpytorch")
+
+
+# 31. GBC
+# see also python-surrogates/iqn.py
+fit_gbc <- function(X, y){
+  X <- as.matrix(X)
+  y <- as.numeric(y)
+
+  X_py <- np$array(X, dtype = "float32")
+  y_py <- np$array(y, dtype = "float32")
+
+  out <- train_iqn(X_np = X_py, y_np = y_py)
+
+  list(
+    model = out[[1]],
+    xm = out[[2]],
+    xs = out[[3]],
+    ym = out[[4]],
+    ys = out[[5]]
+  )
+}
+
+pred_gbc <- function(obj, Xt){
+  Xt <- as.matrix(Xt)
+  Xt_py <- np$array(Xt, dtype = "float32")
+
+  samp <- sample_iqn(
+    model = obj$model,
+    X_np = Xt_py,
+    xm = obj$xm,
+    xs = obj$xs,
+    ym = obj$ym,
+    ys = obj$ys,
+    B = as.integer(1000),
+    device = torch$device("cpu")
+  )
+
+  out <- py_to_r(samp)
+  matrix(out, nrow = 1000, ncol = nrow(Xt))
+}
+model_names <- c(model_names, "gbc")
+
+
+# 32. SVIGP
+# see also python-surrogates/svigp_model.py
+fit_svigp <- function(X, y){
+  # Hyperparameters
+  n <- nrow(as.matrix(X))
+  num_inducing <- min(max(5L, 4L * floor(sqrt(n))), 100L, as.integer(0.75 * n))
+  epochs <- 300L
+  batch_size <- min(256L, n)
+  lr <- 0.01
+
+  X <- as.matrix(X)
+  y <- as.numeric(y)
+
+  if(sd(y) == 0) y <- y + rnorm(length(y), 0, 1e-7)
+
+  X_py <- np$array(X, dtype = "float32")
+  y_py <- np$array(y, dtype = "float32")
+
+  obj <- py$train_svgp(
+    X_np = X_py,
+    y_np = y_py,
+    num_inducing = as.integer(num_inducing),
+    epochs = as.integer(epochs),
+    batch_size = as.integer(batch_size),
+    lr = lr,
+    device = "cpu"
+  )
+
+  obj
+}
+
+pred_svigp <- function(obj, Xt, B = 1000L){
+  Xt <- as.matrix(Xt)
+  Xt_py <- np$array(Xt, dtype = "float32")
+
+  samp <- py$sample_svgp(
+    obj = obj,
+    X_np = Xt_py,
+    B = as.integer(B),
+    device = "cpu"
+  )
+
+  out <- py_to_r(samp)
+  matrix(out, nrow = B, ncol = nrow(Xt))
+}
+model_names <- c(model_names, "svigp")
+
