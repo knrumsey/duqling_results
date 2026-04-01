@@ -11,17 +11,17 @@ duq_data_big  <- filter_sim_study(duq_data, expr = n_train > 1438)
 #================================================================
 #    FIGURES
 #================================================================
-path <- "figs/main/Figure1.eps"
+path <- paste0("figs/main/Figure1.", extension)
 filter_sim_study(duq, n_train=1000, NSR=0) %>%
   rankplot_sim_study("CRPS", title="CRPS Rank (n=1000, NSR=0)")
 ggsave(path, height=4, width=8)
 
-path <- "figs/main/Figure2.eps"
+path <- paste0("figs/main/Figure2.", extension)
 filter_sim_study(duq, n_train=1000, NSR=0.1) %>%
   rankplot_sim_study("CRPS", title="CRPS Rank (n=1000, NSR=0.1)")
 ggsave(path, height=4, width=8)
 
-path <- "figs/main/Figure3.eps"
+path <- paste0("figs/main/Figure3.", extension)
 custom <- function(xx){
   log10(pmin(1, pmax(0.001, xx)))
 }
@@ -33,7 +33,7 @@ filter_sim_study(duq, n_train=1000, NSR=0) %>%
                     title=FALSE)
 ggsave(path, height=7.5, width=8)
 
-path <- "figs/main/Figure4.eps"
+path <- paste0("figs/main/Figure4.", extension)
 custom <- function(xx){
   log10(pmin(1, pmax(0.015, xx)))
 }
@@ -46,38 +46,38 @@ filter_sim_study(duq, n_train=1000, NSR=0.1) %>%
 ggsave(path, height=7.5, width=8)
 
 
-path <- "figs/main/Figure5a.eps"
+path <- paste0("figs/main/Figure5a.", extension)
 filter_sim_study(duq, n_train=1000, NSR=0) %>%
   paretoplot_sim_study(metric=c("CRPS_rel", "time_rel_log"),
                        epsilon=c(0.001, 0), upper_bound=c(100, Inf), show_legend = FALSE,
                        title="CRPS & Speed (n=1000, NSR=0)", ylim=c(1, 70))
 ggsave(path, height=4.5, width=4.5)
 
-path <- "figs/main/Figure5b.eps"
+path <- paste0("figs/main/Figure5b.", extension)
 filter_sim_study(duq, n_train=1000, NSR=0.1) %>%
   paretoplot_sim_study(metric=c("CRPS_rel", "time_rel_log"),
                        epsilon=c(0.001, 0), upper_bound=c(100, Inf), show_legend = FALSE,
                        title="(n=1000, NSR=0.1)", ylim=c(1, 20))
 ggsave(path, height=4.5, width=4.5)
 
-path <- "figs/main/Figure6.eps"
+path <- paste0("figs/main/Figure6.", extension)
 filter_sim_study(duq, n_train=500, NSR=0) %>%
   rankplot_sim_study("CRPS", title="CRPS Rank (n=500, NSR=0)")
 ggsave(path, height=4, width=8)
 
-path <- "figs/main/Figure7.eps"
+path <- paste0("figs/main/Figure7.", extension)
 filter_sim_study(duq, n_train=5000, NSR=0) %>%
   rankplot_sim_study("CRPS", title="CRPS Rank (n=5000, NSR=0)")
 ggsave(path, height=4, width=8)
 
-path <- "figs/main/Figure6b.eps"
+path <- paste0("figs/main/Figure6b.", extension)
 filter_sim_study(duq, n_train=500, NSR=0) %>%
   paretoplot_sim_study(metric=c("CRPS_rel", "time_rel_log"),
                        epsilon=c(0.001, 0), upper_bound=c(100, Inf), show_legend = FALSE,
                        title="CRPS & Speed (n=500, NSR=0)", ylim=c(1, 70))
 ggsave(path, height=4.5, width=4.5)
 
-path <- "figs/main/Figure7b.eps"
+path <- paste0("figs/main/Figure7b.", extension)
 filter_sim_study(duq, n_train=5000, NSR=0) %>%
   paretoplot_sim_study(metric=c("CRPS_rel", "time_rel_log"),
                        epsilon=c(0.001, 0), upper_bound=c(100, Inf), show_legend = FALSE,
@@ -86,40 +86,40 @@ ggsave(path, height=4.5, width=4.5)
 
 ### REALDATA FIGURES
 
-path <- "figs/main/Figure8.eps"
+path <- paste0("figs/main/Figure8.", extension)
 filter_sim_study(duq_data_small) %>%
   rankplot_sim_study("CRPS", title="CRPS Rank (Small Datasets)")
 ggsave(path, height=4, width=8)
 
-path <- "figs/main/Figure9.eps"
+path <- paste0("figs/main/Figure9.", extension)
 filter_sim_study(duq_data_big) %>%
   rankplot_sim_study("CRPS", title="CRPS Rank (Big Datasets)")
 ggsave(path, height=4, width=8)
 
-path <- "figs/main/Figure8_new.eps"
+path <- paste0("figs/main/Figure8_new.", extension)
 filter_sim_study(duq_data_small) %>%
   perfprofile_sim_study("CRPS", title="CRPS Profile (Small Datasets)")
 ggsave(path, height=4, width=8)
 
-path <- "figs/main/Figure9_new.eps"
+path <- paste0("figs/main/Figure9_new.", extension)
 filter_sim_study(duq_data_big) %>%
   perfprofile_sim_study("CRPS", title="CRPS Profile (Big Datasets)")
 ggsave(path, height=4, width=8)
 
 
-path <- "figs/main/Figure10a.eps"
+path <- paste0("figs/main/Figure10a.", extension)
 paretoplot_sim_study(duq_data_small, metric=c("CRPS_rel", "time_rel_log"),
                      epsilon=c(0.001, 0), upper_bound=c(100, Inf), show_legend = FALSE,
                      title="CRPS & Speed (Small Datasets)", ylim=c(1, 35))
 ggsave(path, height=4.5, width=4.5)
 
-path <- "figs/main/Figure10b.eps"
+path <- paste0("figs/main/Figure10b.", extension)
 paretoplot_sim_study(duq_data_big, metric=c("CRPS_rel", "time_rel_log"),
                      epsilon=c(0.001, 0), upper_bound=c(100, Inf), show_legend = FALSE,
                      title="(Big Datasets)", ylim=c(1, 35))
 ggsave(path, height=4.5, width=4.5)
 
-path <- "figs/main/Figure11.eps"
+path <- paste0("figs/main/Figure11.", extension)
 custom <- function(xx){
   log10(pmin(1, pmax(0.001, xx)))
 }
@@ -131,7 +131,7 @@ filter_sim_study(duq_data_small) %>%
                     title="Median CRPS (Small Datasets)")
 ggsave(path, height=5.5, width=8)
 
-path <- "figs/main/Figure12.eps"
+path <- paste0("figs/main/Figure12.", extension)
 custom <- function(xx){
   log10(pmin(1, pmax(0.001, xx)))
 }

@@ -62,4 +62,4 @@ ggplot(mds_df, aes(x = Dim1, y = Dim2, color = cluster, shape = cluster)) +
     title = "Dataset Clusters",
     x = "MDS Dimension 1", y = "MDS Dimension 2"
   )
-ggsave(filename="figs/main/cluster_data.eps", height=4.5, width=4.5)
+ggsave(filename=paste0("figs/main/cluster_data.", extension), height=4.5, width=4.5)

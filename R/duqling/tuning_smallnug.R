@@ -101,4 +101,4 @@ p <- ggplot(method_stats, aes_string(x = metrics[2], y = metrics[1])) +
 
 # Show the plot
 p
-ggsave("figs/main/pareto_lagp_smallnug.eps", width=8, height=4)
+ggsave(paste0("figs/main/pareto_lagp_smallnug.", extension), width=8, height=4)

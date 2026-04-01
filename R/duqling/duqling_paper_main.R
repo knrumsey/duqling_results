@@ -1,6 +1,11 @@
 library(duqling)
 library(tidyverse)
 
+# Choose file extension for figures
+extension <- "png"
+
+# Warnings are normal from these scripts.
+
 # Section 4 Figures
 source("R/duqling/make_figs_main.R")
 #source("R/make_figs_SM.R")

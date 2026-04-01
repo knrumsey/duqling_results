@@ -65,4 +65,4 @@ ggplot(mds_df, aes(x = Dim1, y = Dim2, color = cluster, shape = cluster)) +
     title = "Emulator clusters",
     x = "MDS Dimension 1", y = "MDS Dimension 2"
   )
-ggsave(filename="figs/main/cluster_emu.eps", height=4.5, width=4.5)
+ggsave(filename=paste0("figs/main/cluster_emu.", extension), height=4.5, width=4.5)

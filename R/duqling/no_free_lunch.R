@@ -12,7 +12,7 @@ boxplots_sim_study(res_sub,
                    ylim = c(min(res_sub$df$CRPS), 1),
                    y_scale_fun = log10,
                    title=paste(fname, "(n=1000, NSR=0.1)"))
-ggsave(filename="figs/main/boxplots1.eps", height=3, width=5)
+ggsave(filename=paste0("figs/main/boxplots1.", extension), height=3, width=5)
 
 fname <- "banana"
 res_sub <- filter_sim_study(duq,
@@ -21,7 +21,7 @@ boxplots_sim_study(res_sub,
                    ylim = c(min(res_sub$df$CRPS), 1),
                    y_scale_fun = log10,
                    title=paste(fname, "(n=1000, NSR=0)"))
-ggsave(filename="figs/main/boxplots2.eps", height=3, width=5)
+ggsave(filename=paste0("figs/main/boxplots2.", extension), height=3, width=5)
 
 fname <- "cube5"
 res_sub <- filter_sim_study(duq,
@@ -30,7 +30,7 @@ boxplots_sim_study(res_sub,
                    ylim = c(min(res_sub$df$CRPS), 1),
                    y_scale_fun = log10,
                    title=paste(fname, "(n=1000, NSR=0.1)"))
-ggsave(filename="figs/main/boxplots3.eps", height=3, width=5)
+ggsave(filename=paste0("figs/main/boxplots3.", extension), height=3, width=5)
 
 fname <- "multivalley"
 res_sub <- filter_sim_study(duq,
@@ -39,7 +39,7 @@ boxplots_sim_study(res_sub,
                    ylim = c(min(res_sub$df$CRPS), 1),
                    y_scale_fun = log10,
                    title=paste(fname, "(n=1000, NSR=0.1)"))
-ggsave(filename="figs/main/boxplots4.eps", height=3, width=5)
+ggsave(filename=paste0("figs/main/boxplots4.", extension), height=3, width=5)
 
 
 fname <- "Z_machine_max_vel1"
@@ -48,7 +48,7 @@ boxplots_sim_study(res_sub,
                    ylim = c(min(res_sub$df$CRPS), 1),
                    y_scale_fun = log10,
                    title=paste(fname, ""))
-ggsave(filename="figs/main/boxplots5.eps", height=3, width=5)
+ggsave(filename=paste0("figs/main/boxplots5.", extension), height=3, width=5)
 
 
 fname <- "nuclear_data"
@@ -57,7 +57,7 @@ boxplots_sim_study(res_sub,
                    ylim = c(min(res_sub$df$CRPS), 1),
                    y_scale_fun = log10,
                    title=paste(fname, ""))
-ggsave(filename="figs/main/boxplots6.eps", height=3, width=5)
+ggsave(filename=paste0("figs/main/boxplots6.", extension), height=3, width=5)
 
 ## BPPRS vs Svecgp
 sub_fnames <- c("rabbits", "park4", "friedman", "steel_column", "ebola", "borehole", "crater",
@@ -88,7 +88,7 @@ ggplot(duq_sub0$df, aes(x = id, y = CRPS, fill = method, color = method)) +
     axis.text.x = element_text(angle = 45, hjust = 1)
   ) +
   ggtitle("n=1000, NSR=0")
-ggsave(filename="figs/main/boxplots_comp0.eps", height=3, width=8)
+ggsave(filename=paste0("figs/main/boxplots_comp0.", extension), height=3, width=8)
 
 ggplot(duq_sub1$df, aes(x = id, y = CRPS, fill = method, color = method)) +
   geom_boxplot(outlier.size = 0.5) +
@@ -101,7 +101,7 @@ ggplot(duq_sub1$df, aes(x = id, y = CRPS, fill = method, color = method)) +
     axis.text.x = element_text(angle = 45, hjust = 1)
   ) +
   ggtitle("n=1000, NSR=0.1")
-ggsave(filename="figs/main/boxplots_comp1.eps", height=3, width=8)
+ggsave(filename=paste0("figs/main/boxplots_comp1.", extension), height=3, width=8)
 
 
 
