@@ -1,21 +1,13 @@
 library(duqling)
 library(tidyverse)
 
-#load("data/results_paper.Rda")
-#load("data/results_lagp_smallnug.Rda")
-
-#duq <- process_sim_study(results)
-#duq_lagp <- res_lagp # already processed
-#duq <- join_sim_study(duq, duq_lagp)
-
 data("sim_study_testfuncs")
 duq <- process_sim_study(sim_study_testfuncs, scale_CRPS = TRUE)
 
-load("data/results_lagp_smallnug.Rda")
-duq_lagp <- res_lagp
+load("data/results_lagp.Rda")
+duq_lagp <- process_sim_study(res_lagp)
 
 duq <- join_sim_study(duq, duq_lagp)
-
 
 #filter_sim_study(duq, n_train=1000, NSR=0) %>%
 #  paretoplot_sim_study(metric=c("CRPS_rel", "time_rel_log"),
@@ -101,4 +93,4 @@ p <- ggplot(method_stats, aes_string(x = metrics[2], y = metrics[1])) +
 
 # Show the plot
 p
-ggsave(paste0("figs/main/pareto_lagp_smallnug.", extension), width=8, height=4)
+ggsave("figs/main/pareto_lagp.eps", width=8, height=4)

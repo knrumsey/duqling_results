@@ -2,7 +2,7 @@ library(duqling)
 library(tidyverse)
 
 # Choose file extension for figures
-extension <- "png"
+extension <- "eps"
 
 # Warnings are normal from these scripts.
 
@@ -12,6 +12,6 @@ source("R/duqling/make_figs_main.R")
 
 # Section 5 Figures
 source("R/duqling/no_free_lunch.R")
-source("R/duqling/tuning_smallnug.R")
+source("R/duqling/tuning.R")
 source("R/duqling/clustering.R")
 source("R/duqling/clustering_data.R")

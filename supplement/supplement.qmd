@@ -10,6 +10,13 @@ author:
   - name: Reid Morris
 affiliation: Los Alamos National Laboratory
 date: ""
+header-includes:
+  - \usepackage{tocloft}
+  - \renewcommand{\thesection}{SM \arabic{section}}
+  - \renewcommand{\thesubsection}{SM \arabic{section}.\arabic{subsection}}
+  - \cftsetindents{section}{0em}{3.2em}
+  - \cftsetindents{subsection}{3.2em}{4.2em}
+  - \cftsetindents{subsubsection}{7.4em}{5.2em}
 format:
   pdf:
     documentclass: article
@@ -25,7 +32,7 @@ editor: visual
 
 ------------------------------------------------------------------------
 
-## Section SM1: R Scripts
+## R Scripts
 
 Most of the figures in the main paper can be recreated by running the script \url{https://github.com/knrumsey/duqling_results/R/duqling/duqling_paper_main.R}. In addition, the exact implementation for each of the $32$ emulation methods can be found in the `emulators.R` file at \url{https://github.com/knrumsey/duqling_results/R/duqling/emulators.R}. Alternatively the implementation functions can be found using the `duqling` package.
 
@@ -41,7 +48,7 @@ fit_bass  <- funcs$fit_func
 pred_bass <- funcs$pred_func
 ```
 
-## Section SM2: Summary of Emulator Performance
+## Summary of Emulator Performance
 
 The package makes it easy to conduct additional analyses. We start by loading the data into the global environment. Then we use the `process_sim_study()` function to get the data frames ready for the duqling functions, which expect an object of class `duq_sim_study`.
 
@@ -66,12 +73,10 @@ For each of the 32 surrogate modeling methods, we look at
 
 -   FVU: winrate, top10rate, and average soft-relative scores
 
-The average soft-relative scores give us a rough measure of practical performance. For emulator $i$ and simulation scenario $j$ we define $$t_{i,j} = \frac{\text{metric}_{i,j} + \epsilon}{\min_i\{\text{metric}_{i,j}\}+ \epsilon},$$ and the average soft-relative score is simply 
-$$\text{Soft-Rel-Score}_i = J^{-1}\sum_{j=1}^J\min(t_{i,j}, \text{U})$$
-where $\epsilon$ represents a point at which the metric should be considered practically $0$ and $U$ is a truncation point for robustness. 
-
+The average soft-relative scores give us a rough measure of practical performance. For emulator $i$ and simulation scenario $j$ we define $$t_{i,j} = \frac{\text{metric}_{i,j} + \epsilon}{\min_i\{\text{metric}_{i,j}\}+ \epsilon},$$ and the average soft-relative score is simply $$\text{Soft-Rel-Score}_i = J^{-1}\sum_{j=1}^J\min(t_{i,j}, \text{U})$$ where $\epsilon$ represents a point at which the metric should be considered practically $0$ and $U$ is a truncation point for robustness.
 
 These metrics can be summarized in `duqling` with the code.
+
 ```{R}
 #| echo: true
 #| eval: false
@@ -84,7 +89,8 @@ table <- summarize_sim_study(duq_total,
                   epsilon=c(0.001, 0.001), upper_bound=c(1e4, 1e4))
 ```
 
-For readability, we have broken this into two tables for CRPS and FVU separately, given below. 
+For readability, we have broken this into two tables for CRPS and FVU separately, given below.
+
 ```{R}
 #| echo: false
 #| eval: true
@@ -157,14 +163,13 @@ colnames(table_fvu) <- c(
 knitr::kable(table_fvu, align = "lcccc")
 ```
 
-The reader may be interested in recreating these tables after filtering to a specific set of simulation scenarios, but we omit this here for brevity. 
+The reader may be interested in recreating these tables after filtering to a specific set of simulation scenarios, but we omit this here for brevity.
 
 ### Best Emulators for Each Function
 
-To summarize where each emulator performs particularly well, we identify methods that attain the single best CRPS in at least one case. We encourage the reader to filter the simulation study objects before running this code, which we don't do here for the sake of brevity. 
+To summarize where each emulator performs particularly well, we identify methods that attain the single best CRPS in at least one case. We encourage the reader to filter the simulation study objects before running this code, which we don't do here for the sake of brevity.
 
 #### Test Functions
-
 
 ```{r}
 # Ensure CRPS ranks exist
@@ -208,7 +213,9 @@ knitr::kable(best_table_testfuncs, align = c("l", "c", "l"))
 ```
 
 #### Real Datasets
-Though not shown, the same code is used as above, with `duq_realdata` in place of `duq_testfuncs`. 
+
+Though not shown, the same code is used as above, with `duq_realdata` in place of `duq_testfuncs`.
+
 ```{r}
 #| echo: false
 #| eval: true
@@ -253,8 +260,7 @@ colnames(best_table_testfuncs) <- c("Function", "# of Best", "Best Emulators")
 knitr::kable(best_table_testfuncs, align = c("l", "c", "l"))
 ```
 
-
-## Section SM3: Reproducible Simulation Studies
+## Reproducible Simulation Studies
 
 ### Seed Transformations
 
@@ -314,7 +320,7 @@ The `run_sim_study()` function returns an R data frame in which each row corresp
 -   **IAE_alpha**: Integrated absolute error of empirical coverage across confidence levels, summarizing calibration of predictive intervals.
 -   **CRPS**: Mean continuous ranked probability score on the test set, along with summary statistics (`CRPS_min`, `CRPS_Q1`, `CRPS_med`, `CRPS_Q3`, `CRPS_max`) describing the distribution of CRPS across test points.
 
-Additional columns may be present depending on the metrics and simulation options selected by the user. The full results for the simulation studies shown in Section 4 are included in the associated GitHub repository.
+Additional columns may be present depending on the metrics and simulation options selected by the user (notably mean interval lengths and negatively oriented mean interval scores). The full results for the simulation studies shown in Section 4 are included in the associated GitHub repository.
 
 ### Datasets
 
@@ -335,49 +341,48 @@ y <- emu_data$y
 
 The full list of datasets is given below.
 
-| Dataset                        | n     | p   | In `duqling` | Reference |
-|--------------------------------|-------|-----|--------------|-----------|
-| plate_deformation              | 138   | 7   | No           | @francom2018sensitivity |
-| wind_speed                     | 200   | 17  | No           |           |
-| strontium_plume_p4b            | 300   | 20  | Yes          | @volkova2008global |
-| strontium_plume_p104           | 300   | 20  | Yes          | @volkova2008global |
-| spectra1                       | 500   | 4   | No           | @klein_2020_4069493 |
-| spectra2                       | 500   | 4   | No           | @klein_2020_4069493 |
-| pbx9501_gold                   | 500   | 6   | Yes          | @rumsey2025coactive |
-| pbx9501_ss304                  | 500   | 6   | Yes          | @rumsey2025coactive |
-| pbx9501_nickel                 | 500   | 6   | Yes          | @rumsey2025coactive |
-| pbx9501_uranium                | 500   | 6   | Yes          | @rumsey2025coactive |
-| ptw1                           | 500   | 10  | No           | @preston2003model   |
-| discoflux_flyer                | 914   | 6   | No           | @francom2020simulation |
-| taylor_foot                    | 962   | 11  | No           |           |
-| taylor_length                  | 962   | 11  | No           |           |
-| jc                             | 1000  | 5   | No           | @johnson1983constitutive |
-| flyerPTW1                      | 1000  | 11  | No           |           |
-| flyerPTW2                      | 1000  | 11  | No           |           |
-| flyer_plate104                 | 1000  | 11  | Yes          |           |
-| diffusion_1D                   | 1000  | 62  | No           | @hlobilova2024diffusion2d |
-| fair_climate_ssp1-2.6_year2200 | 1001  | 45  | Yes          | @smith2018fair           |
-| fair_climate_ssp2-4.5_year2200 | 1001  | 45  | Yes          | @smith2018fair          |
-| fair_climate_ssp3-7.0_year2200 | 1001  | 45  | Yes          | @smith2018fair          |
-| taylor_cylinder1               | 1438  | 8   | No           |           |
-| stochastic_sir                 | 2000  | 4   | Yes          | @rumsey2024generalized  |
-| diffusion_2D                   | 2000  | 53  | No           | @hlobilova2024diffusion2d |
-| acme_climate                   | 2980  | 66  | No           |           |
-| ptw2                           | 3701  | 13  | No           | @preston2003model   |
-| SLOSH_low                      | 4000  | 5   | Yes          | @hutchings2023comparing |
-| SLOSH_mid                      | 4000  | 5   | Yes          | @hutchings2023comparing |
-| SLOSH_high                     | 4000  | 5   | Yes          | @hutchings2023comparing |
-| Z_machine_max_vel1             | 5000  | 6   | Yes          | @brown2018estimating |
-| Z_machine_max_vel2             | 5000  | 6   | Yes          | @brown2018estimating |
-| Z_machine_max_vel_all          | 5000  | 30  | Yes          | @brown2018estimating |
-| e3sm_mnar                      | 9122  | 2   | Yes          | @grosskopf2021situ  |
-| nuclear_data                   | 9307  | 178 | No           | @francom2019nuclear |
-| e3sm_mcar                      | 10000 | 2   | Yes          | @grosskopf2021situ  |
-| icf1                           | 10000 | 5   | No           |           |
-| icf2                           | 10000 | 5   | No           |           |
-| diablo_canyon_plume            | 18000 | 13  | No           | @francom2019calibration |
-| okc_plume                      | 22229 | 5   | No           | @brown2009evaluation |
-
+| Dataset | n | p | In `duqling` | Reference |
+|----|----|----|----|----|
+| plate_deformation | 138 | 7 | No | @francom2018sensitivity |
+| wind_speed | 200 | 17 | No | @edmunds2013value  | 
+| strontium_plume_p4b | 300 | 20 | Yes | @volkova2008global |
+| strontium_plume_p104 | 300 | 20 | Yes | @volkova2008global |
+| spectra1 | 500 | 4 | No | @klein_2020_4069493 |
+| spectra2 | 500 | 4 | No | @klein_2020_4069493 |
+| pbx9501_gold | 500 | 6 | Yes | @rumsey2025coactive |
+| pbx9501_ss304 | 500 | 6 | Yes | @rumsey2025coactive |
+| pbx9501_nickel | 500 | 6 | Yes | @rumsey2025coactive |
+| pbx9501_uranium | 500 | 6 | Yes | @rumsey2025coactive |
+| ptw1 | 500 | 10 | No | @impala @preston2003model |
+| discoflux_flyer | 914 | 6 | No | @francom2020simulation |
+| taylor_foot | 962 | 11 | No | @biswas2021asc  |
+| taylor_length | 962 | 11 | No | @biswas2021asc |
+| jc | 1000 | 5 | No | @impala @johnson1983constitutive |
+| flyerPTW1 | 1000 | 11 | No | @biswas2021asc  |
+| flyerPTW2 | 1000 | 11 | No | @biswas2021asc  |
+| flyer_plate104 | 1000 | 11 | Yes | @walters2018bayesian |
+| diffusion_1D | 1000 | 62 | No | @hlobilova2024diffusion2d |
+| fair_climate_ssp1-2.6_year2200 | 1001 | 45 | Yes | @smith2018fair |
+| fair_climate_ssp2-4.5_year2200 | 1001 | 45 | Yes | @smith2018fair |
+| fair_climate_ssp3-7.0_year2200 | 1001 | 45 | Yes | @smith2018fair |
+| taylor_cylinder1 | 1438 | 8 | No | @sjue2023simple  |
+| stochastic_sir | 2000 | 4 | Yes | @rumsey2024generalized |
+| diffusion_2D | 2000 | 53 | No | @hlobilova2024diffusion2d |
+| acme_climate | 2980 | 66 | No | @sargsyan2015sparse  |
+| ptw2 | 3701 | 13 | No | @impala @preston2003model |
+| SLOSH_low | 4000 | 5 | Yes | @hutchings2023comparing |
+| SLOSH_mid | 4000 | 5 | Yes | @hutchings2023comparing |
+| SLOSH_high | 4000 | 5 | Yes | @hutchings2023comparing |
+| Z_machine_max_vel1 | 5000 | 6 | Yes | @brown2018estimating |
+| Z_machine_max_vel2 | 5000 | 6 | Yes | @brown2018estimating |
+| Z_machine_max_vel_all | 5000 | 30 | Yes | @brown2018estimating |
+| e3sm_mnar | 9122 | 2 | Yes | @grosskopf2021situ |
+| nuclear_data | 9307 | 178 | No | @francom2019nuclear |
+| e3sm_mcar | 10000 | 2 | Yes | @grosskopf2021situ |
+| icf1 | 10000 | 5 | No | @gaffney2020jag |
+| icf2 | 10000 | 5 | No | @gaffney2020jag |
+| diablo_canyon_plume | 18000 | 13 | No | @francom2019calibration |
+| okc_plume | 22229 | 5 | No | @brown2009evaluation |
 
 ### Test Functions (and Characteristics)
 
@@ -453,7 +458,7 @@ For these $60$ functions, we computed several characteristics of interest. Futur
 | welch20                 | 20        | 0.598    | 0.598   | 6.375   |
 | onehundred              | 100       | 0.884    | 0.279   | 4.361   |
 
-## Section SM4: The Rashomon Effect and Ensembling
+## The Rashomon Effect and Ensembling
 
 We have already seen that searching for a single emulator that performs best across all functions is a fruitless endeavor—but perhaps we should not even be focused on finding the best emulator for a single setting. *“Amazing things come from having many good models”* is the sentiment behind the Rashomon effect, an idea that has gained increasing attention in recent years (@fisher2019all; @xin2022exploring; @rudin2024amazing; @visokay2025you). The term was originally coined by Leo Breiman to describe the phenomenon in which multiple distinct models explain the data equally well, yet may lead to different conclusions (@breiman2001statistical). While the Rashomon effect is often discussed in the context of noisy or over-parameterized models, we believe it also holds valuable lessons for uncertainty quantification.
 
@@ -461,9 +466,9 @@ Suppose that for a given dataset, we retain all emulators with a CRPS below 0.25
 
 ![Rashomon plot](box_rashomon_clean.png){width="100%"}
 
-## Section SM5: Additional Figures and Analysis
+## Additional Figures and Analysis
 
-In this section, we illustrate how the `duqling` framework can be used to explore additional metrics and visualizations beyond those presented in the main text. See Section SM1 and SM2 for details on installing/loading `duqling` and the simulation study objects. 
+In this section, we illustrate how the `duqling` framework can be used to explore additional metrics and visualizations beyond those presented in the main text. See Section SM1 and SM2 for details on installing/loading `duqling` and the simulation study objects.
 
 We commonly *filter* the simulation study objects to study specific settings, e.g.,
 
@@ -787,9 +792,8 @@ For a given confidence level, mean interval scores (MIS) are a proper scoring ru
 \frac{2}{\alpha}(y_{\mathrm{test},i} - U_i)\mathbf{1}\{y_{\mathrm{test},i} > U_i\}
 \right],$$ while the current version of `duqling` does compute these scores, they were omitted from the original simulation study for simplicity.
 
-One simple metric due to @marrel2024probabilistic that can be recovered, is the integrated absolute error across confidence levels $1-\alpha$, defined as $$\text{IAE}\text{-}\alpha = \int_0^1|C_\alpha - \alpha| d\alpha,$$ where $C_\alpha$ is the empirical coverage for confidence level $\alpha$. To estimate this accurately in duqling, we should run with a long list of confidence levels using the `conf_level` argument in `run_sim_study()` and `run_sim_study_data()`. But it can be interesting to look at the estimate obtained using the confidence levels run by the default settings. In this case, we approximate the integral by a simple discrete average over the confidence levels used in the simulation, i.e., by averaging the absolute differences between empirical and nominal coverage at each level.
-$$\hat{\text{IAE}} = \frac{1}{K}\sum_{k=1}^K |\hat C_{\alpha_k} - \alpha_k|.$$
-We can create this new column using the package's `mutate_sim_study()` function.
+One simple metric due to @marrel2024probabilistic that can be recovered, is the integrated absolute error across confidence levels $1-\alpha$, defined as $$\text{IAE}\text{-}\alpha = \int_0^1|C_\alpha - \alpha| d\alpha,$$ where $C_\alpha$ is the empirical coverage for confidence level $\alpha$. To estimate this accurately in duqling, we should run with a long list of confidence levels using the `conf_level` argument in `run_sim_study()` and `run_sim_study_data()`. But it can be interesting to look at the estimate obtained using the confidence levels run by the default settings. In this case, we approximate the integral by a simple discrete average over the confidence levels used in the simulation, i.e., by averaging the absolute differences between empirical and nominal coverage at each level. $$\hat{\text{IAE}} = \frac{1}{K}\sum_{k=1}^K |\hat C_{\alpha_k} - \alpha_k|.$$ We can create this new column using the package's `mutate_sim_study()` function.
+
 ```{r}
 tmp_IAE <- mutate_sim_study(tmp,
                  IAE_est = 0.25 * abs(COVER0.8 - 0.8) + 
