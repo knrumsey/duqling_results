@@ -2,7 +2,7 @@ library(duqling)
 library(tidyverse)
 
 # Choose file extension for figures
-extension <- "png"
+extension <- "eps"
 
 # Warnings are normal from these scripts.
 

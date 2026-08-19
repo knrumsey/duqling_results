@@ -1,8 +1,12 @@
+# From duqling
 data("sim_study_testfuncs")
 duq <- process_sim_study(sim_study_testfuncs, scale_CRPS = TRUE)
 
 data("sim_study_realdata")
 duq_data <- process_sim_study(sim_study_realdata, scale_CRPS=TRUE)
+
+duq_data_small <- filter_sim_study(duq_data, expr = !big_data_flag )
+duq_data_big   <- filter_sim_study(duq_data, expr = big_data_flag & fast_method_flag)
 
 # Make figures
 fname <- "ignition"
@@ -59,50 +63,49 @@ boxplots_sim_study(res_sub,
                    title=paste(fname, ""))
 ggsave(filename=paste0("figs/main/boxplots6.", extension), height=3, width=5)
 
-## BPPRS vs Svecgp
-sub_fnames <- c("rabbits", "park4", "friedman", "steel_column", "ebola", "borehole", "crater",
-               "dms_harmonic", "dms_radial", "dms_additive", "dms_complicated", "dms_simple",
-               "piston", "ishigami", "Gfunction", "borehole")
-duq_sub <- filter_sim_study(duq, n_train=1000, method=c("bppr", "svecgp"), id=sub_fnames)
-
-#Order funcs
-lvls <- duq_sub$df %>%
-  group_by(id) %>%
-  summarise(mean_crps = mean(CRPS, na.rm = TRUE))
-duq_sub$df$id <- factor(duq_sub$df$id, levels=lvls$id[order(lvls$mean_crps)])
-duq_sub0 <- filter_sim_study(duq_sub, NSR=0)
-duq_sub1 <- filter_sim_study(duq_sub, NSR=0.1)
-
-# Example color palette for two methods
-fill_colors <- c("bppr" = "#A6CEE3", "svecgp" = "#F8766D")
-line_colors <- c("bppr" = "#1F78B4", "svecgp" = "#B22222")  # darker versions
-
-ggplot(duq_sub0$df, aes(x = id, y = CRPS, fill = method, color = method)) +
-  geom_boxplot(outlier.size = 0.5) +
-  scale_y_log10() +
-  scale_fill_manual(values = fill_colors) +
-  scale_color_manual(values = line_colors) +
-  labs(x = "Test Function", y = "CRPS", fill = "Method", color = "Method") +
-  theme_minimal(base_size = 11) +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1)
-  ) +
-  ggtitle("n=1000, NSR=0")
-ggsave(filename=paste0("figs/main/boxplots_comp0.", extension), height=3, width=8)
-
-ggplot(duq_sub1$df, aes(x = id, y = CRPS, fill = method, color = method)) +
-  geom_boxplot(outlier.size = 0.5) +
-  scale_y_log10() +
-  scale_fill_manual(values = fill_colors) +
-  scale_color_manual(values = line_colors) +
-  labs(x = "Test Function", y = "CRPS", fill = "Method", color = "Method") +
-  theme_minimal(base_size = 11) +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1)
-  ) +
-  ggtitle("n=1000, NSR=0.1")
-ggsave(filename=paste0("figs/main/boxplots_comp1.", extension), height=3, width=8)
-
-
-
+# ## bpprS vs Svecgp
+# sub_fnames <- c("rabbits", "park4", "friedman", "steel_column", "ebola", "borehole", "crater",
+#                "dms_harmonic", "dms_radial", "dms_additive", "dms_complicated", "dms_simple",
+#                "piston", "ishigami", "Gfunction", "borehole")
+# sub_fnames <- c("dms_simple", "dms_additive", "park4", "friedman", "ishigami", "borehole")
+# duq_sub <- filter_sim_study(duq, n_train=500, method=c("bppr", "svecgp"), id=sub_fnames)
+#
+# #Order funcs
+# lvls <- duq_sub$df %>%
+#   group_by(id) %>%
+#   summarise(mean_COVER0.95 = mean(COVER0.95, na.rm = TRUE))
+# duq_sub$df$id <- factor(duq_sub$df$id, levels=lvls$id[order(lvls$mean_COVER0.95)])
+# duq_sub0 <- filter_sim_study(duq_sub, NSR=0)
+# duq_sub1 <- filter_sim_study(duq_sub, NSR=0.1)
+#
+# # Example color palette for two methods
+# fill_colors <- c("bppr" = "#A6CEE3", "svecgp" = "#F8766D")
+# line_colors <- c("bppr" = "#1F78B4", "svecgp" = "#B22222")  # darker versions
+#
+# ggplot(duq_sub0$df, aes(x = id, y = COVER0.95, fill = method, color = method)) +
+#   geom_boxplot(outlier.size = 0.5) +
+#   scale_y_log10() +
+#   scale_fill_manual(values = fill_colors) +
+#   scale_color_manual(values = line_colors) +
+#   labs(x = "Test Function", y = "COVER0.95", fill = "Method", color = "Method") +
+#   theme_minimal(base_size = 11) +
+#   theme(
+#     axis.text.x = element_text(angle = 45, hjust = 1)
+#   ) +
+#   ggtitle("n=1000, NSR=0")
+# ggsave(filename=paste0("figs/main/boxplots_comp0.", extension), height=3, width=8)
+#
+# ggplot(duq_sub1$df, aes(x = id, y = COVER0.95, fill = method, color = method)) +
+#   geom_boxplot(outlier.size = 0.5) +
+#   scale_y_log10() +
+#   scale_fill_manual(values = fill_colors) +
+#   scale_color_manual(values = line_colors) +
+#   labs(x = "Test Function", y = "COVER0.95", fill = "Method", color = "Method") +
+#   theme_minimal(base_size = 11) +
+#   theme(
+#     axis.text.x = element_text(angle = 45, hjust = 1)
+#   ) +
+#   ggtitle("n=1000, NSR=0.1")
+# ggsave(filename=paste0("figs/main/boxplots_comp1.", extension), height=3, width=8)
+#
 

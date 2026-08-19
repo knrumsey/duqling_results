@@ -25,9 +25,15 @@ format:
     toc: true
     toc-depth: 3
     number-sections: true
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
 bibliography: references.bib
 csl: ieee.csl
 editor: visual
+execute:
+  warning: false
 ---
 
 ------------------------------------------------------------------------
@@ -56,7 +62,6 @@ The package makes it easy to conduct additional analyses. We start by loading th
 # Sim study on the 60 test functions
 data("sim_study_testfuncs")
 duq_testfuncs <- process_sim_study(sim_study_testfuncs)
-  
 
 # Sim study on the 40 test functions
 data("sim_study_realdata")
@@ -344,7 +349,7 @@ The full list of datasets is given below.
 | Dataset | n | p | In `duqling` | Reference |
 |----|----|----|----|----|
 | plate_deformation | 138 | 7 | No | @francom2018sensitivity |
-| wind_speed | 200 | 17 | No | @edmunds2013value  | 
+| wind_speed | 200 | 17 | No | @edmunds2013value |
 | strontium_plume_p4b | 300 | 20 | Yes | @volkova2008global |
 | strontium_plume_p104 | 300 | 20 | Yes | @volkova2008global |
 | spectra1 | 500 | 4 | No | @klein_2020_4069493 |
@@ -355,20 +360,20 @@ The full list of datasets is given below.
 | pbx9501_uranium | 500 | 6 | Yes | @rumsey2025coactive |
 | ptw1 | 500 | 10 | No | @impala @preston2003model |
 | discoflux_flyer | 914 | 6 | No | @francom2020simulation |
-| taylor_foot | 962 | 11 | No | @biswas2021asc  |
+| taylor_foot | 962 | 11 | No | @biswas2021asc |
 | taylor_length | 962 | 11 | No | @biswas2021asc |
 | jc | 1000 | 5 | No | @impala @johnson1983constitutive |
-| flyerPTW1 | 1000 | 11 | No | @biswas2021asc  |
-| flyerPTW2 | 1000 | 11 | No | @biswas2021asc  |
+| flyerPTW1 | 1000 | 11 | No | @biswas2021asc |
+| flyerPTW2 | 1000 | 11 | No | @biswas2021asc |
 | flyer_plate104 | 1000 | 11 | Yes | @walters2018bayesian |
 | diffusion_1D | 1000 | 62 | No | @hlobilova2024diffusion2d |
 | fair_climate_ssp1-2.6_year2200 | 1001 | 45 | Yes | @smith2018fair |
 | fair_climate_ssp2-4.5_year2200 | 1001 | 45 | Yes | @smith2018fair |
 | fair_climate_ssp3-7.0_year2200 | 1001 | 45 | Yes | @smith2018fair |
-| taylor_cylinder1 | 1438 | 8 | No | @sjue2023simple  |
+| taylor_cylinder1 | 1438 | 8 | No | @sjue2023simple |
 | stochastic_sir | 2000 | 4 | Yes | @rumsey2024generalized |
 | diffusion_2D | 2000 | 53 | No | @hlobilova2024diffusion2d |
-| acme_climate | 2980 | 66 | No | @sargsyan2015sparse  |
+| acme_climate | 2980 | 66 | No | @sargsyan2015sparse |
 | ptw2 | 3701 | 13 | No | @impala @preston2003model |
 | SLOSH_low | 4000 | 5 | Yes | @hutchings2023comparing |
 | SLOSH_mid | 4000 | 5 | Yes | @hutchings2023comparing |
@@ -393,70 +398,70 @@ The `duqling` library of test functions is ever growing, but the list of the $60
 get_paper_funcs()
 ```
 
-For these $60$ functions, we computed several characteristics of interest. Future work could try to link these characteristics (or others not listed here) to emulator performance. Determining, in advance, which surrogate modeling technique is likely to succeed on a given computer model would be of great use to practitioners.
+For these $60$ functions, we computed several characteristics of interest. Future work could try to link these characteristics (or others not listed here) to emulator performance. Determining, in advance, which surrogate modeling technique is likely to succeed on a given computer model would be of great use to practitioners. The R squared quantity refers to the $R^2$ statistic from a linear model fit to the input-output pairs of the computer model. For the other methods, gradients were estimated using automatic differentiation when possible. When needed, the gradient is approximated based on a BASS surrogate fit to the computer model. The AS Participation metric refers to the quantity $$(\sum_{i=1}^p \lambda_i)^2 / \sum_{i=1}^p \lambda_i^2,$$ where $\lambda_i$ is the $i$th eigenvalue of the active subspace matrix $C = E(\nabla f(x) \nabla f(x)^T)$.
 
-| fname                   | input_dim | Rsquared | MoransI | Sobolev |
-|-------------------------|-----------|----------|---------|---------|
-| const_fn                | 1         | 0.000    | 0.020   | 1.000   |
-| forrester1_low_fidelity | 1         | 0.407    | 0.998   | 9.785   |
-| forrester1              | 1         | 0.043    | 0.982   | 11.682  |
-| grlee1                  | 1         | 0.604    | 0.987   | 16.676  |
-| banana                  | 2         | 0.035    | 0.955   | 11.017  |
-| dms_additive            | 2         | 0.058    | 0.984   | 9.895   |
-| dms_complicated         | 2         | 0.192    | 0.962   | 9.831   |
-| dms_harmonic            | 2         | 0.030    | 0.932   | 13.037  |
-| dms_radial              | 2         | 0.000    | 0.983   | 7.092   |
-| dms_simple              | 2         | 0.189    | 0.948   | 4.768   |
-| foursquare              | 2         | 0.471    | 0.931   | 24.490  |
-| grlee2                  | 2         | 0.022    | 0.904   | 16.179  |
-| lim_non_polynomial      | 2         | 0.643    | 0.974   | 5.532   |
-| lim_polynomial          | 2         | 0.594    | 0.958   | 6.212   |
-| multivalley             | 2         | 0.091    | 0.701   | 72.760  |
-| ripples                 | 2         | 0.003    | 0.807   | 40.944  |
-| simple_poly             | 2         | 0.945    | 0.980   | 3.798   |
-| squiggle                | 2         | 0.015    | 0.868   | 25.773  |
-| star2                   | 2         | 0.204    | 0.803   | 22.482  |
-| twin_galaxies           | 2         | 0.442    | 0.962   | 9.100   |
-| const_fn3               | 3         | 0.000    | -0.022  | 1.000   |
-| cube3_rotate            | 3         | 0.198    | 0.797   | 10.383  |
-| cube3                   | 3         | 0.060    | 0.795   | 31.274  |
-| detpep_curve            | 3         | 0.795    | 0.956   | 4.611   |
-| Gfunction               | 3         | 0.000    | 0.883   | 1.000   |
-| ishigami                | 3         | 0.199    | 0.841   | 11.257  |
-| rabbits                 | 3         | 0.927    | 0.954   | 4.710   |
-| sharkfin                | 3         | 0.246    | 0.753   | 41.910  |
-| park4_low_fidelity      | 4         | 0.956    | 0.936   | 3.658   |
-| park4                   | 4         | 0.955    | 0.919   | 3.655   |
-| pollutant_uni           | 4         | 0.827    | 0.886   | 5.231   |
-| cube5                   | 5         | 0.622    | 0.785   | 19.961  |
-| friedman                | 5         | 0.770    | 0.877   | 4.856   |
-| short_column            | 5         | 0.769    | 0.824   | 4.730   |
-| cantilever_D            | 6         | 0.501    | 0.701   | 5.993   |
-| cantilever_S            | 6         | 0.699    | 0.827   | 4.495   |
-| circuit                 | 6         | 0.973    | 0.855   | 3.869   |
-| Gfunction6              | 6         | 0.002    | 0.562   | 1.000   |
-| grlee6                  | 6         | 0.302    | 0.433   | 40.708  |
-| crater                  | 7         | 0.647    | 0.758   | 5.090   |
-| gamma_mix               | 7         | 0.094    | 0.091   | 16.440  |
-| piston                  | 7         | 0.914    | 0.819   | 4.093   |
-| borehole_low_fidelity   | 8         | 0.947    | 0.786   | 3.766   |
-| borehole                | 8         | 0.947    | 0.791   | 3.729   |
-| detpep8                 | 8         | 0.802    | 0.752   | 4.609   |
-| ebola                   | 8         | 0.856    | 0.748   | 4.794   |
-| robot                   | 8         | 0.174    | 0.410   | 8.614   |
-| steel_column            | 9         | 0.968    | 0.762   | 3.813   |
-| sulfur                  | 9         | 0.549    | 0.698   | 4.473   |
-| friedman10              | 10        | 0.742    | 0.674   | 5.064   |
-| ignition                | 10        | 0.815    | 0.729   | 3.937   |
-| wingweight              | 10        | 0.984    | 0.758   | 3.652   |
-| Gfunction12             | 12        | 0.002    | 0.275   | 1.000   |
-| const_fn15              | 15        | 0.001    | 0.001   | 1.000   |
-| oo15                    | 15        | 0.258    | 0.574   | 1.000   |
-| permdb                  | 16        | 0.000    | 0.101   | 46.941  |
-| Gfunction18             | 18        | 0.000    | 0.139   | 1.000   |
-| friedman20              | 20        | 0.753    | 0.675   | 4.961   |
-| welch20                 | 20        | 0.598    | 0.598   | 6.375   |
-| onehundred              | 100       | 0.884    | 0.279   | 4.361   |
+| fname              | input_dim | Rsquared | MoransI | Sobolev | Participation |
+|--------------------|----------:|---------:|--------:|--------:|--------------:|
+| banana             |         2 |    0.035 |   0.955 |  11.017 |         1.232 |
+| borehole           |         8 |    0.947 |   0.791 |   3.729 |         1.020 |
+| cantilever_D       |         6 |    0.501 |   0.701 |   5.993 |         1.159 |
+| cantilever_S       |         6 |    0.699 |   0.827 |   4.495 |         1.481 |
+| circuit            |         6 |    0.973 |   0.855 |   3.869 |         1.104 |
+| const_fn           |         1 |  0.00003 |   0.020 |   1.000 |               |
+| const_fn15         |        15 |    0.001 |   0.001 |   1.000 |         1.271 |
+| crater             |         7 |    0.647 |   0.758 |   5.090 |         1.621 |
+| cube3              |         3 |    0.060 |   0.795 |  31.274 |         1.332 |
+| cube3_rotate       |         3 |    0.198 |   0.797 |  10.383 |         2.355 |
+| cube5              |         5 |    0.622 |   0.785 |  19.961 |         1.323 |
+| detpep_curve       |         3 |    0.795 |   0.956 |   4.611 |         1.165 |
+| detpep8            |         8 |    0.802 |   0.752 |   4.609 |         1.178 |
+| dms_additive       |         2 |    0.058 |   0.984 |   9.895 |         1.918 |
+| dms_complicated    |         2 |    0.192 |   0.962 |   9.831 |         1.941 |
+| dms_harmonic       |         2 |    0.030 |   0.932 |  13.037 |         1.735 |
+| dms_radial         |         2 |   0.0001 |   0.983 |   7.092 |         1.998 |
+| dms_simple         |         2 |    0.189 |   0.948 |   4.768 |         1.966 |
+| ebola              |         8 |    0.856 |   0.748 |   4.794 |         1.533 |
+| forrester1         |         1 |    0.043 |   0.982 |  11.682 |             1 |
+| foursquare         |         2 |    0.471 |   0.931 |  24.490 |         1.206 |
+| friedman           |         5 |    0.770 |   0.877 |   4.856 |         2.717 |
+| friedman10         |        10 |    0.742 |   0.674 |   5.064 |         2.666 |
+| friedman20         |        20 |    0.753 |   0.675 |   4.961 |         2.674 |
+| Gfunction          |         3 |   0.0001 |   0.883 |   1.000 |         2.803 |
+| Gfunction18        |        18 |   0.0001 |   0.139 |   1.000 |         4.144 |
+| Gfunction40        |        40 |    0.001 |   0.021 |   1.000 |         3.938 |
+| Gfunction6         |         6 |    0.002 |   0.562 |   1.000 |         2.114 |
+| grlee1             |         1 |    0.604 |   0.987 |  16.676 |             1 |
+| grlee6             |         6 |    0.302 |   0.433 |  40.708 |         1.004 |
+| higdon1            |         1 |    0.520 |   0.996 |  34.114 |               |
+| ignition           |        10 |    0.815 |   0.729 |   3.937 |         2.695 |
+| ishigami           |         3 |    0.199 |   0.841 |  11.257 |         2.380 |
+| lim_non_polynomial |         2 |    0.643 |   0.974 |   5.532 |         1.814 |
+| lim_polynomial     |         2 |    0.594 |   0.958 |   6.212 |         1.764 |
+| linear21           |        21 |        1 |   0.569 |   3.620 |             1 |
+| linear21_s1        |        21 |        1 |   0.572 |   3.605 |             1 |
+| linear21_s10       |        21 |        1 |   0.594 |   3.591 |             1 |
+| moon31             |        31 |    0.926 |   0.463 |   3.764 |         1.105 |
+| multivalley        |         2 |    0.091 |   0.701 |  72.760 |         1.488 |
+| onehundred         |       100 |    0.884 |   0.279 |   4.361 |         2.519 |
+| oo15               |        15 |    0.258 |   0.574 |   1.000 |         7.538 |
+| park4              |         4 |    0.955 |   0.919 |   3.655 |         1.075 |
+| permdb             |        16 |   0.0004 |   0.101 |  46.941 |         9.681 |
+| piston             |         7 |    0.914 |   0.819 |   4.093 |         1.270 |
+| pollutant_uni      |         4 |    0.827 |   0.886 |   5.231 |         1.301 |
+| quad4              |         4 |    0.938 |   0.920 |   3.826 |         1.226 |
+| rabbits            |         3 |    0.927 |   0.954 |   4.710 |         1.072 |
+| ripples            |         2 |    0.003 |   0.807 |  40.944 |         1.376 |
+| robot              |         8 |    0.174 |   0.410 |   8.614 |         2.428 |
+| sharkfin           |         3 |    0.246 |   0.753 |  41.910 |         2.246 |
+| short_column       |         5 |    0.769 |   0.824 |   4.730 |         1.066 |
+| squiggle           |         2 |    0.015 |   0.868 |  25.773 |         1.855 |
+| star2              |         2 |    0.204 |   0.803 |  22.482 |         1.596 |
+| steel_column       |         9 |    0.968 |   0.762 |   3.813 |         1.139 |
+| sulfur             |         9 |    0.549 |   0.698 |   4.473 |         1.178 |
+| turb12             |        12 |    0.335 |   0.463 |   7.659 |         1.758 |
+| twin_galaxies      |         2 |    0.442 |   0.962 |   9.100 |         1.775 |
+| welch20            |        20 |    0.598 |   0.598 |   6.375 |         2.097 |
+| wingweight         |        10 |    0.984 |   0.758 |   3.652 |         1.061 |
 
 ## The Rashomon Effect and Ensembling
 
@@ -501,11 +506,34 @@ The plotting and analysis functions provided by the package include
 
 ### Fraction of Variance Unexplained
 
-In the main paper, we generally analyze CRPS due to our focus on uncertainty quantification. If the focus is on pure predictive performance and not on well-calibrated predictive intervals, then mean squared error (MSE) or root MSE (RMSE) is the usual choice. The fraction of variance unexplained (FVU) is simply a scaled version of MSE which improves interpretability and allows for some level of comparison between simulation scenarios. We calculate FVU as
-
+In the main paper, we generally analyze CRPS due to our focus on uncertainty quantification. If the focus is on pure predictive performance and not on well-calibrated predictive intervals, then mean squared error (MSE) or root MSE (RMSE) is the usual choice. The fraction of variance unexplained (FVU) is simply a scaled version of MSE which improves interpretability and allows for some level of comparison between simulation scenarios. We calculate RMSE and FVU as
 $$
-\text{FVU} = \frac{\frac{1}{n_{\text{test}}}\sum_{i=1}^{n_{\text{test}}} (y_{\text{test},i} - \hat y_i)^2}{\frac{1}{n_{\text{test}} - 1}\sum_{i=1}^{n_{\text{test}}} (y_{\text{test},i} - \bar{y}_{\text{test}})^2}
+\mathrm{RMSE}
+=
+\sqrt{
+\frac{1}{n_{\mathrm{test}}}
+\sum_{i=1}^{n_{\mathrm{test}}}
+(y_{\mathrm{test},i}-\hat y_i)^2
+},
 $$
+and
+$$
+\mathrm{FVU}
+=
+\frac{
+\frac{1}{n_{\mathrm{test}}}
+\sum_{i=1}^{n_{\mathrm{test}}}
+(y_{\mathrm{test},i}-\hat y_i)^2
+}{
+\frac{1}{n_{\mathrm{test}}-1}
+\sum_{i=1}^{n_{\mathrm{test}}}
+(y_{\mathrm{test},i}-\bar y_{\mathrm{test}})^2
+}
+=
+\frac{\mathrm{RMSE}^2}{s_y^2},
+$$
+where $s_y^2$ is the sample variance of the test responses and
+$\hat y_1,\ldots,\hat y_{n_{\mathrm{test}}}$ are the emulator predictions.
 
 where $\hat y_1, \ldots, \hat y_{n_\text{test}}$ are the emulator predictions. This metric (along with RMSE) is automatically calculated during `run_sim_study()` and `run_sim_study_data()`.
 
@@ -528,7 +556,8 @@ for(i in 1:5){
 }
 ```
 
-```{R fig.width=10, fig.height=6}
+```{R fig.height=6, fig.width=10}
+#| warning: false
 # Small data
 title <- paste0("FVU Rank (Small Data)")
 tmp <- filter_sim_study(duq_realdata, 
@@ -605,8 +634,9 @@ for(i in 1:5){
   tmp <- filter_sim_study(duq_testfuncs, 
                           n_train = n_train_vec[i], NSR = NSR_vec[i])
   p <- heatmap_sim_study(tmp, metric="FVU", y_scale_fun = custom,
-                    colorbar_labels = list(breaks=log10(c(0.001, 0.01,  0.1, 0.56, 1)),
-                                           labels=c("<0.001","0.01", "0.1", "0.56", "")),
+                    colorbar_labels = 
+                      list(breaks=log10(c(0.001, 0.01,  0.1, 0.56, 1)),
+                           labels=c("<0.001","0.01", "0.1", "0.56", "")),
                     color_scale="mako",
                     title=title)
   
@@ -628,8 +658,9 @@ title <- paste0("Average FVU (Small Data)")
 tmp <- filter_sim_study(duq_realdata, 
                         expr = n_train <= 1500)
 p <- heatmap_sim_study(tmp, metric="FVU", y_scale_fun = custom,
-                  colorbar_labels = list(breaks=log10(c(0.001, 0.01,  0.1, 0.56, 1)),
-                                         labels=c("<0.001","0.01", "0.1", "0.56", "")),
+                  colorbar_labels = 
+                    list(breaks=log10(c(0.001, 0.01,  0.1, 0.56, 1)),
+                         labels=c("<0.001","0.01", "0.1", "0.56", "")),
                   color_scale="mako",
                   title=title)
 p <- p + ggplot2::theme_minimal(base_size=12) +
@@ -646,8 +677,9 @@ title <- paste0("Average FVU (Big Data)")
 tmp <- filter_sim_study(duq_realdata, 
                         expr = n_train > 1500)
 p <- heatmap_sim_study(tmp, metric="FVU", y_scale_fun = custom,
-                  colorbar_labels = list(breaks=log10(c(0.001, 0.01,  0.1, 0.56, 1)),
-                                         labels=c("<0.001","0.01", "0.1", "0.56", "")),
+                  colorbar_labels = 
+                    list(breaks=log10(c(0.001, 0.01,  0.1, 0.56, 1)),
+                         labels=c("<0.001","0.01", "0.1", "0.56", "")),
                   color_scale="mako",
                   title=title)
 p <- p + ggplot2::theme_minimal(base_size=12) +

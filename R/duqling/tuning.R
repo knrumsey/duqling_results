@@ -1,3 +1,4 @@
+# From duqling
 data("sim_study_testfuncs")
 duq <- process_sim_study(sim_study_testfuncs, scale_CRPS = TRUE)
 

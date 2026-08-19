@@ -1,13 +1,13 @@
 library(dbscan)
 library(ggrepel)
-
+# From duqling
 data("sim_study_testfuncs")
-duq1 <- process_sim_study(sim_study_testfuncs, scale_CRPS = TRUE)
+duq <- process_sim_study(sim_study_testfuncs, scale_CRPS = TRUE)
 
 data("sim_study_realdata")
-duq2 <- process_sim_study(sim_study_realdata, scale_CRPS = TRUE)
+duq_data <- process_sim_study(sim_study_realdata, scale_CRPS=TRUE)
 
-duq <- join_sim_study(duq1, duq2)
+duq <- join_sim_study(duq, duq_data)
 df <- duq$df
 
 # ---- Step 1. Define scenario ----
@@ -33,6 +33,8 @@ rownames(mat) <- rownames_mat
 # ---- Step 4. Distance matrix ----
 cor_mat <- cor(t(mat), method = "spearman", use = "pairwise.complete.obs")
 dist_mat <- as.dist(1 - cor_mat)
+cor_mat <- dist(mat, method = "euclidean")
+dist_mat <- as.dist(cor_mat)
 
 # ---- Step 5. 2D MDS projection ----
 mds <- cmdscale(dist_mat, k = 2, eig = TRUE)
@@ -43,9 +45,9 @@ mds_df <- data.frame(
 )
 
 # ---- Step 6. DBSCAN clustering ----
-set.seed(123)
+#set.seed(123)
 #db <- dbscan(mds_df[,c("Dim1","Dim2")], eps = 0.22, minPts = 1)
-db <- dbscan(mds_df[,c("Dim1","Dim2")], eps = 0.25, minPts = 1)
+db <- dbscan(mds_df[,c("Dim1","Dim2")], eps = 160, minPts = 1)
 mds_df$cluster <- factor(ifelse(db$cluster == 0, "Noise", paste0("C", db$cluster)))
 
 # ---- Step 7. Plot with hidden legend + markers + non-overlapping labels ----
@@ -53,16 +55,17 @@ mds_df$cluster <- factor(ifelse(db$cluster == 0, "Noise", paste0("C", db$cluster
 n_clusters <- length(unique(mds_df$cluster))
 
 # Predefine a vector of shape codes with enough variety
-shape_codes <- c(16, 15, 17, 18, 3, 8, 7, 4, 3, 0)  # add more if needed
+shape_codes <- c(16, 15, 17, 18, 3, 8, 7, 4, 3, 1, 5, 6)  # add more if needed
 
 ggplot(mds_df, aes(x = Dim1, y = Dim2, color = cluster, shape = cluster)) +
   geom_point(size = 3, stroke = 1) +
   ggrepel::geom_text_repel(aes(label = method), size = 3, max.overlaps = Inf) +
   theme_minimal(base_size = 13) +
   guides(color = "none", shape = "none") +
+  theme(axis.text = element_blank()) +
   scale_shape_manual(values = shape_codes[seq_len(n_clusters)]) +
   labs(
     title = "Emulator clusters",
     x = "MDS Dimension 1", y = "MDS Dimension 2"
   )
-ggsave(filename=paste0("figs/main/cluster_emu.", extension), height=4.5, width=4.5)
+ggsave(filename=paste0("figs/main/cluster_emu_new.", extension), height=4.5, width=4.5)

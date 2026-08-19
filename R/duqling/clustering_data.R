@@ -1,10 +1,10 @@
 library(dbscan)
 library(ggrepel)
-load("data/results_paper_data.Rda")
-
+# From duqling
 data("sim_study_realdata")
-duq2 <- process_sim_study(sim_study_realdata, scale_CRPS = TRUE)
-df <- duq2$df
+duq_data <- process_sim_study(sim_study_realdata, scale_CRPS=TRUE)
+
+df <- duq_data$df
 
 # ---- Step 1. Define scenario ID (each dataset/test function + replication) ----
 scenario_cols <- c("id")
@@ -32,6 +32,7 @@ rownames(mat) <- rownames_mat
 # ---- Step 4. Distance matrix between scenarios ----
 cor_mat <- cor(t(mat), method = "spearman", use = "pairwise.complete.obs")
 dist_mat <- as.dist(1 - cor_mat)
+dist_mat <- dist(mat, method = "euclidean")
 
 # ---- Step 5. 2D projection with MDS ----
 mds <- cmdscale(dist_mat, k = 2, eig = TRUE)
@@ -43,23 +44,25 @@ mds_df <- data.frame(
 
 # ---- Step 6. DBSCAN clustering ----
 set.seed(123)
-db <- dbscan(mds_df[,c("Dim1","Dim2")], eps = 0.13, minPts = 1)  # tune eps + minPts!
+db <- dbscan(mds_df[,c("Dim1","Dim2")], eps = 0.09, minPts = 1)  # tune eps + minPts!
+db <- dbscan(mds_df[,c("Dim1","Dim2")], eps = 75, minPts = 1)  # tune eps + minPts!
 mds_df$cluster <- factor(ifelse(db$cluster == 0, "Noise", paste0("C", db$cluster)))
 
 # ---- Step 7. Plot ----
 n_clusters <- length(unique(mds_df$cluster))
 
 # Predefine a vector of shape codes with enough variety
-shape_codes <- c(16, 15, 17, 18, 3, 8, 7, 4, 3, 0, 1, 2, 5, 9, 10:14)  # add more if needed
+shape_codes <- c(16, 15, 17, 18, 3, 8, 7, 4, 3, 0, 1, 2, 5, 9, 10:14, 21:25)  # add more if needed
 
 ggplot(mds_df, aes(x = Dim1, y = Dim2, color = cluster, shape = cluster)) +
-  geom_point(size = 3, stroke = 1) +
-  ggrepel::geom_text_repel(aes(label = scenario_id), size = 2.3, max.overlaps = 20) +
+  geom_point(size = 2, stroke = 1) +
+  ggrepel::geom_text_repel(aes(label = scenario_id), size = 2.3, max.overlaps = 10) +
   theme_minimal(base_size = 13) +
+  theme(axis.text = element_blank()) +
   scale_shape_manual(values = shape_codes[seq_len(n_clusters)]) +
   guides(color = "none", shape = "none") +
   labs(
     title = "Dataset Clusters",
     x = "MDS Dimension 1", y = "MDS Dimension 2"
   )
-ggsave(filename=paste0("figs/main/cluster_data.", extension), height=4.5, width=4.5)
+ggsave(filename=paste0("figs/main/cluster_data_new.", extension), height=4.5, width=4.5)

@@ -1,0 +1,3388 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Kellin N. Rumsey">
+<meta name="author" content="Devin Francom">
+<meta name="author" content="Graham C. Gibson">
+<meta name="author" content="Reid Morris">
+
+<title>quarto-input9c28a9fba89f76a9</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="supplement_files/libs/clipboard/clipboard.min.js"></script>
+<script src="supplement_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="supplement_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="supplement_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="supplement_files/libs/quarto-html/popper.min.js"></script>
+<script src="supplement_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="supplement_files/libs/quarto-html/anchor.min.js"></script>
+<link href="supplement_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="supplement_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="supplement_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="supplement_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="supplement_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+</head><body class="quarto-light">\usepackage{tocloft}
+\renewcommand{\thesection}{SM \arabic{section}}
+\renewcommand{\thesubsection}{SM \arabic{section}.\arabic{subsection}}
+\cftsetindents{section}{0em}{3.2em}
+\cftsetindents{subsection}{3.2em}{4.2em}
+\cftsetindents{subsubsection}{7.4em}{5.2em}
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+
+
+
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link active" data-scroll-target="#r-scripts">R Scripts</a></li>
+  <li><a href="#summary-of-emulator-performance" id="toc-summary-of-emulator-performance" class="nav-link" data-scroll-target="#summary-of-emulator-performance">Summary of Emulator Performance</a>
+  <ul class="collapse">
+  <li><a href="#overall-performance-summary" id="toc-overall-performance-summary" class="nav-link" data-scroll-target="#overall-performance-summary">Overall Performance Summary</a></li>
+  <li><a href="#best-emulators-for-each-function" id="toc-best-emulators-for-each-function" class="nav-link" data-scroll-target="#best-emulators-for-each-function">Best Emulators for Each Function</a></li>
+  </ul></li>
+  <li><a href="#reproducible-simulation-studies" id="toc-reproducible-simulation-studies" class="nav-link" data-scroll-target="#reproducible-simulation-studies">Reproducible Simulation Studies</a>
+  <ul class="collapse">
+  <li><a href="#seed-transformations" id="toc-seed-transformations" class="nav-link" data-scroll-target="#seed-transformations">Seed Transformations</a></li>
+  <li><a href="#the-fallback-model" id="toc-the-fallback-model" class="nav-link" data-scroll-target="#the-fallback-model">The Fallback Model</a></li>
+  <li><a href="#simulation-study-output" id="toc-simulation-study-output" class="nav-link" data-scroll-target="#simulation-study-output">Simulation Study Output</a></li>
+  <li><a href="#datasets" id="toc-datasets" class="nav-link" data-scroll-target="#datasets">Datasets</a></li>
+  <li><a href="#test-functions-and-characteristics" id="toc-test-functions-and-characteristics" class="nav-link" data-scroll-target="#test-functions-and-characteristics">Test Functions (and Characteristics)</a></li>
+  </ul></li>
+  <li><a href="#the-rashomon-effect-and-ensembling" id="toc-the-rashomon-effect-and-ensembling" class="nav-link" data-scroll-target="#the-rashomon-effect-and-ensembling">The Rashomon Effect and Ensembling</a></li>
+  <li><a href="#additional-figures-and-analysis" id="toc-additional-figures-and-analysis" class="nav-link" data-scroll-target="#additional-figures-and-analysis">Additional Figures and Analysis</a>
+  <ul class="collapse">
+  <li><a href="#fraction-of-variance-unexplained" id="toc-fraction-of-variance-unexplained" class="nav-link" data-scroll-target="#fraction-of-variance-unexplained">Fraction of Variance Unexplained</a></li>
+  <li><a href="#continuous-ranked-probability-scores" id="toc-continuous-ranked-probability-scores" class="nav-link" data-scroll-target="#continuous-ranked-probability-scores">Continuous Ranked Probability Scores</a></li>
+  <li><a href="#computation-time" id="toc-computation-time" class="nav-link" data-scroll-target="#computation-time">Computation Time</a></li>
+  <li><a href="#other-metrics" id="toc-other-metrics" class="nav-link" data-scroll-target="#other-metrics">Other Metrics</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="supplement.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><p> All Emulators are Wrong, Many are Useful, and Some are More Useful Than Others</p></h1>
+<p class="subtitle lead">A Reproducible Comparison of Computer Model Surrogates</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Kellin N. Rumsey </p>
+             <p>Devin Francom </p>
+             <p>Graham C. Gibson </p>
+             <p>Reid Morris </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<hr>
+<section id="r-scripts" class="level2">
+<h2 class="anchored" data-anchor-id="r-scripts">R Scripts</h2>
+<p>Most of the figures in the main paper can be recreated by running the script . In addition, the exact implementation for each of the <span class="math inline">\(32\)</span> emulation methods can be found in the <code>emulators.R</code> file at . Alternatively the implementation functions can be found using the <code>duqling</code> package.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install and load duqling</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github("knrumsey/duqling")</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(duqling)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>funcs <span class="ot">&lt;-</span> <span class="fu">get_emulator_functions</span>(<span class="st">"bass"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fit_bass  <span class="ot">&lt;-</span> funcs<span class="sc">$</span>fit_func</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>pred_bass <span class="ot">&lt;-</span> funcs<span class="sc">$</span>pred_func</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="summary-of-emulator-performance" class="level2">
+<h2 class="anchored" data-anchor-id="summary-of-emulator-performance">Summary of Emulator Performance</h2>
+<p>The package makes it easy to conduct additional analyses. We start by loading the data into the global environment. Then we use the <code>process_sim_study()</code> function to get the data frames ready for the duqling functions, which expect an object of class <code>duq_sim_study</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sim study on the 60 test functions</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"sim_study_testfuncs"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>duq_testfuncs <span class="ot">&lt;-</span> <span class="fu">process_sim_study</span>(sim_study_testfuncs)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sim study on the 40 test functions</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"sim_study_realdata"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>duq_realdata <span class="ot">&lt;-</span> <span class="fu">process_sim_study</span>(sim_study_realdata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="overall-performance-summary" class="level3">
+<h3 class="anchored" data-anchor-id="overall-performance-summary">Overall Performance Summary</h3>
+<p>For each of the 32 surrogate modeling methods, we look at</p>
+<ul>
+<li><p>Average runtime</p></li>
+<li><p>CRPS: winrate, top10rate, and average soft-relative scores</p></li>
+<li><p>FVU: winrate, top10rate, and average soft-relative scores</p></li>
+</ul>
+<p>The average soft-relative scores give us a rough measure of practical performance. For emulator <span class="math inline">\(i\)</span> and simulation scenario <span class="math inline">\(j\)</span> we define <span class="math display">\[t_{i,j} = \frac{\text{metric}_{i,j} + \epsilon}{\min_i\{\text{metric}_{i,j}\}+ \epsilon},\]</span> and the average soft-relative score is simply <span class="math display">\[\text{Soft-Rel-Score}_i = J^{-1}\sum_{j=1}^J\min(t_{i,j}, \text{U})\]</span> where <span class="math inline">\(\epsilon\)</span> represents a point at which the metric should be considered practically <span class="math inline">\(0\)</span> and <span class="math inline">\(U\)</span> is a truncation point for robustness.</p>
+<p>These metrics can be summarized in <code>duqling</code> with the code.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>duq_total <span class="ot">&lt;-</span> <span class="fu">join_sim_study</span>(duq_testfuncs, duq_realdata)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> <span class="fu">summarize_sim_study</span>(duq_total,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">summarize=</span><span class="st">"time"</span>, <span class="at">summary_fun =</span> <span class="cf">function</span>(val) <span class="fu">c</span>(<span class="at">mean=</span><span class="fu">mean</span>(val)),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">win_rate  =</span> <span class="fu">c</span>(<span class="st">"CRPS"</span>, <span class="st">"FVU"</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">topK_rate =</span> <span class="fu">c</span>(<span class="st">"CRPS"</span>, <span class="st">"FVU"</span>), <span class="at">K=</span><span class="dv">10</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">soft_rel  =</span> <span class="fu">c</span>(<span class="st">"CRPS"</span>, <span class="st">"FVU"</span>), </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">epsilon=</span><span class="fu">c</span>(<span class="fl">0.001</span>, <span class="fl">0.001</span>), <span class="at">upper_bound=</span><span class="fu">c</span>(<span class="fl">1e4</span>, <span class="fl">1e4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For readability, we have broken this into two tables for CRPS and FVU separately, given below.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 16%">
+<col style="width: 22%">
+<col style="width: 20%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Method</th>
+<th style="text-align: center;">Time (mean)</th>
+<th style="text-align: center;">CRPS (win rate)</th>
+<th style="text-align: center;">CRPS (top 10%)</th>
+<th style="text-align: center;">CRPS (soft relative)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">alcgp</td>
+<td style="text-align: center;">14.216</td>
+<td style="text-align: center;">5.882e-04</td>
+<td style="text-align: center;">0.095</td>
+<td style="text-align: center;">28.699</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">apce</td>
+<td style="text-align: center;">67.243</td>
+<td style="text-align: center;">0.111</td>
+<td style="text-align: center;">0.384</td>
+<td style="text-align: center;">15.939</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bart</td>
+<td style="text-align: center;">21.753</td>
+<td style="text-align: center;">0.032</td>
+<td style="text-align: center;">0.297</td>
+<td style="text-align: center;">14.841</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">baseline</td>
+<td style="text-align: center;">0.133</td>
+<td style="text-align: center;">0.019</td>
+<td style="text-align: center;">0.031</td>
+<td style="text-align: center;">155.956</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bass</td>
+<td style="text-align: center;">21.855</td>
+<td style="text-align: center;">0.041</td>
+<td style="text-align: center;">0.673</td>
+<td style="text-align: center;">5.239</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bcart</td>
+<td style="text-align: center;">27.684</td>
+<td style="text-align: center;">0.000e+00</td>
+<td style="text-align: center;">0.025</td>
+<td style="text-align: center;">67.270</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bcmgp</td>
+<td style="text-align: center;">54.824</td>
+<td style="text-align: center;">0.002</td>
+<td style="text-align: center;">0.211</td>
+<td style="text-align: center;">25.987</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">blasso</td>
+<td style="text-align: center;">0.249</td>
+<td style="text-align: center;">0.003</td>
+<td style="text-align: center;">0.025</td>
+<td style="text-align: center;">113.389</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">blm</td>
+<td style="text-align: center;">0.102</td>
+<td style="text-align: center;">0.029</td>
+<td style="text-align: center;">0.069</td>
+<td style="text-align: center;">88.958</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bnn</td>
+<td style="text-align: center;">4134.652</td>
+<td style="text-align: center;">0.000e+00</td>
+<td style="text-align: center;">0.069</td>
+<td style="text-align: center;">255.358</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bootrf</td>
+<td style="text-align: center;">495.688</td>
+<td style="text-align: center;">0.000e+00</td>
+<td style="text-align: center;">0.093</td>
+<td style="text-align: center;">41.584</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bppr</td>
+<td style="text-align: center;">27.401</td>
+<td style="text-align: center;">0.039</td>
+<td style="text-align: center;">0.766</td>
+<td style="text-align: center;">9.086</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">btreelm</td>
+<td style="text-align: center;">33.622</td>
+<td style="text-align: center;">0.002</td>
+<td style="text-align: center;">0.171</td>
+<td style="text-align: center;">22.037</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">confrf</td>
+<td style="text-align: center;">10.280</td>
+<td style="text-align: center;">0.012</td>
+<td style="text-align: center;">0.186</td>
+<td style="text-align: center;">34.865</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">deepgp</td>
+<td style="text-align: center;">4868.729</td>
+<td style="text-align: center;">0.091</td>
+<td style="text-align: center;">0.526</td>
+<td style="text-align: center;">16.877</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fitcgp</td>
+<td style="text-align: center;">17.204</td>
+<td style="text-align: center;">0.013</td>
+<td style="text-align: center;">0.308</td>
+<td style="text-align: center;">35.433</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">gbc</td>
+<td style="text-align: center;">67.393</td>
+<td style="text-align: center;">0.085</td>
+<td style="text-align: center;">0.454</td>
+<td style="text-align: center;">10.204</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">gp</td>
+<td style="text-align: center;">211.286</td>
+<td style="text-align: center;">0.043</td>
+<td style="text-align: center;">0.799</td>
+<td style="text-align: center;">7.069</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">gpytorch</td>
+<td style="text-align: center;">151.071</td>
+<td style="text-align: center;">0.003</td>
+<td style="text-align: center;">0.229</td>
+<td style="text-align: center;">481.235</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hetgp</td>
+<td style="text-align: center;">429.467</td>
+<td style="text-align: center;">0.044</td>
+<td style="text-align: center;">0.768</td>
+<td style="text-align: center;">6.784</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lagp</td>
+<td style="text-align: center;">132.919</td>
+<td style="text-align: center;">0.004</td>
+<td style="text-align: center;">0.281</td>
+<td style="text-align: center;">19.634</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mpgp</td>
+<td style="text-align: center;">131.328</td>
+<td style="text-align: center;">0.000e+00</td>
+<td style="text-align: center;">0.108</td>
+<td style="text-align: center;">64.867</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ngboost</td>
+<td style="text-align: center;">188.036</td>
+<td style="text-align: center;">8.824e-04</td>
+<td style="text-align: center;">0.078</td>
+<td style="text-align: center;">80.199</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">qbass</td>
+<td style="text-align: center;">306.078</td>
+<td style="text-align: center;">0.004</td>
+<td style="text-align: center;">0.374</td>
+<td style="text-align: center;">308.943</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rffgp</td>
+<td style="text-align: center;">5.468</td>
+<td style="text-align: center;">0.006</td>
+<td style="text-align: center;">0.134</td>
+<td style="text-align: center;">85.564</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rgasp</td>
+<td style="text-align: center;">765.851</td>
+<td style="text-align: center;">0.322</td>
+<td style="text-align: center;">0.955</td>
+<td style="text-align: center;">4.211</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rvm</td>
+<td style="text-align: center;">195.968</td>
+<td style="text-align: center;">0.007</td>
+<td style="text-align: center;">0.229</td>
+<td style="text-align: center;">63.031</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">spce</td>
+<td style="text-align: center;">709.144</td>
+<td style="text-align: center;">0.017</td>
+<td style="text-align: center;">0.172</td>
+<td style="text-align: center;">144.580</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">svecgp</td>
+<td style="text-align: center;">80.879</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">0.799</td>
+<td style="text-align: center;">29.632</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">svigp</td>
+<td style="text-align: center;">60.420</td>
+<td style="text-align: center;">8.824e-04</td>
+<td style="text-align: center;">0.336</td>
+<td style="text-align: center;">12.096</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tbass</td>
+<td style="text-align: center;">373.883</td>
+<td style="text-align: center;">0.031</td>
+<td style="text-align: center;">0.624</td>
+<td style="text-align: center;">9.252</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">treegp</td>
+<td style="text-align: center;">40.922</td>
+<td style="text-align: center;">0.021</td>
+<td style="text-align: center;">0.334</td>
+<td style="text-align: center;">45.345</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- FVU TABLE ----</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>table_fvu <span class="ot">&lt;-</span> <span class="fu">summarize_sim_study</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  duq_total,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">summarize =</span> <span class="st">"time"</span>, <span class="at">summary_fun =</span> <span class="cf">function</span>(val) <span class="fu">c</span>(<span class="at">mean =</span> <span class="fu">mean</span>(val)),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">win_rate  =</span> <span class="st">"FVU"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">topK_rate =</span> <span class="st">"FVU"</span>, <span class="at">K =</span> <span class="dv">10</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">soft_rel  =</span> <span class="st">"FVU"</span>, <span class="at">epsilon =</span> <span class="fl">0.001</span>, <span class="at">upper_bound=</span><span class="fl">1e4</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to numeric</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(table_fvu)){</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  table_fvu[,j] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(table_fvu[,j])</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Format numeric columns</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>table_fvu<span class="sc">$</span>time_mean      <span class="ot">&lt;-</span> <span class="fu">fmt</span>(table_fvu<span class="sc">$</span>time_mean)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>table_fvu<span class="sc">$</span>FVU_winrate    <span class="ot">&lt;-</span> <span class="fu">fmt</span>(table_fvu<span class="sc">$</span>FVU_winrate)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>table_fvu<span class="sc">$</span>FVU_top10rate  <span class="ot">&lt;-</span> <span class="fu">fmt</span>(table_fvu<span class="sc">$</span>FVU_top10rate)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>table_fvu<span class="sc">$</span>FVU_softrel    <span class="ot">&lt;-</span> <span class="fu">fmt</span>(table_fvu<span class="sc">$</span>FVU_softrel)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename columns</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(table_fvu) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Method"</span>,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Time (mean)"</span>,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"FVU (win rate)"</span>,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">"FVU (top 10%)"</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"FVU (soft relative)"</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(table_fvu, <span class="at">align =</span> <span class="st">"lcccc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 21%">
+<col style="width: 20%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Method</th>
+<th style="text-align: center;">Time (mean)</th>
+<th style="text-align: center;">FVU (win rate)</th>
+<th style="text-align: center;">FVU (top 10%)</th>
+<th style="text-align: center;">FVU (soft relative)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">alcgp</td>
+<td style="text-align: center;">14.216</td>
+<td style="text-align: center;">2.941e-04</td>
+<td style="text-align: center;">0.084</td>
+<td style="text-align: center;">116.669</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">apce</td>
+<td style="text-align: center;">67.243</td>
+<td style="text-align: center;">0.118</td>
+<td style="text-align: center;">0.394</td>
+<td style="text-align: center;">23.935</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bart</td>
+<td style="text-align: center;">21.753</td>
+<td style="text-align: center;">0.036</td>
+<td style="text-align: center;">0.262</td>
+<td style="text-align: center;">10.632</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">baseline</td>
+<td style="text-align: center;">0.133</td>
+<td style="text-align: center;">0.018</td>
+<td style="text-align: center;">0.034</td>
+<td style="text-align: center;">441.186</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bass</td>
+<td style="text-align: center;">21.855</td>
+<td style="text-align: center;">0.045</td>
+<td style="text-align: center;">0.639</td>
+<td style="text-align: center;">8.191</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bcart</td>
+<td style="text-align: center;">27.684</td>
+<td style="text-align: center;">0.000e+00</td>
+<td style="text-align: center;">0.021</td>
+<td style="text-align: center;">117.843</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bcmgp</td>
+<td style="text-align: center;">54.824</td>
+<td style="text-align: center;">0.002</td>
+<td style="text-align: center;">0.230</td>
+<td style="text-align: center;">52.891</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">blasso</td>
+<td style="text-align: center;">0.249</td>
+<td style="text-align: center;">0.004</td>
+<td style="text-align: center;">0.029</td>
+<td style="text-align: center;">248.636</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">blm</td>
+<td style="text-align: center;">0.102</td>
+<td style="text-align: center;">0.028</td>
+<td style="text-align: center;">0.065</td>
+<td style="text-align: center;">182.037</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bnn</td>
+<td style="text-align: center;">4134.652</td>
+<td style="text-align: center;">2.941e-04</td>
+<td style="text-align: center;">0.061</td>
+<td style="text-align: center;">471.030</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bootrf</td>
+<td style="text-align: center;">495.688</td>
+<td style="text-align: center;">0.002</td>
+<td style="text-align: center;">0.166</td>
+<td style="text-align: center;">46.966</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bppr</td>
+<td style="text-align: center;">27.401</td>
+<td style="text-align: center;">0.037</td>
+<td style="text-align: center;">0.755</td>
+<td style="text-align: center;">7.579</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">btreelm</td>
+<td style="text-align: center;">33.622</td>
+<td style="text-align: center;">0.002</td>
+<td style="text-align: center;">0.137</td>
+<td style="text-align: center;">34.050</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">confrf</td>
+<td style="text-align: center;">10.280</td>
+<td style="text-align: center;">0.011</td>
+<td style="text-align: center;">0.181</td>
+<td style="text-align: center;">40.661</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">deepgp</td>
+<td style="text-align: center;">4868.729</td>
+<td style="text-align: center;">0.074</td>
+<td style="text-align: center;">0.438</td>
+<td style="text-align: center;">28.761</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fitcgp</td>
+<td style="text-align: center;">17.204</td>
+<td style="text-align: center;">0.007</td>
+<td style="text-align: center;">0.279</td>
+<td style="text-align: center;">59.866</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">gbc</td>
+<td style="text-align: center;">67.393</td>
+<td style="text-align: center;">0.057</td>
+<td style="text-align: center;">0.422</td>
+<td style="text-align: center;">14.898</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">gp</td>
+<td style="text-align: center;">211.286</td>
+<td style="text-align: center;">0.048</td>
+<td style="text-align: center;">0.787</td>
+<td style="text-align: center;">8.369</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">gpytorch</td>
+<td style="text-align: center;">151.071</td>
+<td style="text-align: center;">0.016</td>
+<td style="text-align: center;">0.414</td>
+<td style="text-align: center;">811.459</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hetgp</td>
+<td style="text-align: center;">429.467</td>
+<td style="text-align: center;">0.039</td>
+<td style="text-align: center;">0.697</td>
+<td style="text-align: center;">8.880</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lagp</td>
+<td style="text-align: center;">132.919</td>
+<td style="text-align: center;">0.004</td>
+<td style="text-align: center;">0.265</td>
+<td style="text-align: center;">65.591</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mpgp</td>
+<td style="text-align: center;">131.328</td>
+<td style="text-align: center;">5.882e-04</td>
+<td style="text-align: center;">0.099</td>
+<td style="text-align: center;">33.455</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ngboost</td>
+<td style="text-align: center;">188.036</td>
+<td style="text-align: center;">0.002</td>
+<td style="text-align: center;">0.063</td>
+<td style="text-align: center;">129.674</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">qbass</td>
+<td style="text-align: center;">306.078</td>
+<td style="text-align: center;">0.007</td>
+<td style="text-align: center;">0.409</td>
+<td style="text-align: center;">316.246</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rffgp</td>
+<td style="text-align: center;">5.468</td>
+<td style="text-align: center;">0.003</td>
+<td style="text-align: center;">0.124</td>
+<td style="text-align: center;">158.576</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rgasp</td>
+<td style="text-align: center;">765.851</td>
+<td style="text-align: center;">0.349</td>
+<td style="text-align: center;">0.939</td>
+<td style="text-align: center;">2.677</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rvm</td>
+<td style="text-align: center;">195.968</td>
+<td style="text-align: center;">0.008</td>
+<td style="text-align: center;">0.177</td>
+<td style="text-align: center;">113.715</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">spce</td>
+<td style="text-align: center;">709.144</td>
+<td style="text-align: center;">0.021</td>
+<td style="text-align: center;">0.227</td>
+<td style="text-align: center;">380.335</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">svecgp</td>
+<td style="text-align: center;">80.879</td>
+<td style="text-align: center;">0.131</td>
+<td style="text-align: center;">0.769</td>
+<td style="text-align: center;">53.861</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">svigp</td>
+<td style="text-align: center;">60.420</td>
+<td style="text-align: center;">0.008</td>
+<td style="text-align: center;">0.525</td>
+<td style="text-align: center;">22.005</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tbass</td>
+<td style="text-align: center;">373.883</td>
+<td style="text-align: center;">0.023</td>
+<td style="text-align: center;">0.562</td>
+<td style="text-align: center;">13.940</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">treegp</td>
+<td style="text-align: center;">40.922</td>
+<td style="text-align: center;">0.011</td>
+<td style="text-align: center;">0.310</td>
+<td style="text-align: center;">145.445</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The reader may be interested in recreating these tables after filtering to a specific set of simulation scenarios, but we omit this here for brevity.</p>
+</section>
+<section id="best-emulators-for-each-function" class="level3">
+<h3 class="anchored" data-anchor-id="best-emulators-for-each-function">Best Emulators for Each Function</h3>
+<p>To summarize where each emulator performs particularly well, we identify methods that attain the single best CRPS in at least one case. We encourage the reader to filter the simulation study objects before running this code, which we don’t do here for the sake of brevity.</p>
+<section id="test-functions" class="level4">
+<h4 class="anchored" data-anchor-id="test-functions">Test Functions</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure CRPS ranks exist</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>duq_testfuncs_ranked <span class="ot">&lt;-</span> <span class="fu">rank_sim_study</span>(duq_testfuncs, <span class="at">metric =</span> <span class="st">"CRPS"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> duq_testfuncs_ranked<span class="sc">$</span>df</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep only winners</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>best_df <span class="ot">&lt;-</span> df[df<span class="sc">$</span>CRPS_rank <span class="sc">==</span> <span class="dv">1</span>, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep only scenarios with a unique winner</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>scenario_counts <span class="ot">&lt;-</span> <span class="fu">ave</span>(best_df<span class="sc">$</span>method, best_df<span class="sc">$</span>sim_scenario, <span class="at">FUN =</span> length)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>best_df <span class="ot">&lt;-</span> best_df[scenario_counts <span class="sc">==</span> <span class="dv">1</span>, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Build table: one row per function</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>ids <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(best_df<span class="sc">$</span>id))</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>methods_best <span class="ot">&lt;-</span> <span class="fu">sapply</span>(ids, <span class="cf">function</span>(z) {</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste</span>(<span class="fu">sort</span>(<span class="fu">unique</span>(best_df<span class="sc">$</span>method[best_df<span class="sc">$</span>id <span class="sc">==</span> z])), <span class="at">collapse =</span> <span class="st">", "</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>n_methods_best <span class="ot">&lt;-</span> <span class="fu">sapply</span>(ids, <span class="cf">function</span>(z) {</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">unique</span>(best_df<span class="sc">$</span>method[best_df<span class="sc">$</span>id <span class="sc">==</span> z]))</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>total_wins <span class="ot">&lt;-</span> <span class="fu">sapply</span>(ids, <span class="cf">function</span>(z) {</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(best_df<span class="sc">$</span>id <span class="sc">==</span> z)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>best_table_testfuncs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> ids,</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_methods_best =</span> n_methods_best,</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">methods_best =</span> methods_best,</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(best_table_testfuncs) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(best_table_testfuncs) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Function"</span>, <span class="st">"# of Best"</span>, <span class="st">"Best Emulators"</span>)</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(best_table_testfuncs, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="st">"c"</span>, <span class="st">"l"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 11%">
+<col style="width: 69%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Function</th>
+<th style="text-align: center;"># of Best</th>
+<th style="text-align: left;">Best Emulators</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">banana</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">apce, rffgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">borehole</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">bass, bppr, fitcgp, rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">cantilever_D</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">deepgp, gbc, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cantilever_S</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">deepgp, gbc, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">circuit</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">bppr, rffgp, rgasp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">const_fn</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: left;">baseline, bass, bcmgp, blasso, blm, bppr, rffgp, rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">const_fn15</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: left;">alcgp, apce, baseline, bass, bcmgp, bppr, deepgp, gp, rffgp, rgasp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">crater</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">gbc, rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">cube3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">bart, confrf, deepgp, gbc</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cube3_rotate</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">deepgp, gbc</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">cube5</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">bart, bass, bppr, gbc</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">detpep_curve</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">apce, bass, bppr, fitcgp, rffgp, rgasp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">detpep8</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">bass, bppr, rgasp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dms_additive</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">apce, bass, bppr, rgasp, svecgp, treegp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dms_complicated</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">bcmgp, deepgp, fitcgp, gp, hetgp, lagp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dms_harmonic</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">apce, hetgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dms_radial</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">apce</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dms_simple</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">apce, bass, fitcgp, rffgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ebola</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">bppr, rgasp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">forrester1</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: left;">apce, bass, bppr, fitcgp, gp, rffgp, rgasp, rvm, spce</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">foursquare</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: left;">bart, bass, bppr, btreelm, deepgp, gbc, tbass, treegp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">friedman</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">apce, bass, bppr, rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">friedman10</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">apce, bppr, rgasp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">friedman20</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">bppr, rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gfunction</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">bass, gbc, gp, rgasp, tbass, treegp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gfunction18</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">deepgp, gbc, qbass, rgasp, spce, tbass</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gfunction40</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">bppr, qbass, spce, tbass</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gfunction6</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">bass, bppr, gbc, rgasp, tbass</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">grlee1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">gp, hetgp, rgasp, treegp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">grlee6</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">bass, qbass, rgasp, svecgp, tbass</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">higdon1</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: left;">bass, btreelm, deepgp, qbass, rgasp, svecgp, tbass, treegp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ignition</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">deepgp, gbc</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ishigami</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">apce, hetgp, rgasp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lim_non_polynomial</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">bppr, fitcgp, gp, hetgp, rffgp, rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lim_polynomial</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">apce, bppr, fitcgp, gp, rffgp, rgasp, rvm</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">linear21</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">blasso, blm, fitcgp, rffgp, rgasp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">linear21_s1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">apce, bass, blm, bppr, rgasp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">linear21_s10</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: left;">apce, bass, blm, bppr, btreelm, fitcgp, rffgp, rgasp, tbass</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">moon31</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">gbc, rgasp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">multivalley</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">bart, bass, rgasp, tbass, treegp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">onehundred</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">bass, gp, hetgp, rvm, spce, tbass</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">oo15</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">rgasp, spce</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">park4</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: left;">apce, bass, fitcgp, gp, hetgp, qbass, rffgp, rgasp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">permdb</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">confrf, deepgp, ngboost, rvm, tbass</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">piston</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">rgasp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pollutant_uni</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">apce, bass, bppr, rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">quad4</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">apce, fitcgp, rffgp, rgasp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rabbits</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: left;">bass, bppr, fitcgp, gp, hetgp, rffgp, rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ripples</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">deepgp, gp, gpytorch, hetgp, rgasp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">robot</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">gp, hetgp, rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sharkfin</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">bart, tbass</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">short_column</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">bppr, rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">squiggle</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">deepgp, gbc, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">star2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">confrf, deepgp, gbc, rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">steel_column</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">rgasp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sulfur</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">deepgp, gbc, gp, hetgp, lagp, rvm, svigp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">turb12</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">gbc, rgasp, svecgp, svigp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">twin_galaxies</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">deepgp, fitcgp, gbc, gp, hetgp, rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">welch20</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">bppr, rgasp, tbass</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">wingweight</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">bppr, fitcgp, rgasp</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="real-datasets" class="level4">
+<h4 class="anchored" data-anchor-id="real-datasets">Real Datasets</h4>
+<p>Though not shown, the same code is used as above, with <code>duq_realdata</code> in place of <code>duq_testfuncs</code>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 12%">
+<col style="width: 51%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Function</th>
+<th style="text-align: center;"># of Best</th>
+<th style="text-align: left;">Best Emulators</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">acme_climate</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">gp, hetgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">diablo_canyon_plume</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">diffusion_1D</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">rgasp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">diffusion_2D</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">rgasp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">discoflux_flyer</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">gbc, hetgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">e3sm_mcar</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">deepgp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">e3sm_mnar</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">deepgp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fair_climate_ssp1-2.6_year2200</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">hetgp, rgasp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fair_climate_ssp2-4.5_year2200</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">rgasp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fair_climate_ssp3-7.0_year2200</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">flyer_plate104</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">bart, gbc, rgasp, tbass</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">flyerPTW1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">bart, gbc, hetgp, rgasp, tbass</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">flyerPTW2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">bppr, rgasp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">icf1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">bppr, tbass</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">icf2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">apce, gp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">jc</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">rgasp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">nuclear_data</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">bppr</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">okc_plume</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">gbc</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pbx9501_gold</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">bass, bppr, gbc, hetgp, rgasp, svecgp, tbass</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pbx9501_nickel</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">fitcgp, gpytorch, rffgp, rgasp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pbx9501_ss304</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">fitcgp, rffgp, rgasp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pbx9501_uranium</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">deepgp, gbc, hetgp, rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">plate_deformation</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">bass, bppr, deepgp, rgasp, svecgp, tbass</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ptw1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">gbc, gp, hetgp, rgasp, svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ptw2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">hetgp, rgasp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SLOSH_high</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">gbc, hetgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SLOSH_low</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">gbc</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SLOSH_mid</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">gbc, hetgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">spectra1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">gp, hetgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">spectra2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">gp, hetgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">stochastic_sir</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">gbc</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">strontium_plume_p104</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">strontium_plume_p4b</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">confrf, hetgp, qbass, svecgp, tbass</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">taylor_cylinder1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">bass, gbc</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">taylor_foot</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">gbc, rgasp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">taylor_length</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">rgasp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">wind_speed</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">gp, gpytorch, rgasp, svecgp, tbass</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Z_machine_max_vel_all</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">svecgp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Z_machine_max_vel1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">rgasp, svecgp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Z_machine_max_vel2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">svecgp</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="reproducible-simulation-studies" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-simulation-studies">Reproducible Simulation Studies</h2>
+<section id="seed-transformations" class="level3">
+<h3 class="anchored" data-anchor-id="seed-transformations">Seed Transformations</h3>
+<p>One of the primary design principles of <code>duqling::run_sim_study()</code> is reproducibility. For any combination of (i) test function, (ii) <span class="math inline">\(n_{\text{train}}\)</span>, (iii) design type, (iv) noise to signal ratio, and (v) replication number, the generated training data (inputs and response) are identical. This is true, even when using slightly different function calls. For example,</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>results1 <span class="ot">&lt;-</span> <span class="fu">run_sim_study</span>(fit_func, pred_func,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">fnames=</span><span class="fu">c</span>(<span class="st">"borehole"</span>, <span class="st">"ishigami"</span>, <span class="st">"banana"</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">NSR=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">design_type=</span><span class="st">"LHS"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">replications=</span><span class="dv">10</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>results2 <span class="ot">&lt;-</span> <span class="fu">run_sim_study</span>(fit_func, pred_func,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">fnames=</span><span class="fu">c</span>(<span class="st">"ishigami"</span>, <span class="st">"borehole"</span>),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">NSR=</span><span class="dv">0</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">design_type=</span><span class="st">"LHS"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">replications=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">15</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>the rows of <code>results1</code> and <code>results2</code> corresponding to the same simulation scenario will have identical results (with minor exceptions such as timing data) even though they were run in a different order internally.</p>
+<p>To accomplish this, we use a rolling polynomial hash (also called Rabin fingerprinting) to generate a unique seed for each simulation scenario, <span class="math display">\[\begin{equation}
+    \text{seed} = \left(\sum_{j=0}^6 B^j s_j\right) \bmod M
+\end{equation}\]</span> for prime numbers <span class="math inline">\(B=101\)</span> and <span class="math inline">\(M=100030001\)</span>, where the set <span class="math inline">\(\{s_0, \ldots, s_j\}\)</span> describes the simulation scenario. This can be computed safely using Horner’s rule (<span class="citation" data-cites="cormen2022introduction"><a href="#ref-cormen2022introduction" role="doc-biblioref">[1]</a></span>). The <span class="math inline">\(s_j\)</span> values are computed as follows: <span class="math inline">\(s_0\)</span> is the user-defined seed with default <span class="math inline">\(42\)</span> (not usually intended to be modified), <span class="math inline">\(s_1 = n_\text{train}\)</span>, <span class="math inline">\(s_2\)</span> is the replication index. To obtain <span class="math inline">\(s_3\)</span>, we hash each function name to a unique integer (with high probability) again using the Rabin fingerprint (with <span class="math inline">\(B=31\)</span>) after mapping each character to a unique integer. The pair <span class="math inline">\((s_4,s_5)\)</span> encodes the noise to signal ratio (<span class="math inline">\(NSR\)</span>) with at least four decimal places of precision as follows: <span class="math display">\[\begin{equation}
+s_4 = \begin{cases}
+    99999, &amp; NSR = 0 \\
+    \left[-10^4 \times \log(NSR)\right], &amp; NSR &lt; 1 \\
+    0, &amp; NSR \geq 1
+\end{cases}, \quad\quad\quad
+s_5 = \begin{cases}
+    0, &amp; NSR &lt; 1 \\
+    \left[10^4 \times NSR\right], &amp; NSR \geq 1
+\end{cases}.
+\end{equation}\]</span> Finally, <span class="math inline">\(s_6 \in \{1, 2, 3\}\)</span> denotes the design type: <span class="math inline">\(\text{LHS}\)</span>, <span class="math inline">\(\text{Grid}\)</span>, and <span class="math inline">\(\text{Random}\)</span>, respectively.</p>
+</section>
+<section id="the-fallback-model" class="level3">
+<h3 class="anchored" data-anchor-id="the-fallback-model">The Fallback Model</h3>
+<p>Even the most robust emulator implementations can occasionally fail, particularly when faced with such a diverse and challenging set of test functions and datasets. To ensure that simulation studies proceed smoothly and results remain well-defined, <code>duqling::run_sim_study()</code> incorporates a fallback strategy. If one of the emulator methods fails during fitting or prediction, it is temporarily replaced with a baseline “null model” that predicts by fitting a Gaussian distribution to the marginal of the response variable from the training data (ignoring the inputs). Specifically, the predictive distribution for each test point is a Student’s <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-1\)</span> degrees of freedom, mean <span class="math inline">\(\bar{y}\)</span>, and variance <span class="math inline">\(S_y^2 (1 + 1/n) (n-1)/(n-3)\)</span>, where <span class="math inline">\(n\)</span>, <span class="math inline">\(\bar{y}\)</span>, and <span class="math inline">\(S^2_y\)</span> are the training set size, mean, and sample variance, respectively. When a failure occurs, it is logged in the <code>failure_type</code> column of the returned data-frame one of the following values: “none”, “fit”, or “pred”.</p>
+</section>
+<section id="simulation-study-output" class="level3">
+<h3 class="anchored" data-anchor-id="simulation-study-output">Simulation Study Output</h3>
+<p>The <code>run_sim_study()</code> function returns an R data frame in which each row corresponds to the outcome of a single simulation scenario, replication, and emulator method. The returned columns include:</p>
+<ul>
+<li><strong>method</strong>: Short name of the fitted emulator; if no name is supplied, a unique label (<code>method&lt;indx&gt;</code>) is generated automatically.</li>
+<li><strong>fname</strong>: The test function name (from <code>duqling::quack()</code>).</li>
+<li><strong>input_dim</strong>: Input dimension of the test function.</li>
+<li><strong>n</strong>: Number of training points used.</li>
+<li><strong>NSR</strong>: Noise-to-signal ratio applied in data generation.</li>
+<li><strong>design_type</strong>: Experimental design type (<code>"LHS"</code>, <code>"grid"</code>, or <code>"random"</code>).</li>
+<li><strong>rep</strong>: Replication index.</li>
+<li><strong>t_fit</strong>, <strong>t_pred</strong>, <strong>t_tot</strong>: Elapsed wall-clock time (seconds) for fitting, prediction, and total runtime, respectively.</li>
+<li><strong>failure_type</strong>: Categorical indicator for whether the method failed at fitting, prediction, or <code>"none"</code> if successful.</li>
+<li><strong>RMSE</strong>: Root mean squared error on the test set.</li>
+<li><strong>FVU</strong>: Fraction of variance unexplained, computed as RMSE² divided by the total variance.</li>
+<li><strong>COVER</strong><level>, <strong>MIS</strong><level>: Coverage rates and mean interval scores for each specified confidence level.</level></level></li>
+<li><strong>IAE_alpha</strong>: Integrated absolute error of empirical coverage across confidence levels, summarizing calibration of predictive intervals.</li>
+<li><strong>CRPS</strong>: Mean continuous ranked probability score on the test set, along with summary statistics (<code>CRPS_min</code>, <code>CRPS_Q1</code>, <code>CRPS_med</code>, <code>CRPS_Q3</code>, <code>CRPS_max</code>) describing the distribution of CRPS across test points.</li>
+</ul>
+<p>Additional columns may be present depending on the metrics and simulation options selected by the user (notably mean interval lengths and negatively oriented mean interval scores). The full results for the simulation studies shown in Section 4 are included in the associated GitHub repository.</p>
+</section>
+<section id="datasets" class="level3">
+<h3 class="anchored" data-anchor-id="datasets">Datasets</h3>
+<p>A full list of the real datasets used in this comparison is given in the table below. We are hopeful that all of these will be available in <code>duqling</code> soon. You can check which emulation datasets are available in duqling via the command:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data_quack</span>(<span class="at">raw=</span><span class="cn">FALSE</span>, <span class="at">response_type=</span><span class="st">"uni"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            dname input_dim input_cat_dim     n   response
+1                            e3sm         2             0 48602 univariate
+2                       e3sm_mcar         2             0 10000 univariate
+3                       e3sm_mnar         2             0  9122 univariate
+4                  stochastic_sir         4             0  2000 univariate
+5                      SLOSH_high         5             0  4000 univariate
+6                       SLOSH_low         5             0  4000 univariate
+7                       SLOSH_mid         5             0  4000 univariate
+8                    pbx9501_gold         6             0   500 univariate
+9                  pbx9501_nickel         6             0   500 univariate
+10                  pbx9501_ss304         6             0   500 univariate
+11                pbx9501_uranium         6             0   500 univariate
+12             Z_machine_max_vel1         6             0  5000 univariate
+13             Z_machine_max_vel2         6             0  5000 univariate
+14                 flyer_plate104        11             0  1000 univariate
+15           strontium_plume_p104        20             0   300 univariate
+16            strontium_plume_p4b        20             0   300 univariate
+17          Z_machine_max_vel_all        30             0  5000 univariate
+18 fair_climate_ssp1-2.6_year2200        45             0  1001 univariate
+19 fair_climate_ssp2-4.5_year2200        45             0  1001 univariate
+20 fair_climate_ssp3-7.0_year2200        45             0  1001 univariate
+21          fair_climate_ssp1-2.6        46             0 56056 univariate
+22          fair_climate_ssp2-4.5        46             0 56056 univariate
+23          fair_climate_ssp3-7.0        46             0 56056 univariate</code></pre>
+</div>
+</div>
+<p>A particular dataset can be read into R (internet connection is required) with the command:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>emu_data <span class="ot">&lt;-</span> <span class="fu">get_emulation_data</span>(<span class="st">"pbx9501_gold"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> emu_data<span class="sc">$</span>X</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> emu_data<span class="sc">$</span>y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The full list of datasets is given below.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>n</th>
+<th>p</th>
+<th>In <code>duqling</code></th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>plate_deformation</td>
+<td>138</td>
+<td>7</td>
+<td>No</td>
+<td><span class="citation" data-cites="francom2018sensitivity"><a href="#ref-francom2018sensitivity" role="doc-biblioref">[2]</a></span></td>
+</tr>
+<tr class="even">
+<td>wind_speed</td>
+<td>200</td>
+<td>17</td>
+<td>No</td>
+<td><span class="citation" data-cites="edmunds2013value"><a href="#ref-edmunds2013value" role="doc-biblioref">[3]</a></span></td>
+</tr>
+<tr class="odd">
+<td>strontium_plume_p4b</td>
+<td>300</td>
+<td>20</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="volkova2008global"><a href="#ref-volkova2008global" role="doc-biblioref">[4]</a></span></td>
+</tr>
+<tr class="even">
+<td>strontium_plume_p104</td>
+<td>300</td>
+<td>20</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="volkova2008global"><a href="#ref-volkova2008global" role="doc-biblioref">[4]</a></span></td>
+</tr>
+<tr class="odd">
+<td>spectra1</td>
+<td>500</td>
+<td>4</td>
+<td>No</td>
+<td><span class="citation" data-cites="klein_2020_4069493"><a href="#ref-klein_2020_4069493" role="doc-biblioref">[5]</a></span></td>
+</tr>
+<tr class="even">
+<td>spectra2</td>
+<td>500</td>
+<td>4</td>
+<td>No</td>
+<td><span class="citation" data-cites="klein_2020_4069493"><a href="#ref-klein_2020_4069493" role="doc-biblioref">[5]</a></span></td>
+</tr>
+<tr class="odd">
+<td>pbx9501_gold</td>
+<td>500</td>
+<td>6</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="rumsey2025coactive"><a href="#ref-rumsey2025coactive" role="doc-biblioref">[6]</a></span></td>
+</tr>
+<tr class="even">
+<td>pbx9501_ss304</td>
+<td>500</td>
+<td>6</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="rumsey2025coactive"><a href="#ref-rumsey2025coactive" role="doc-biblioref">[6]</a></span></td>
+</tr>
+<tr class="odd">
+<td>pbx9501_nickel</td>
+<td>500</td>
+<td>6</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="rumsey2025coactive"><a href="#ref-rumsey2025coactive" role="doc-biblioref">[6]</a></span></td>
+</tr>
+<tr class="even">
+<td>pbx9501_uranium</td>
+<td>500</td>
+<td>6</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="rumsey2025coactive"><a href="#ref-rumsey2025coactive" role="doc-biblioref">[6]</a></span></td>
+</tr>
+<tr class="odd">
+<td>ptw1</td>
+<td>500</td>
+<td>10</td>
+<td>No</td>
+<td><span class="citation" data-cites="impala"><a href="#ref-impala" role="doc-biblioref">[7]</a></span> <span class="citation" data-cites="preston2003model"><a href="#ref-preston2003model" role="doc-biblioref">[8]</a></span></td>
+</tr>
+<tr class="even">
+<td>discoflux_flyer</td>
+<td>914</td>
+<td>6</td>
+<td>No</td>
+<td><span class="citation" data-cites="francom2020simulation"><a href="#ref-francom2020simulation" role="doc-biblioref">[9]</a></span></td>
+</tr>
+<tr class="odd">
+<td>taylor_foot</td>
+<td>962</td>
+<td>11</td>
+<td>No</td>
+<td><span class="citation" data-cites="biswas2021asc"><a href="#ref-biswas2021asc" role="doc-biblioref">[10]</a></span></td>
+</tr>
+<tr class="even">
+<td>taylor_length</td>
+<td>962</td>
+<td>11</td>
+<td>No</td>
+<td><span class="citation" data-cites="biswas2021asc"><a href="#ref-biswas2021asc" role="doc-biblioref">[10]</a></span></td>
+</tr>
+<tr class="odd">
+<td>jc</td>
+<td>1000</td>
+<td>5</td>
+<td>No</td>
+<td><span class="citation" data-cites="impala"><a href="#ref-impala" role="doc-biblioref">[7]</a></span> <span class="citation" data-cites="johnson1983constitutive"><a href="#ref-johnson1983constitutive" role="doc-biblioref">[11]</a></span></td>
+</tr>
+<tr class="even">
+<td>flyerPTW1</td>
+<td>1000</td>
+<td>11</td>
+<td>No</td>
+<td><span class="citation" data-cites="biswas2021asc"><a href="#ref-biswas2021asc" role="doc-biblioref">[10]</a></span></td>
+</tr>
+<tr class="odd">
+<td>flyerPTW2</td>
+<td>1000</td>
+<td>11</td>
+<td>No</td>
+<td><span class="citation" data-cites="biswas2021asc"><a href="#ref-biswas2021asc" role="doc-biblioref">[10]</a></span></td>
+</tr>
+<tr class="even">
+<td>flyer_plate104</td>
+<td>1000</td>
+<td>11</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="walters2018bayesian"><a href="#ref-walters2018bayesian" role="doc-biblioref">[12]</a></span></td>
+</tr>
+<tr class="odd">
+<td>diffusion_1D</td>
+<td>1000</td>
+<td>62</td>
+<td>No</td>
+<td><span class="citation" data-cites="hlobilova2024diffusion2d"><a href="#ref-hlobilova2024diffusion2d" role="doc-biblioref">[13]</a></span></td>
+</tr>
+<tr class="even">
+<td>fair_climate_ssp1-2.6_year2200</td>
+<td>1001</td>
+<td>45</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="smith2018fair"><a href="#ref-smith2018fair" role="doc-biblioref">[14]</a></span></td>
+</tr>
+<tr class="odd">
+<td>fair_climate_ssp2-4.5_year2200</td>
+<td>1001</td>
+<td>45</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="smith2018fair"><a href="#ref-smith2018fair" role="doc-biblioref">[14]</a></span></td>
+</tr>
+<tr class="even">
+<td>fair_climate_ssp3-7.0_year2200</td>
+<td>1001</td>
+<td>45</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="smith2018fair"><a href="#ref-smith2018fair" role="doc-biblioref">[14]</a></span></td>
+</tr>
+<tr class="odd">
+<td>taylor_cylinder1</td>
+<td>1438</td>
+<td>8</td>
+<td>No</td>
+<td><span class="citation" data-cites="sjue2023simple"><a href="#ref-sjue2023simple" role="doc-biblioref">[15]</a></span></td>
+</tr>
+<tr class="even">
+<td>stochastic_sir</td>
+<td>2000</td>
+<td>4</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="rumsey2024generalized"><a href="#ref-rumsey2024generalized" role="doc-biblioref">[16]</a></span></td>
+</tr>
+<tr class="odd">
+<td>diffusion_2D</td>
+<td>2000</td>
+<td>53</td>
+<td>No</td>
+<td><span class="citation" data-cites="hlobilova2024diffusion2d"><a href="#ref-hlobilova2024diffusion2d" role="doc-biblioref">[13]</a></span></td>
+</tr>
+<tr class="even">
+<td>acme_climate</td>
+<td>2980</td>
+<td>66</td>
+<td>No</td>
+<td><span class="citation" data-cites="sargsyan2015sparse"><a href="#ref-sargsyan2015sparse" role="doc-biblioref">[17]</a></span></td>
+</tr>
+<tr class="odd">
+<td>ptw2</td>
+<td>3701</td>
+<td>13</td>
+<td>No</td>
+<td><span class="citation" data-cites="impala"><a href="#ref-impala" role="doc-biblioref">[7]</a></span> <span class="citation" data-cites="preston2003model"><a href="#ref-preston2003model" role="doc-biblioref">[8]</a></span></td>
+</tr>
+<tr class="even">
+<td>SLOSH_low</td>
+<td>4000</td>
+<td>5</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="hutchings2023comparing"><a href="#ref-hutchings2023comparing" role="doc-biblioref">[18]</a></span></td>
+</tr>
+<tr class="odd">
+<td>SLOSH_mid</td>
+<td>4000</td>
+<td>5</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="hutchings2023comparing"><a href="#ref-hutchings2023comparing" role="doc-biblioref">[18]</a></span></td>
+</tr>
+<tr class="even">
+<td>SLOSH_high</td>
+<td>4000</td>
+<td>5</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="hutchings2023comparing"><a href="#ref-hutchings2023comparing" role="doc-biblioref">[18]</a></span></td>
+</tr>
+<tr class="odd">
+<td>Z_machine_max_vel1</td>
+<td>5000</td>
+<td>6</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="brown2018estimating"><a href="#ref-brown2018estimating" role="doc-biblioref">[19]</a></span></td>
+</tr>
+<tr class="even">
+<td>Z_machine_max_vel2</td>
+<td>5000</td>
+<td>6</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="brown2018estimating"><a href="#ref-brown2018estimating" role="doc-biblioref">[19]</a></span></td>
+</tr>
+<tr class="odd">
+<td>Z_machine_max_vel_all</td>
+<td>5000</td>
+<td>30</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="brown2018estimating"><a href="#ref-brown2018estimating" role="doc-biblioref">[19]</a></span></td>
+</tr>
+<tr class="even">
+<td>e3sm_mnar</td>
+<td>9122</td>
+<td>2</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="grosskopf2021situ"><a href="#ref-grosskopf2021situ" role="doc-biblioref">[20]</a></span></td>
+</tr>
+<tr class="odd">
+<td>nuclear_data</td>
+<td>9307</td>
+<td>178</td>
+<td>No</td>
+<td><span class="citation" data-cites="francom2019nuclear"><a href="#ref-francom2019nuclear" role="doc-biblioref">[21]</a></span></td>
+</tr>
+<tr class="even">
+<td>e3sm_mcar</td>
+<td>10000</td>
+<td>2</td>
+<td>Yes</td>
+<td><span class="citation" data-cites="grosskopf2021situ"><a href="#ref-grosskopf2021situ" role="doc-biblioref">[20]</a></span></td>
+</tr>
+<tr class="odd">
+<td>icf1</td>
+<td>10000</td>
+<td>5</td>
+<td>No</td>
+<td><span class="citation" data-cites="gaffney2020jag"><a href="#ref-gaffney2020jag" role="doc-biblioref">[22]</a></span></td>
+</tr>
+<tr class="even">
+<td>icf2</td>
+<td>10000</td>
+<td>5</td>
+<td>No</td>
+<td><span class="citation" data-cites="gaffney2020jag"><a href="#ref-gaffney2020jag" role="doc-biblioref">[22]</a></span></td>
+</tr>
+<tr class="odd">
+<td>diablo_canyon_plume</td>
+<td>18000</td>
+<td>13</td>
+<td>No</td>
+<td><span class="citation" data-cites="francom2019calibration"><a href="#ref-francom2019calibration" role="doc-biblioref">[23]</a></span></td>
+</tr>
+<tr class="even">
+<td>okc_plume</td>
+<td>22229</td>
+<td>5</td>
+<td>No</td>
+<td><span class="citation" data-cites="brown2009evaluation"><a href="#ref-brown2009evaluation" role="doc-biblioref">[24]</a></span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="test-functions-and-characteristics" class="level3">
+<h3 class="anchored" data-anchor-id="test-functions-and-characteristics">Test Functions (and Characteristics)</h3>
+<p>The <code>duqling</code> library of test functions is ever growing, but the list of the <span class="math inline">\(60\)</span> test functions studied in this paper can be found as</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_paper_funcs</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For these <span class="math inline">\(60\)</span> functions, we computed several characteristics of interest. Future work could try to link these characteristics (or others not listed here) to emulator performance. Determining, in advance, which surrogate modeling technique is likely to succeed on a given computer model would be of great use to practitioners. The R squared quantity refers to the <span class="math inline">\(R^2\)</span> statistic from a linear model fit to the input-output pairs of the computer model. For the other methods, gradients were estimated using automatic differentiation when possible. When needed, the gradient is approximated based on a BASS surrogate fit to the computer model. The AS Participation metric refers to the quantity <span class="math display">\[(\sum_{i=1}^p \lambda_i)^2 / \sum_{i=1}^p \lambda_i^2,\]</span> where <span class="math inline">\(\lambda_i\)</span> is the <span class="math inline">\(i\)</span>th eigenvalue of the active subspace matrix <span class="math inline">\(C = E(\nabla f(x) \nabla f(x)^T)\)</span>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>fname</th>
+<th style="text-align: right;">input_dim</th>
+<th style="text-align: right;">Rsquared</th>
+<th style="text-align: right;">MoransI</th>
+<th style="text-align: right;">Sobolev</th>
+<th style="text-align: right;">Participation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>banana</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.035</td>
+<td style="text-align: right;">0.955</td>
+<td style="text-align: right;">11.017</td>
+<td style="text-align: right;">1.232</td>
+</tr>
+<tr class="even">
+<td>borehole</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.947</td>
+<td style="text-align: right;">0.791</td>
+<td style="text-align: right;">3.729</td>
+<td style="text-align: right;">1.020</td>
+</tr>
+<tr class="odd">
+<td>cantilever_D</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.501</td>
+<td style="text-align: right;">0.701</td>
+<td style="text-align: right;">5.993</td>
+<td style="text-align: right;">1.159</td>
+</tr>
+<tr class="even">
+<td>cantilever_S</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.699</td>
+<td style="text-align: right;">0.827</td>
+<td style="text-align: right;">4.495</td>
+<td style="text-align: right;">1.481</td>
+</tr>
+<tr class="odd">
+<td>circuit</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.973</td>
+<td style="text-align: right;">0.855</td>
+<td style="text-align: right;">3.869</td>
+<td style="text-align: right;">1.104</td>
+</tr>
+<tr class="even">
+<td>const_fn</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.00003</td>
+<td style="text-align: right;">0.020</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td>const_fn15</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">1.271</td>
+</tr>
+<tr class="even">
+<td>crater</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.647</td>
+<td style="text-align: right;">0.758</td>
+<td style="text-align: right;">5.090</td>
+<td style="text-align: right;">1.621</td>
+</tr>
+<tr class="odd">
+<td>cube3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.060</td>
+<td style="text-align: right;">0.795</td>
+<td style="text-align: right;">31.274</td>
+<td style="text-align: right;">1.332</td>
+</tr>
+<tr class="even">
+<td>cube3_rotate</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.198</td>
+<td style="text-align: right;">0.797</td>
+<td style="text-align: right;">10.383</td>
+<td style="text-align: right;">2.355</td>
+</tr>
+<tr class="odd">
+<td>cube5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.622</td>
+<td style="text-align: right;">0.785</td>
+<td style="text-align: right;">19.961</td>
+<td style="text-align: right;">1.323</td>
+</tr>
+<tr class="even">
+<td>detpep_curve</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.795</td>
+<td style="text-align: right;">0.956</td>
+<td style="text-align: right;">4.611</td>
+<td style="text-align: right;">1.165</td>
+</tr>
+<tr class="odd">
+<td>detpep8</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.802</td>
+<td style="text-align: right;">0.752</td>
+<td style="text-align: right;">4.609</td>
+<td style="text-align: right;">1.178</td>
+</tr>
+<tr class="even">
+<td>dms_additive</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.058</td>
+<td style="text-align: right;">0.984</td>
+<td style="text-align: right;">9.895</td>
+<td style="text-align: right;">1.918</td>
+</tr>
+<tr class="odd">
+<td>dms_complicated</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.192</td>
+<td style="text-align: right;">0.962</td>
+<td style="text-align: right;">9.831</td>
+<td style="text-align: right;">1.941</td>
+</tr>
+<tr class="even">
+<td>dms_harmonic</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.030</td>
+<td style="text-align: right;">0.932</td>
+<td style="text-align: right;">13.037</td>
+<td style="text-align: right;">1.735</td>
+</tr>
+<tr class="odd">
+<td>dms_radial</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0001</td>
+<td style="text-align: right;">0.983</td>
+<td style="text-align: right;">7.092</td>
+<td style="text-align: right;">1.998</td>
+</tr>
+<tr class="even">
+<td>dms_simple</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.189</td>
+<td style="text-align: right;">0.948</td>
+<td style="text-align: right;">4.768</td>
+<td style="text-align: right;">1.966</td>
+</tr>
+<tr class="odd">
+<td>ebola</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.856</td>
+<td style="text-align: right;">0.748</td>
+<td style="text-align: right;">4.794</td>
+<td style="text-align: right;">1.533</td>
+</tr>
+<tr class="even">
+<td>forrester1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.043</td>
+<td style="text-align: right;">0.982</td>
+<td style="text-align: right;">11.682</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td>foursquare</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.471</td>
+<td style="text-align: right;">0.931</td>
+<td style="text-align: right;">24.490</td>
+<td style="text-align: right;">1.206</td>
+</tr>
+<tr class="even">
+<td>friedman</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.770</td>
+<td style="text-align: right;">0.877</td>
+<td style="text-align: right;">4.856</td>
+<td style="text-align: right;">2.717</td>
+</tr>
+<tr class="odd">
+<td>friedman10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.742</td>
+<td style="text-align: right;">0.674</td>
+<td style="text-align: right;">5.064</td>
+<td style="text-align: right;">2.666</td>
+</tr>
+<tr class="even">
+<td>friedman20</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.753</td>
+<td style="text-align: right;">0.675</td>
+<td style="text-align: right;">4.961</td>
+<td style="text-align: right;">2.674</td>
+</tr>
+<tr class="odd">
+<td>Gfunction</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.0001</td>
+<td style="text-align: right;">0.883</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">2.803</td>
+</tr>
+<tr class="even">
+<td>Gfunction18</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0.0001</td>
+<td style="text-align: right;">0.139</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">4.144</td>
+</tr>
+<tr class="odd">
+<td>Gfunction40</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">0.021</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">3.938</td>
+</tr>
+<tr class="even">
+<td>Gfunction6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.002</td>
+<td style="text-align: right;">0.562</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">2.114</td>
+</tr>
+<tr class="odd">
+<td>grlee1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.604</td>
+<td style="text-align: right;">0.987</td>
+<td style="text-align: right;">16.676</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td>grlee6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.302</td>
+<td style="text-align: right;">0.433</td>
+<td style="text-align: right;">40.708</td>
+<td style="text-align: right;">1.004</td>
+</tr>
+<tr class="odd">
+<td>higdon1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.520</td>
+<td style="text-align: right;">0.996</td>
+<td style="text-align: right;">34.114</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td>ignition</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.815</td>
+<td style="text-align: right;">0.729</td>
+<td style="text-align: right;">3.937</td>
+<td style="text-align: right;">2.695</td>
+</tr>
+<tr class="odd">
+<td>ishigami</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.199</td>
+<td style="text-align: right;">0.841</td>
+<td style="text-align: right;">11.257</td>
+<td style="text-align: right;">2.380</td>
+</tr>
+<tr class="even">
+<td>lim_non_polynomial</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.643</td>
+<td style="text-align: right;">0.974</td>
+<td style="text-align: right;">5.532</td>
+<td style="text-align: right;">1.814</td>
+</tr>
+<tr class="odd">
+<td>lim_polynomial</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.594</td>
+<td style="text-align: right;">0.958</td>
+<td style="text-align: right;">6.212</td>
+<td style="text-align: right;">1.764</td>
+</tr>
+<tr class="even">
+<td>linear21</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.569</td>
+<td style="text-align: right;">3.620</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td>linear21_s1</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.572</td>
+<td style="text-align: right;">3.605</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td>linear21_s10</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.594</td>
+<td style="text-align: right;">3.591</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td>moon31</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">0.926</td>
+<td style="text-align: right;">0.463</td>
+<td style="text-align: right;">3.764</td>
+<td style="text-align: right;">1.105</td>
+</tr>
+<tr class="even">
+<td>multivalley</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.091</td>
+<td style="text-align: right;">0.701</td>
+<td style="text-align: right;">72.760</td>
+<td style="text-align: right;">1.488</td>
+</tr>
+<tr class="odd">
+<td>onehundred</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0.884</td>
+<td style="text-align: right;">0.279</td>
+<td style="text-align: right;">4.361</td>
+<td style="text-align: right;">2.519</td>
+</tr>
+<tr class="even">
+<td>oo15</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0.258</td>
+<td style="text-align: right;">0.574</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">7.538</td>
+</tr>
+<tr class="odd">
+<td>park4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.955</td>
+<td style="text-align: right;">0.919</td>
+<td style="text-align: right;">3.655</td>
+<td style="text-align: right;">1.075</td>
+</tr>
+<tr class="even">
+<td>permdb</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0.0004</td>
+<td style="text-align: right;">0.101</td>
+<td style="text-align: right;">46.941</td>
+<td style="text-align: right;">9.681</td>
+</tr>
+<tr class="odd">
+<td>piston</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.914</td>
+<td style="text-align: right;">0.819</td>
+<td style="text-align: right;">4.093</td>
+<td style="text-align: right;">1.270</td>
+</tr>
+<tr class="even">
+<td>pollutant_uni</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.827</td>
+<td style="text-align: right;">0.886</td>
+<td style="text-align: right;">5.231</td>
+<td style="text-align: right;">1.301</td>
+</tr>
+<tr class="odd">
+<td>quad4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.938</td>
+<td style="text-align: right;">0.920</td>
+<td style="text-align: right;">3.826</td>
+<td style="text-align: right;">1.226</td>
+</tr>
+<tr class="even">
+<td>rabbits</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.927</td>
+<td style="text-align: right;">0.954</td>
+<td style="text-align: right;">4.710</td>
+<td style="text-align: right;">1.072</td>
+</tr>
+<tr class="odd">
+<td>ripples</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">0.807</td>
+<td style="text-align: right;">40.944</td>
+<td style="text-align: right;">1.376</td>
+</tr>
+<tr class="even">
+<td>robot</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.174</td>
+<td style="text-align: right;">0.410</td>
+<td style="text-align: right;">8.614</td>
+<td style="text-align: right;">2.428</td>
+</tr>
+<tr class="odd">
+<td>sharkfin</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.246</td>
+<td style="text-align: right;">0.753</td>
+<td style="text-align: right;">41.910</td>
+<td style="text-align: right;">2.246</td>
+</tr>
+<tr class="even">
+<td>short_column</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.769</td>
+<td style="text-align: right;">0.824</td>
+<td style="text-align: right;">4.730</td>
+<td style="text-align: right;">1.066</td>
+</tr>
+<tr class="odd">
+<td>squiggle</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.015</td>
+<td style="text-align: right;">0.868</td>
+<td style="text-align: right;">25.773</td>
+<td style="text-align: right;">1.855</td>
+</tr>
+<tr class="even">
+<td>star2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.204</td>
+<td style="text-align: right;">0.803</td>
+<td style="text-align: right;">22.482</td>
+<td style="text-align: right;">1.596</td>
+</tr>
+<tr class="odd">
+<td>steel_column</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.968</td>
+<td style="text-align: right;">0.762</td>
+<td style="text-align: right;">3.813</td>
+<td style="text-align: right;">1.139</td>
+</tr>
+<tr class="even">
+<td>sulfur</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.549</td>
+<td style="text-align: right;">0.698</td>
+<td style="text-align: right;">4.473</td>
+<td style="text-align: right;">1.178</td>
+</tr>
+<tr class="odd">
+<td>turb12</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.335</td>
+<td style="text-align: right;">0.463</td>
+<td style="text-align: right;">7.659</td>
+<td style="text-align: right;">1.758</td>
+</tr>
+<tr class="even">
+<td>twin_galaxies</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.442</td>
+<td style="text-align: right;">0.962</td>
+<td style="text-align: right;">9.100</td>
+<td style="text-align: right;">1.775</td>
+</tr>
+<tr class="odd">
+<td>welch20</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.598</td>
+<td style="text-align: right;">0.598</td>
+<td style="text-align: right;">6.375</td>
+<td style="text-align: right;">2.097</td>
+</tr>
+<tr class="even">
+<td>wingweight</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.984</td>
+<td style="text-align: right;">0.758</td>
+<td style="text-align: right;">3.652</td>
+<td style="text-align: right;">1.061</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="the-rashomon-effect-and-ensembling" class="level2">
+<h2 class="anchored" data-anchor-id="the-rashomon-effect-and-ensembling">The Rashomon Effect and Ensembling</h2>
+<p>We have already seen that searching for a single emulator that performs best across all functions is a fruitless endeavor—but perhaps we should not even be focused on finding the best emulator for a single setting. <em>“Amazing things come from having many good models”</em> is the sentiment behind the Rashomon effect, an idea that has gained increasing attention in recent years (<span class="citation" data-cites="fisher2019all"><a href="#ref-fisher2019all" role="doc-biblioref">[25]</a></span>; <span class="citation" data-cites="xin2022exploring"><a href="#ref-xin2022exploring" role="doc-biblioref">[26]</a></span>; <span class="citation" data-cites="rudin2024amazing"><a href="#ref-rudin2024amazing" role="doc-biblioref">[27]</a></span>; <span class="citation" data-cites="visokay2025you"><a href="#ref-visokay2025you" role="doc-biblioref">[28]</a></span>). The term was originally coined by Leo Breiman to describe the phenomenon in which multiple distinct models explain the data equally well, yet may lead to different conclusions (<span class="citation" data-cites="breiman2001statistical"><a href="#ref-breiman2001statistical" role="doc-biblioref">[29]</a></span>). While the Rashomon effect is often discussed in the context of noisy or over-parameterized models, we believe it also holds valuable lessons for uncertainty quantification.</p>
+<p>Suppose that for a given dataset, we retain all emulators with a CRPS below 0.25 (see Figure below). If we then perform a sensitivity analysis using each of these similarly accurate emulators and they all agree, this serves as a strong sanity check—not just for the conclusions, but also for the models themselves. On the other hand, if the emulators disagree, this immediately signals a need for deeper inspection. For example, imagine that one emulator identifies <code>x1</code> as the most important input, <code>x2</code> as moderately important, and <code>x3</code> as inert—while another emulator ranks <code>x3</code> highest, de-emphasizes <code>x1</code>, and again sees <code>x2</code> as moderately important. Such a discrepancy suggests a lack of identifiability between <code>x1</code> and <code>x3</code>, and highlights how choosing a single emulator might obscure meaningful structure in the data. Had we selected only one model, we might have confidently reported that <code>x1</code> does not matter—when in fact, the full Rashomon set tells a more nuanced story.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="box_rashomon_clean.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Rashomon plot</figcaption>
+</figure>
+</div>
+</section>
+<section id="additional-figures-and-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="additional-figures-and-analysis">Additional Figures and Analysis</h2>
+<p>In this section, we illustrate how the <code>duqling</code> framework can be used to explore additional metrics and visualizations beyond those presented in the main text. See Section SM1 and SM2 for details on installing/loading <code>duqling</code> and the simulation study objects.</p>
+<p>We commonly <em>filter</em> the simulation study objects to study specific settings, e.g.,</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter_sim_study</span>(duq_testfuncs, <span class="at">n_train=</span><span class="dv">500</span>, <span class="at">NSR=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The plotting and analysis functions provided by the package include</p>
+<ul>
+<li><p><code>summarize_sim_study()</code>: Computes summary statistics across simulation scenarios (e.g., mean or median performance), producing a compact view of emulator performance.</p></li>
+<li><p><code>heatmap_sim_study()</code>: Visualizes performance metrics (e.g., CRPS, FVU) across scenarios using heatmaps, helping identify patterns across settings.</p></li>
+<li><p><code>rankplot_sim_study()</code>: Displays cumulative rank distributions, showing how often each emulator achieves a given rank or better.</p></li>
+<li><p><code>paretoplot_sim_study()</code>: Plots trade-offs between metrics (typically accuracy vs.&nbsp;compute time), highlighting Pareto-efficient methods.</p></li>
+<li><p><code>perfprofile_sim_study()</code>: Generates performance profile plots, showing the proportion of scenarios for which each method is within a factor of the best.</p></li>
+<li><p><code>boxplots_sim_study()</code>: Produces boxplots of performance metrics across scenarios, useful for assessing variability and the Rashomon effect.</p></li>
+<li><p><code>rank_sim_study()</code>: Computes rank-based summaries for a specified metric and appends corresponding rank columns.</p></li>
+<li><p><code>normalize_sim_study()</code>: Normalizes metrics (e.g., scaling relative to variance or baseline values) to improve comparability across scenarios.</p></li>
+<li><p><code>relativize_sim_study()</code>: Computes relative performance metrics by comparing each method to the best-performing method within each scenario.</p></li>
+<li><p><code>collapse_sim_study()</code>: Aggregates results across replications or folds, producing a reduced data frame suitable for summary analyses.</p></li>
+</ul>
+<section id="fraction-of-variance-unexplained" class="level3">
+<h3 class="anchored" data-anchor-id="fraction-of-variance-unexplained">Fraction of Variance Unexplained</h3>
+<p>In the main paper, we generally analyze CRPS due to our focus on uncertainty quantification. If the focus is on pure predictive performance and not on well-calibrated predictive intervals, then mean squared error (MSE) or root MSE (RMSE) is the usual choice. The fraction of variance unexplained (FVU) is simply a scaled version of MSE which improves interpretability and allows for some level of comparison between simulation scenarios. We calculate RMSE and FVU as <span class="math display">\[
+\mathrm{RMSE}
+=
+\sqrt{
+\frac{1}{n_{\mathrm{test}}}
+\sum_{i=1}^{n_{\mathrm{test}}}
+(y_{\mathrm{test},i}-\hat y_i)^2
+},
+\]</span> and <span class="math display">\[
+\mathrm{FVU}
+=
+\frac{
+\frac{1}{n_{\mathrm{test}}}
+\sum_{i=1}^{n_{\mathrm{test}}}
+(y_{\mathrm{test},i}-\hat y_i)^2
+}{
+\frac{1}{n_{\mathrm{test}}-1}
+\sum_{i=1}^{n_{\mathrm{test}}}
+(y_{\mathrm{test},i}-\bar y_{\mathrm{test}})^2
+}
+=
+\frac{\mathrm{RMSE}^2}{s_y^2},
+\]</span> where <span class="math inline">\(s_y^2\)</span> is the sample variance of the test responses and <span class="math inline">\(\hat y_1,\ldots,\hat y_{n_{\mathrm{test}}}\)</span> are the emulator predictions.</p>
+<p>where <span class="math inline">\(\hat y_1, \ldots, \hat y_{n_\text{test}}\)</span> are the emulator predictions. This metric (along with RMSE) is automatically calculated during <code>run_sim_study()</code> and <code>run_sim_study_data()</code>.</p>
+<section id="fvu-rankplots" class="level4">
+<h4 class="anchored" data-anchor-id="fvu-rankplots">FVU Rankplots</h4>
+<p>We use the following loop structure to iterate over the five synthetic simulation settings.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>n_train_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">1000</span>, <span class="dv">5000</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>NSR_vec     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"FVU Rank (n="</span>, n_train_vec[i], <span class="st">", NSR="</span>, NSR_vec[i], <span class="st">")"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_testfuncs, </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">n_train =</span> n_train_vec[i], <span class="at">NSR =</span> NSR_vec[i])</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">rankplot_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"FVU"</span>, <span class="at">title=</span>title)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adjust sizing</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(p)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/fvurank-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/fvurank-2.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/fvurank-3.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/fvurank-4.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/fvurank-5.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Small data</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"FVU Rank (Small Data)"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_realdata, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">expr =</span> n_train <span class="sc">&lt;=</span> <span class="dv">1500</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">rankplot_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"FVU"</span>, <span class="at">title=</span>title)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Large data</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"FVU Rank (Big Data)"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_realdata, </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">expr =</span> n_train <span class="sc">&gt;</span> <span class="dv">1500</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">rankplot_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"FVU"</span>, <span class="at">title=</span>title)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fvu-performance-profiles" class="level4">
+<h4 class="anchored" data-anchor-id="fvu-performance-profiles">FVU Performance Profiles</h4>
+<p>Performance profiles come from the literature on benchmarking for optimization research (<span class="citation" data-cites="dolan2002benchmarking"><a href="#ref-dolan2002benchmarking" role="doc-biblioref">[30]</a></span>; <span class="citation" data-cites="more2009benchmarking"><a href="#ref-more2009benchmarking" role="doc-biblioref">[31]</a></span>). For emulator <span class="math inline">\(i\)</span> and simulation scenario <span class="math inline">\(j\)</span> we define <span class="math display">\[t_{i,j} = \frac{\text{metric}_{i,j} + \epsilon}{\min_i\{\text{metric}_{i,j}\}+ \epsilon},\]</span> and we define <span class="math display">\[\rho_i(\tau) = \frac{1}{J}\sum_{j=1}^J1(t_{i,j} \leq \tau).\]</span> When <span class="math inline">\(\epsilon=0\)</span>, the idea is that <span class="math inline">\(\rho_i(\tau)\)</span> tells us the proportion of the time that emulator <span class="math inline">\(i\)</span> is within a factor <span class="math inline">\(\tau\)</span> of the best performing emulator across the <span class="math inline">\(J\)</span> different simulation scenarios. We use a small value of <span class="math inline">\(\epsilon=0.001\)</span> to perform a type of “Laplace smoothing”, which effectively induces the belief that values of the metric (FVU, here) less than this value are all effectively equally good.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>n_train_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">1000</span>, <span class="dv">5000</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>NSR_vec     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"FVU Profile (n="</span>, n_train_vec[i], <span class="st">", NSR="</span>, NSR_vec[i], <span class="st">")"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_testfuncs, </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">n_train =</span> n_train_vec[i], <span class="at">NSR =</span> NSR_vec[i])</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">perfprofile_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"FVU"</span>, </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">relative_epsilon =</span> <span class="fl">0.001</span>, <span class="at">tau_lim=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10000</span>),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">title=</span>title, <span class="at">color_scale =</span> <span class="st">"viridis"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adjust sizing</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(p)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-14-3.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-14-4.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-14-5.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Small data</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"FVU Profile (Small Data)"</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_realdata, </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">expr =</span> n_train <span class="sc">&lt;=</span> <span class="dv">1500</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">perfprofile_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"FVU"</span>, </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">relative_epsilon =</span> <span class="fl">0.001</span>, <span class="at">tau_lim=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10000</span>),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">title=</span>title, <span class="at">color_scale =</span> <span class="st">"viridis"</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Large data</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"FVU Profile (Big Data)"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_realdata, </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">expr =</span> n_train <span class="sc">&gt;</span> <span class="dv">1500</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">perfprofile_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"FVU"</span>, </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">relative_epsilon =</span> <span class="fl">0.001</span>, <span class="at">tau_lim=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10000</span>),</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">title=</span>title, <span class="at">color_scale =</span> <span class="st">"viridis"</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fvu-heatmaps" class="level4">
+<h4 class="anchored" data-anchor-id="fvu-heatmaps">FVU Heatmaps</h4>
+<p>We use a custom colorbar scale to make the figures more readable.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>custom <span class="ot">&lt;-</span> <span class="cf">function</span>(xx){</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log10</span>(<span class="fu">pmin</span>(<span class="dv">1</span>, <span class="fu">pmax</span>(<span class="fl">0.001</span>, xx)))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>n_train_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">1000</span>, <span class="dv">5000</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>NSR_vec     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Average FVU (n="</span>, n_train_vec[i], <span class="st">", NSR="</span>, NSR_vec[i], <span class="st">")"</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_testfuncs, </span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">n_train =</span> n_train_vec[i], <span class="at">NSR =</span> NSR_vec[i])</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">heatmap_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"FVU"</span>, <span class="at">y_scale_fun =</span> custom,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                    <span class="at">colorbar_labels =</span> </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">list</span>(<span class="at">breaks=</span><span class="fu">log10</span>(<span class="fu">c</span>(<span class="fl">0.001</span>, <span class="fl">0.01</span>,  <span class="fl">0.1</span>, <span class="fl">0.56</span>, <span class="dv">1</span>)),</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>                           <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"&lt;0.001"</span>,<span class="st">"0.01"</span>, <span class="st">"0.1"</span>, <span class="st">"0.56"</span>, <span class="st">""</span>)),</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>                    <span class="at">color_scale=</span><span class="st">"mako"</span>,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>                    <span class="at">title=</span>title)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adjust sizing</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">angle =</span> <span class="dv">90</span>,</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">vjust =</span> <span class="fl">0.5</span>,</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="dv">1</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(p)</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-16-3.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-16-4.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-16-5.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Small data</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Average FVU (Small Data)"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_realdata, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">expr =</span> n_train <span class="sc">&lt;=</span> <span class="dv">1500</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">heatmap_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"FVU"</span>, <span class="at">y_scale_fun =</span> custom,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">colorbar_labels =</span> </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">list</span>(<span class="at">breaks=</span><span class="fu">log10</span>(<span class="fu">c</span>(<span class="fl">0.001</span>, <span class="fl">0.01</span>,  <span class="fl">0.1</span>, <span class="fl">0.56</span>, <span class="dv">1</span>)),</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"&lt;0.001"</span>,<span class="st">"0.01"</span>, <span class="st">"0.1"</span>, <span class="st">"0.56"</span>, <span class="st">""</span>)),</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color_scale=</span><span class="st">"mako"</span>,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title=</span>title)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">angle =</span> <span class="dv">90</span>,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">vjust =</span> <span class="fl">0.5</span>,</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="dv">1</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Large data</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Average FVU (Big Data)"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_realdata, </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">expr =</span> n_train <span class="sc">&gt;</span> <span class="dv">1500</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">heatmap_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"FVU"</span>, <span class="at">y_scale_fun =</span> custom,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">colorbar_labels =</span> </span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">list</span>(<span class="at">breaks=</span><span class="fu">log10</span>(<span class="fu">c</span>(<span class="fl">0.001</span>, <span class="fl">0.01</span>,  <span class="fl">0.1</span>, <span class="fl">0.56</span>, <span class="dv">1</span>)),</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"&lt;0.001"</span>,<span class="st">"0.01"</span>, <span class="st">"0.1"</span>, <span class="st">"0.56"</span>, <span class="st">""</span>)),</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color_scale=</span><span class="st">"mako"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title=</span>title)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">angle =</span> <span class="dv">90</span>,</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">vjust =</span> <span class="fl">0.5</span>,</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="dv">1</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fvu-boxplots" class="level4">
+<h4 class="anchored" data-anchor-id="fvu-boxplots">FVU Boxplots</h4>
+<p>Boxplots are a great way to summarize a specific simulation scenario. There are thousands of possible boxplots one could make from this data, here’s an example.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_testfuncs, <span class="at">id =</span> <span class="st">"welch20"</span>, </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n_train=</span><span class="dv">500</span>, <span class="at">NSR=</span><span class="fl">0.1</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplots_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"FVU"</span>, </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">title=</span><span class="st">"FVU for welch20 (n=5000)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="continuous-ranked-probability-scores" class="level3">
+<h3 class="anchored" data-anchor-id="continuous-ranked-probability-scores">Continuous Ranked Probability Scores</h3>
+<p>Continuous ranked probability scores (CRPS) was the primary metric used in the main manuscript, and so we won’t rehash all of that here. Here we show some key figures not given in the main manuscript: (i) CRPS rankplots for the real datasets and (ii) CRPS performance profiles for the test functions.</p>
+<section id="crps-rankplots-data-only" class="level4">
+<h4 class="anchored" data-anchor-id="crps-rankplots-data-only">CRPS Rankplots (data only)</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Small data</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"CRPS Rank (Small Data)"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_realdata, </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">expr =</span> n_train <span class="sc">&lt;=</span> <span class="dv">1500</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">rankplot_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"CRPS"</span>, <span class="at">title=</span>title)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Large data</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"CRPS Rank (Big Data)"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_realdata, </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">expr =</span> n_train <span class="sc">&gt;</span> <span class="dv">1500</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">rankplot_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"CRPS"</span>, <span class="at">title=</span>title)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="crps-performance-profiles-testfuncs-only" class="level4">
+<h4 class="anchored" data-anchor-id="crps-performance-profiles-testfuncs-only">CRPS Performance Profiles (testfuncs only)</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>n_train_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">1000</span>, <span class="dv">5000</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>NSR_vec     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"CRPS Profile (n="</span>, n_train_vec[i], <span class="st">", NSR="</span>, NSR_vec[i], <span class="st">")"</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_testfuncs, </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">n_train =</span> n_train_vec[i], <span class="at">NSR =</span> NSR_vec[i])</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">perfprofile_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"CRPS"</span>, </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">relative_epsilon =</span> <span class="fl">0.001</span>, <span class="at">tau_lim=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10000</span>),</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">title=</span>title, <span class="at">color_scale =</span> <span class="st">"viridis"</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adjust sizing</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(p)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-20-3.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-20-4.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-20-5.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="computation-time" class="level3">
+<h3 class="anchored" data-anchor-id="computation-time">Computation Time</h3>
+<p>The <code>duqling</code> package usually times both training and prediction splits, but for this paper we report just the total computation time, because several of the surrogate modeling implementations cannot be split easily.</p>
+<section id="time-performance-profiles" class="level4">
+<h4 class="anchored" data-anchor-id="time-performance-profiles">Time Performance Profiles</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Synthetic test functions (5 cases)</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>n_train_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">1000</span>, <span class="dv">5000</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>NSR_vec     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Time Profile (n="</span>, n_train_vec[i], <span class="st">", NSR="</span>, NSR_vec[i], <span class="st">")"</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_testfuncs, </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">n_train =</span> n_train_vec[i], <span class="at">NSR =</span> NSR_vec[i])</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">perfprofile_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"time"</span>, </span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>                             <span class="at">title=</span>title, <span class="at">color_scale =</span> <span class="st">"viridis"</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(p)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-21-3.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-21-4.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-21-5.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Small data</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="st">"Time Profile (Small Data)"</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_realdata, <span class="at">expr =</span> n_train <span class="sc">&lt;=</span> <span class="dv">1500</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">perfprofile_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"time"</span>, </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">title=</span>title, <span class="at">color_scale =</span> <span class="st">"viridis"</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Large data</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="st">"Time Profile (Big Data)"</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_realdata, <span class="at">expr =</span> n_train <span class="sc">&gt;</span> <span class="dv">1500</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">perfprofile_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"time"</span>, </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">title=</span>title, <span class="at">color_scale =</span> <span class="st">"viridis"</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size=</span><span class="dv">12</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="time-paretoplots" class="level4">
+<h4 class="anchored" data-anchor-id="time-paretoplots">Time Paretoplots</h4>
+<p>Finally, we provide an example of how the paretoplots in the main paper were created (with an internal call to <code>duqling::relativize_sim_study</code>).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This only filters on sample size, not NSR</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_testfuncs, <span class="at">n_train=</span><span class="dv">1000</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">paretoplot_sim_study</span>(tmp, <span class="at">metric=</span><span class="fu">c</span>(<span class="st">"CRPS_rel"</span>, <span class="st">"time_rel_log"</span>),</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">epsilon=</span><span class="fu">c</span>(<span class="fl">0.001</span>, <span class="dv">0</span>), <span class="at">upper_bound=</span><span class="fu">c</span>(<span class="dv">100</span>, <span class="cn">Inf</span>), </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_legend =</span> <span class="cn">FALSE</span>, <span class="at">title=</span><span class="st">"CRPS &amp; Speed (n=1000)"</span>, </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">50</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="other-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="other-metrics">Other Metrics</h3>
+<p>The analyses presented in the main paper focus primarily on CRPS, because it is a proper scoring rule for predictions with uncertainty, but the <code>duqling</code> framework is flexible and supports a wide range of alternative metrics. In many uncertainty quantification applications, practitioners are interested in properties of predictive intervals, such as coverage or interval width, in addition to overall predictive accuracy.</p>
+<p>Coverage is one of the most commonly reported diagnostics, but it is not a proper scoring rule and does not account for the width of the interval.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">filter_sim_study</span>(duq_testfuncs, </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">id=</span><span class="st">"borehole"</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n_train=</span><span class="dv">1000</span>, <span class="at">NSR=</span><span class="fl">0.1</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplots_sim_study</span>(tmp, <span class="at">metric=</span><span class="st">"COVER0.95"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For a given confidence level, mean interval scores (MIS) are a proper scoring rule that factor in both accuracy and precision. <span class="math display">\[\text{MIS}_{1-\alpha}
+=
+\frac{1}{n_{\mathrm{test}}}
+\sum_{i=1}^{n_{\mathrm{test}}}
+\left[
+(U_i - L_i)
++
+\frac{2}{\alpha}(L_i - y_{\mathrm{test},i})\mathbf{1}\{y_{\mathrm{test},i} &lt; L_i\}
++
+\frac{2}{\alpha}(y_{\mathrm{test},i} - U_i)\mathbf{1}\{y_{\mathrm{test},i} &gt; U_i\}
+\right],\]</span> while the current version of <code>duqling</code> does compute these scores, they were omitted from the original simulation study for simplicity.</p>
+<p>One simple metric due to <span class="citation" data-cites="marrel2024probabilistic"><a href="#ref-marrel2024probabilistic" role="doc-biblioref">[32]</a></span> that can be recovered, is the integrated absolute error across confidence levels <span class="math inline">\(1-\alpha\)</span>, defined as <span class="math display">\[\text{IAE}\text{-}\alpha = \int_0^1|C_\alpha - \alpha| d\alpha,\]</span> where <span class="math inline">\(C_\alpha\)</span> is the empirical coverage for confidence level <span class="math inline">\(\alpha\)</span>. To estimate this accurately in duqling, we should run with a long list of confidence levels using the <code>conf_level</code> argument in <code>run_sim_study()</code> and <code>run_sim_study_data()</code>. But it can be interesting to look at the estimate obtained using the confidence levels run by the default settings. In this case, we approximate the integral by a simple discrete average over the confidence levels used in the simulation, i.e., by averaging the absolute differences between empirical and nominal coverage at each level. <span class="math display">\[\hat{\text{IAE}} = \frac{1}{K}\sum_{k=1}^K |\hat C_{\alpha_k} - \alpha_k|.\]</span> We can create this new column using the package’s <code>mutate_sim_study()</code> function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>tmp_IAE <span class="ot">&lt;-</span> <span class="fu">mutate_sim_study</span>(tmp,</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">IAE_est =</span> <span class="fl">0.25</span> <span class="sc">*</span> <span class="fu">abs</span>(COVER0<span class="fl">.8</span> <span class="sc">-</span> <span class="fl">0.8</span>) <span class="sc">+</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                           <span class="fl">0.25</span> <span class="sc">*</span> <span class="fu">abs</span>(COVER0<span class="fl">.9</span> <span class="sc">-</span> <span class="fl">0.9</span>) <span class="sc">+</span> </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                           <span class="fl">0.25</span> <span class="sc">*</span> <span class="fu">abs</span>(COVER0<span class="fl">.95</span> <span class="sc">-</span> <span class="fl">0.95</span>) <span class="sc">+</span> </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                           <span class="fl">0.25</span> <span class="sc">*</span> <span class="fu">abs</span>(COVER0<span class="fl">.99</span> <span class="sc">-</span> <span class="fl">0.99</span>))</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplots_sim_study</span>(tmp_IAE, <span class="at">metric =</span> <span class="st">"IAE_est"</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">title =</span> <span class="st">"Estimated IAE (Intervals)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="supplement_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These results indicate the shortcoming of IAE: they are an excellent tool for assessing how well calibrated a method is, but they fail to take precision of the predictive interval into account. Thus, the baseline predictor will often be reasonably well calibrated when the marginal output of the computer model is even remotely bell-shaped.</p>
+</section>
+</section>
+<section id="references" class="level2 unnumbered">
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-cormen2022introduction" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">T. H. Cormen, C. E. Leiserson, R. L. Rivest, and C. Stein, <em>Introduction to algorithms</em>. MIT press, 2022.</div>
+</div>
+<div id="ref-francom2018sensitivity" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">D. Francom, B. Sansó, A. Kupresanin, and G. Johannesson, <span>“Sensitivity analysis and emulation for functional data using bayesian adaptive splines,”</span> <em>Statistica Sinica</em>, pp. 791–816, 2018.</div>
+</div>
+<div id="ref-edmunds2013value" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">T. Edmunds <em>et al.</em>, <span>“The value of storage and demand response for renewble integration,”</span> Lawrence Livermore National Laboratory (LLNL), Livermore, CA (United States), 2013.</div>
+</div>
+<div id="ref-volkova2008global" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">E. Volkova, B. Iooss, and F. Van Dorpe, <span>“Global sensitivity analysis for a numerical model of radionuclide migration from the RRC <span>‘kurchatov institute’</span> radwaste disposal site,”</span> <em>Stochastic Environmental Research and Risk Assessment</em>, vol. 22, no. 1, pp. 17–31, 2008.</div>
+</div>
+<div id="ref-klein_2020_4069493" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">N. Klein, J. Colgan, E. Judge, K. Bhat, K. Myers, and E. Lawrence, <span>“ATOMIC simulations and experimental data for basalt-like compounds.”</span> Zenodo, Oct. 2020. doi: <a href="https://doi.org/10.25583/1670467">10.25583/1670467</a>.</div>
+</div>
+<div id="ref-rumsey2025coactive" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">K. N. Rumsey, Z. K. Hardy, C. Ahrens, and S. Vander Wiel, <span>“Co-active subspace methods for the joint analysis of adjacent computer models,”</span> <em>Technometrics</em>, vol. 67, no. 1, pp. 133–146, 2025.</div>
+</div>
+<div id="ref-impala" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">IMPALA Team, <em>GitHub repository</em>. <a href="https://github.com/lanl/impala" class="uri">https://github.com/lanl/impala</a>; GitHub, 2025.</div>
+</div>
+<div id="ref-preston2003model" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">D. L. Preston, D. L. Tonks, and D. C. Wallace, <span>“Model of plastic deformation for extreme loading conditions,”</span> <em>Journal of applied physics</em>, vol. 93, no. 1, pp. 211–220, 2003.</div>
+</div>
+<div id="ref-francom2020simulation" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">D. C. Francom <em>et al.</em>, <span>“Simulation and emulation of x-ray diffraction from dynamic compression experiments,”</span> <em>Journal of Dynamic Behavior of Materials</em>, vol. 7, no. LA–UR–19–31689, 2020.</div>
+</div>
+<div id="ref-biswas2021asc" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline">A. Biswas <em>et al.</em>, <span>“ASC/PEM/materials L3 milestone briefing: A briefing on impala and the savanna efforts in support of FY22/FY23 SCDS L1 milestones,”</span> Los Alamos National Laboratory (LANL), 2021.</div>
+</div>
+<div id="ref-johnson1983constitutive" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[11] </div><div class="csl-right-inline">G. R. Johnson, <span>“A constitutive model and data for metals subjected to large strains, high strain rates and high temperatures,”</span> in <em>Proceedings of the 7th international symposium on ballistics, am. Def. Prep. Org.(ADPA), netherlands, 1983</em>, 1983, pp. 541–547.</div>
+</div>
+<div id="ref-walters2018bayesian" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[12] </div><div class="csl-right-inline">D. J. Walters <em>et al.</em>, <span>“Bayesian calibration of strength parameters using hydrocode simulations of symmetric impact shock experiments of al-5083,”</span> <em>Journal of Applied Physics</em>, vol. 124, no. 20, 2018.</div>
+</div>
+<div id="ref-hlobilova2024diffusion2d" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[13] </div><div class="csl-right-inline">A. Hlobilová, S. Marelli, and B. Sudret, <span>“Benchmark case datasets - two-dimensional heat diffusion model.”</span> Zenodo, 2024. doi: <a href="https://doi.org/10.5281/zenodo.12701147">10.5281/zenodo.12701147</a>.</div>
+</div>
+<div id="ref-smith2018fair" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[14] </div><div class="csl-right-inline">C. J. Smith <em>et al.</em>, <span>“<span class="nocase">FAIR v1. 3: a simple emissions-based impulse response and carbon cycle model</span>,”</span> <em>Geoscientific Model Development</em>, vol. 11, no. 6, pp. 2273–2297, 2018.</div>
+</div>
+<div id="ref-sjue2023simple" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[15] </div><div class="csl-right-inline">S. Sjue, K. Hickmann, and N. Nguyen, <span>“Simple and sophisticated models of taylor’s cylinder impact,”</span> in <em>AIP conference proceedings</em>, AIP Publishing LLC, 2023, p. 370006.</div>
+</div>
+<div id="ref-rumsey2024generalized" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[16] </div><div class="csl-right-inline">K. N. Rumsey, D. Francom, and A. Shen, <span>“Generalized bayesian MARS: Tools for stochastic computer model emulation,”</span> <em>SIAM/ASA Journal on Uncertainty Quantification</em>, vol. 12, no. 2, pp. 646–666, 2024.</div>
+</div>
+<div id="ref-sargsyan2015sparse" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[17] </div><div class="csl-right-inline">K. Sargsyan, C. Safta, H. N. Najm, B. Debusschere, D. Ricciuto, and P. Thornton, <span>“Sparse polynomial chaos surrogate for ACME land model via iterative bayesian compressive sensing.”</span> Sandia National Laboratories (SNL-CA), Livermore, CA (United States), 2015.</div>
+</div>
+<div id="ref-hutchings2023comparing" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[18] </div><div class="csl-right-inline">G. Hutchings, B. Sansó, J. Gattiker, D. Francom, and D. Pasqualini, <span>“Comparing emulation methods for a high-resolution storm surge model,”</span> <em>Environmetrics</em>, vol. 34, no. 3, p. e2796, 2023.</div>
+</div>
+<div id="ref-brown2018estimating" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[19] </div><div class="csl-right-inline">J. L. Brown and L. B. Hund, <span>“Estimating material properties under extreme conditions by using bayesian model calibration with functional outputs,”</span> <em>Journal of the Royal Statistical Society Series C: Applied Statistics</em>, vol. 67, no. 4, pp. 1023–1045, 2018.</div>
+</div>
+<div id="ref-grosskopf2021situ" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[20] </div><div class="csl-right-inline">M. Grosskopf <em>et al.</em>, <span>“In-situ spatial inference on climate simulations with sparse gaussian processes,”</span> in <em>ISAV’21: In situ infrastructures for enabling extreme-scale analysis and visualization</em>, 2021, pp. 31–36.</div>
+</div>
+<div id="ref-francom2019nuclear" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[21] </div><div class="csl-right-inline">D. C. Francom, S. A. Vander Wiel, and B. P. Weaver, <span>“Nuclear data dimension reduction,”</span> Los Alamos National Lab.(LANL), Los Alamos, NM (United States), 2019.</div>
+</div>
+<div id="ref-gaffney2020jag" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[22] </div><div class="csl-right-inline">J. A. Gaffney <em>et al.</em>, <span>“The JAG inertial confinement fusion simulation dataset for multi-modal scientific deep learning,”</span> <em>Lawrence Livermore National Laboratory (LLNL) Open Data Initiative. UC San Diego Library Digital Collections</em>, vol. 3, 2020.</div>
+</div>
+<div id="ref-francom2019calibration" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[23] </div><div class="csl-right-inline">D. Francom, B. Sansó, V. Bulaevskaya, D. Lucas, and M. Simpson, <span>“Inferring atmospheric release characteristics in a large computer experiment using bayesian adaptive splines,”</span> <em>Journal of the American Statistical Association</em>, vol. 114, no. 528, pp. 1450–1465, 2019.</div>
+</div>
+<div id="ref-brown2009evaluation" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[24] </div><div class="csl-right-inline">M. J. Brown, A. Gowardhan, M. Nelson, M. Williams, and E. R. Pardyjak, <span>“Evaluation of the QUIC wind and dispersion models using the joint urban 2003 field experiment dataset,”</span> in <em>AMS 8th symp. Urban env, phoenix, USA</em>, 2009, pp. 10–16.</div>
+</div>
+<div id="ref-fisher2019all" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[25] </div><div class="csl-right-inline">A. Fisher, C. Rudin, and F. Dominici, <span>“All models are wrong, but many are useful: Learning a variable’s importance by studying an entire class of prediction models simultaneously,”</span> <em>Journal of Machine Learning Research</em>, vol. 20, no. 177, pp. 1–81, 2019.</div>
+</div>
+<div id="ref-xin2022exploring" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[26] </div><div class="csl-right-inline">R. Xin, C. Zhong, Z. Chen, T. Takagi, M. Seltzer, and C. Rudin, <span>“Exploring the whole rashomon set of sparse decision trees,”</span> <em>Advances in neural information processing systems</em>, vol. 35, pp. 14071–14084, 2022.</div>
+</div>
+<div id="ref-rudin2024amazing" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[27] </div><div class="csl-right-inline">C. Rudin <em>et al.</em>, <span>“Amazing things come from having many good models,”</span> <em>arXiv preprint arXiv:2407.04846</em>, 2024.</div>
+</div>
+<div id="ref-visokay2025you" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[28] </div><div class="csl-right-inline">A. Visokay, E. Hock, K. Hoffman, and T. H. McCormick, <span>“When you come to a fork in the road, take it: The rashomon effect for social scientists,”</span> 2025.</div>
+</div>
+<div id="ref-breiman2001statistical" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[29] </div><div class="csl-right-inline">L. Breiman, <span>“Statistical modeling: The two cultures (with comments and a rejoinder by the author),”</span> <em>Statistical science</em>, vol. 16, no. 3, pp. 199–231, 2001.</div>
+</div>
+<div id="ref-dolan2002benchmarking" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[30] </div><div class="csl-right-inline">E. D. Dolan and J. J. Moré, <span>“Benchmarking optimization software with performance profiles,”</span> <em>Mathematical programming</em>, vol. 91, no. 2, pp. 201–213, 2002.</div>
+</div>
+<div id="ref-more2009benchmarking" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[31] </div><div class="csl-right-inline">J. J. Moré and S. M. Wild, <span>“Benchmarking derivative-free optimization algorithms,”</span> <em>SIAM Journal on Optimization</em>, vol. 20, no. 1, pp. 172–191, 2009.</div>
+</div>
+<div id="ref-marrel2024probabilistic" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[32] </div><div class="csl-right-inline">A. Marrel and B. Iooss, <span>“Probabilistic surrogate modeling by gaussian process: A review on recent insights in estimation and validation,”</span> <em>Reliability Engineering &amp; System Safety</em>, vol. 247, p. 110094, 2024.</div>
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
